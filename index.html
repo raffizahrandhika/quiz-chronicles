@@ -23,1795 +23,1850 @@
 
     <style>
         :root {
-            /* New Brown Earth Color Palette */
-            --primary: #8B4513;
-            /* Saddle Brown */
-            --primary-light: #A0522D;
-            /* Sienna */
-            --primary-dark: #654321;
-            /* Dark Brown */
-            --secondary: #D2691E;
-            /* Chocolate */
-            --accent: #CD853F;
-            /* Peru */
-            --success: #228B22;
-            /* Forest Green */
-            --warning: #DAA520;
-            /* Goldenrod */
-            --danger: #B22222;
-            /* Firebrick */
-            --dark: #2C1810;
-            /* Dark Brown */
-            --darker: #1A0F0A;
-            /* Very Dark Brown */
-            --light: #FAF3E9;
-            /* Light Beige */
-            --lighter: #FFFDF9;
-            /* Almost White */
-            --gray: #8B7D6B;
-            /* Gray-Brown */
-            --gray-light: #E8E0D5;
-            /* Light Brownish Gray */
-
-            /* Theme Variables for Header/Footer */
-            --font-primary: 'Inter', sans-serif;
-            --font-secondary: 'Merriweather', serif;
-            --primary-gradient: linear-gradient(135deg, #8B4513 0%, #654321 100%);
-            --accent-gradient: linear-gradient(135deg, #8B4513, #A0522D);
-            --dark-bg: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-            --light-bg: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            --card-bg-dark: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            --card-bg-light: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
-            --text-dark: #0f172a;
-            --text-light: #f8fafc;
-            --text-muted-dark: #94a3b8;
-            --text-muted-light: #64748b;
-            /* Radii, shadows and transitions (added to ensure rounded corners and smooth hovers) */
-            --radius-sm: 6px;
-            --radius-md: 10px;
-            --radius-lg: 14px;
-            --radius-full: 9999px;
-
-            --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.06);
-            --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.10);
-            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.14);
-            --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.18);
-
-            --transition-fast: 0.12s ease;
-            --transition-normal: 0.25s ease;
-            --transition-smooth: 0.35s ease;
-        }
-
-        /* Light Theme Variables */
-        [data-theme="light"] {
-            --bg-primary: var(--light-bg);
-            --text-primary: var(--text-dark);
-            --text-secondary: var(--text-muted-light);
-            --card-bg: var(--card-bg-light);
-            --nav-bg: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
-            --footer-bg: #ffffff;
-            --footer-text: var(--text-dark);
-            --footer-muted: var(--text-muted-light);
-            --footer-border: rgba(148, 163, 184, 0.2);
-        }
-
-        /* Dark Theme Variables */
-        [data-theme="dark"] {
-            --bg-primary: var(--dark-bg);
-            --text-primary: var(--text-light);
-            --text-secondary: var(--text-muted-dark);
-            --card-bg: var(--card-bg-dark);
-            --nav-bg: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            --footer-bg: #0f172a;
-            --footer-text: var(--text-light);
-            --footer-muted: var(--text-muted-dark);
-            --footer-border: rgba(148, 163, 184, 0.1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #F8F1E4 0%, #EFE5D3 100%);
-            color: var(--dark);
-            line-height: 1.5;
-            min-height: 100vh;
-            padding: 0;
-            overflow-x: hidden;
-            font-size: 16px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 16px;
-        }
-
-        /* ===== HEADER (R-QUEST STYLE) ===== */
-        .rquest-nav {
-            background: linear-gradient(135deg, var(--darker) 0%, #3A2618 100%);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            padding: 0.5rem 0;
-            transition: background 0.3s ease;
-        }
-
-        .rquest-nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 16px;
-        }
-
-        .rquest-nav-logo h2 {
-            font-weight: 700;
-            color: white;
-            font-size: 1.5rem;
-            margin: 0;
-            font-family: var(--font-secondary);
-        }
-
-        .rquest-nav-subtitle {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin: 0;
-            font-weight: 300;
-            font-family: var(--font-primary);
-        }
-
-        .rquest-nav-menu {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            align-items: center;
-        }
-
-        .rquest-nav-menu a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 0;
-            position: relative;
-            transition: color 0.2s;
-            font-family: var(--font-primary);
-        }
-
-        .rquest-nav-menu a::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background: var(--primary-gradient);
-            transform: scaleX(0);
-            transform-origin: bottom right;
-            transition: transform 0.3s ease;
-        }
-
-        .rquest-nav-menu a:hover {
-            color: #FFE4C4;
-        }
-
-        .rquest-nav-menu a:hover::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
-
-        .rquest-nav-menu a.active {
-            color: white;
-            font-weight: 700;
-        }
-
-        .rquest-nav-menu a.active::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
-
-        .rquest-nav-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            z-index: 101;
-            position: relative;
-        }
-
-        .rquest-nav-toggle span {
-            width: 25px;
-            height: 3px;
-            background: white;
-            margin: 3px 0;
-            transition: 0.3s;
-        }
-
-        /* Search Section - box removed so content stands alone */
-        .search-section {
-            background: transparent;
-            margin: 32px auto 12px;
-            /* keep a little horizontal padding for small screens */
-            padding: 6px 12px;
-            border-radius: 0;
-            box-shadow: none;
-            max-width: 900px;
-            position: relative;
-            z-index: 0;
-        }
-
-        .search-header {
-            text-align: center;
-            margin-bottom: 12px;
-        }
-
-        .search-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--darker);
-            margin-bottom: 6px;
-            line-height: 1.3;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .search-subtitle {
-            color: var(--gray);
-            font-size: 0.9rem;
-            line-height: 1.4;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .search-box {
-            display: flex;
-            gap: 12px;
-            max-width: 700px;
-            margin: 0 auto;
-            flex-direction: column;
-        }
-
-        @media (min-width: 480px) {
-            .search-box {
-                flex-direction: row;
-            }
-        }
-
-        .search-input {
-            flex: 1;
-            padding: 14px 18px;
-            border: 2px solid var(--gray-light);
-            border-radius: var(--radius-full);
-            font-size: 0.95rem;
-            font-family: 'Inter', sans-serif;
-            transition: var(--transition-normal);
-            background: var(--lighter);
-            min-width: 0;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.15);
-        }
-
-        .search-btn {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            color: white;
-            border: none;
-            border-radius: var(--radius-full);
-            padding: 14px 24px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition-normal);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            box-shadow: var(--shadow-md);
-            white-space: nowrap;
-            min-width: 120px;
-            font-family: 'Inter', sans-serif;
-            transition: transform var(--transition-normal), box-shadow var(--transition-normal), background var(--transition-normal);
-        }
-
-        .search-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary) 100%);
-        }
-
-        /* Smooth transitions and consistent rounded corners for main UI blocks */
-        .results-container,
-        .search-section,
-        .profile-card,
-        .score-card,
-        .message-card,
-        .certificate-card,
-        .info-card,
-        .answer-card,
-        .table-container,
-        .modal-content {
-            border-radius: var(--radius-lg);
-            transition: transform var(--transition-normal), box-shadow var(--transition-normal), background-color var(--transition-smooth);
-        }
-
-        .certificate-card,
-        .answer-card,
-        .info-card {
-            transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
-        }
-
-        .certificate-card:hover,
-        .answer-card:hover,
-        .info-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .action-btn,
-        .tab-btn,
-        .rquest-nav-menu a,
-        .certificate-btn,
-        .search-btn {
-            transition: transform var(--transition-normal), box-shadow var(--transition-normal), color var(--transition-normal), background var(--transition-normal);
-            will-change: transform, box-shadow;
-        }
-
-        .tab-btn.active {
-            transition: background var(--transition-fast), color var(--transition-fast);
-        }
-
-        /* Results Container */
-        .results-container {
-            background: white;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
-            overflow: hidden;
-            margin-bottom: 24px;
-        }
-
-        .results-header {
-            background: linear-gradient(135deg, var(--darker) 0%, #3A2618 100%);
-            color: white;
-            padding: 20px 16px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .results-header::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
-            border-radius: 50%;
-            transform: translate(30%, -30%);
-        }
-
-        .results-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 4px;
-            position: relative;
-            z-index: 2;
-            line-height: 1.3;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .results-subtitle {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            position: relative;
-            z-index: 2;
-            line-height: 1.4;
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* Score Display */
-        .score-display-section {
-            padding: 20px 16px;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        @media (min-width: 768px) {
-            .score-display-section {
-                grid-template-columns: 1fr 1fr;
-                gap: 24px;
-                padding: 24px 20px;
-            }
-        }
-
-        .profile-card {
-            background: linear-gradient(135deg, #F9F5F0 0%, #F1EBE1 100%);
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            border: 1px solid var(--gray-light);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .profile-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .profile-avatar {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            font-weight: 700;
-            box-shadow: var(--shadow-md);
-            flex-shrink: 0;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .profile-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .profile-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 4px;
-            line-height: 1.3;
-            word-break: break-word;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .profile-username {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--gray);
-            font-size: 0.85rem;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .rank-badge {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--warning) 100%);
-            color: white;
-            padding: 6px 12px;
-            border-radius: var(--radius-full);
-            font-weight: 700;
-            font-size: 0.8rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            box-shadow: var(--shadow-sm);
-            width: fit-content;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .score-card {
-            background: linear-gradient(135deg, #FDF8F3 0%, #FAF1E6 100%);
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            border: 1px solid #E0C9B1;
-            box-shadow: var(--shadow-sm);
-            text-align: center;
-        }
-
-        .score-label {
-            font-size: 0.9rem;
-            color: var(--gray);
-            margin-bottom: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .score-value {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--primary-dark);
-            margin: 12px 0;
-            line-height: 1;
-            position: relative;
-            display: inline-block;
-            font-family: 'Inter', sans-serif;
-        }
-
-        @media (min-width: 480px) {
-            .score-value {
-                font-size: 3.5rem;
-            }
-        }
-
-        .score-value::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent 0%, var(--primary) 50%, transparent 100%);
-            border-radius: 2px;
-        }
-
-        .score-max {
-            font-size: 0.9rem;
-            color: var(--gray);
-            margin-top: 8px;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .score-progress {
-            margin-top: 16px;
-            height: 6px;
-            background: var(--gray-light);
-            border-radius: var(--radius-full);
-            overflow: hidden;
-        }
-
-        .score-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--success) 100%);
-            border-radius: var(--radius-full);
-            transition: width 1s ease;
-        }
-
-        /* Message Card */
-        .message-card {
-            background: linear-gradient(135deg, #FEF3E2 0%, #FDE8C8 100%);
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            border: 1px solid #F0C78A;
-            margin: 0 16px 20px;
-            box-shadow: var(--shadow-md);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .message-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 6px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--warning) 0%, var(--accent) 100%);
-        }
-
-        .message-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--darker);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            line-height: 1.3;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .message-content {
-            color: #5D4037;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* Certificate Section */
-        .certificate-section {
-            padding: 0 16px 20px;
-        }
-
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            line-height: 1.3;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .certificate-options {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 16px;
-        }
-
-        @media (min-width: 480px) {
-            .certificate-options {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-        }
-
-        .certificate-card {
-            background: white;
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            border: 1px solid var(--gray-light);
-            box-shadow: var(--shadow-md);
-            transition: var(--transition-normal);
-            text-align: center;
-        }
-
-        .certificate-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary);
-        }
-
-        .certificate-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 16px;
-            color: white;
-            font-size: 1.3rem;
-        }
-
-        .certificate-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 8px;
-            line-height: 1.3;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .certificate-desc {
-            color: var(--gray);
-            font-size: 0.85rem;
-            margin-bottom: 16px;
-            line-height: 1.4;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .certificate-btn {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: white;
-            border: none;
-            border-radius: var(--radius-full);
-            padding: 10px 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition-normal);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            width: 100%;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .certificate-btn:hover {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        /* Tabs Navigation */
-        .tabs-container {
-            padding: 0 16px 20px;
-        }
-
-        .tabs-navigation {
-            display: flex;
-            gap: 4px;
-            background: var(--gray-light);
-            padding: 4px;
-            border-radius: var(--radius-full);
-            margin-bottom: 20px;
-            overflow-x: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .tabs-navigation::-webkit-scrollbar {
-            display: none;
-        }
-
-        .tab-btn {
-            flex: 0 0 auto;
-            padding: 10px 14px;
-            background: transparent;
-            border: none;
-            border-radius: var(--radius-full);
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--gray);
-            cursor: pointer;
-            transition: var(--transition-normal);
-            white-space: nowrap;
-            min-width: 100px;
-            text-align: center;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .tab-btn.active {
-            background: white;
-            color: var(--primary);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .tab-btn:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.5);
-            color: var(--dark);
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Tables */
-        .table-container {
-            background: white;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            margin-bottom: 20px;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 700px;
-            font-size: 0.85rem;
-        }
-
-        .data-table thead {
-            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
-            color: white;
-        }
-
-        .data-table th {
-            padding: 14px 12px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.4px;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .data-table tbody tr {
-            border-bottom: 1px solid var(--gray-light);
-            transition: var(--transition-fast);
-        }
-
-        .data-table tbody tr:hover {
-            background: #f8fafc;
-        }
-
-        .data-table td {
-            padding: 14px 12px;
-            color: var(--dark);
-            font-size: 0.85rem;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .status-correct {
-            color: #059669;
-            font-weight: 600;
-            background: #d1fae5;
-            padding: 4px 10px;
-            border-radius: var(--radius-full);
-            display: inline-block;
-            font-size: 0.8rem;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .status-incorrect {
-            color: #dc2626;
-            font-weight: 600;
-            background: #fee2e2;
-            padding: 4px 10px;
-            border-radius: var(--radius-full);
-            display: inline-block;
-            font-size: 0.8rem;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .status-unanswered {
-            color: var(--gray);
-            font-weight: 600;
-            background: #f3f4f6;
-            padding: 4px 10px;
-            border-radius: var(--radius-full);
-            display: inline-block;
-            font-size: 0.8rem;
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* Answers Section */
-        .answers-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .answer-card {
-            background: white;
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            border: 1px solid var(--gray-light);
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition-normal);
-        }
-
-        .answer-card:hover {
-            box-shadow: var(--shadow-md);
-            border-color: var(--primary-light);
-        }
-
-        .answer-header {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 12px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--gray-light);
-        }
-
-        @media (min-width: 480px) {
-            .answer-header {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                gap: 16px;
-            }
-        }
-
-        .answer-number {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--dark);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            line-height: 1.3;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .answer-number::before {
-            content: 'Q';
-            background: var(--primary);
-            color: white;
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            flex-shrink: 0;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .answer-question {
-            font-size: 0.9rem;
-            color: var(--dark);
-            margin-bottom: 16px;
-            line-height: 1.5;
-            text-align: justify;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .answer-details {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-
-        @media (min-width: 480px) {
-            .answer-details {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .user-answer-box,
-        .correct-answer-box {
-            padding: 14px;
-            border-radius: var(--radius-md);
-            font-size: 0.9rem;
-        }
-
-        .user-answer-box {
-            background: #f0f9ff;
-            border: 1px solid #bae6fd;
-        }
-
-        .correct-answer-box {
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-        }
-
-        .answer-box-label {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--gray);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.4px;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .answer-box-content {
-            font-size: 0.9rem;
-            color: var(--dark);
-            font-weight: 500;
-            line-height: 1.4;
-            word-break: break-word;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .explanation-box {
-            background: #f8fafc;
-            border-radius: var(--radius-md);
-            padding: 16px;
-            border-left: 4px solid var(--primary);
-            font-size: 0.9rem;
-        }
-
-        .explanation-label {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            line-height: 1.3;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .explanation-content {
-            color: var(--dark);
-            line-height: 1.5;
-            font-family: 'Inter', sans-serif;
-            text-align: justify;
-        }
-
-        /* Action Buttons */
-        .action-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            padding: 20px 16px;
-        }
-
-        @media (min-width: 480px) {
-            .action-buttons {
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
-        }
-
-        .action-btn {
-            flex: 1;
-            min-width: 100%;
-            padding: 16px 20px;
-            border-radius: var(--radius-lg);
-            border: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition-normal);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: var(--shadow-md);
-            font-family: 'Inter', sans-serif;
-        }
-
-        @media (min-width: 480px) {
-            .action-btn {
-                min-width: 200px;
-            }
-        }
-
-        .action-btn.primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: white;
-        }
-
-        .action-btn.secondary {
-            background: white;
-            color: var(--dark);
-            border: 2px solid var(--gray-light);
-        }
-
-        .action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .action-btn.primary:hover {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-        }
-
-        .action-btn.secondary:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        /* Info Cards */
-        .info-cards {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            padding: 20px 0;
-        }
-
-        @media (min-width: 768px) {
-            .info-cards {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            }
-        }
-
-        .info-card {
-            background: white;
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            border: 1px solid var(--gray-light);
-            box-shadow: var(--shadow-md);
-        }
-
-        .info-card-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            line-height: 1.3;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .info-card-content {
-            color: var(--gray);
-            line-height: 1.5;
-            font-size: 0.9rem;
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* Feedback Section (dipindah dari modal) */
-        .feedback-section {
-            background: white;
-            border-radius: var(--radius-lg);
-            padding: 25px;
-            margin: 30px 0;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--gray-light);
-        }
-
-        .feedback-section h3 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 16px;
-            font-family: var(--font-primary);
-        }
-
-        .feedback-form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .form-group label {
-            font-weight: 600;
-            color: var(--dark);
-            font-size: 0.9rem;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .form-control {
-            padding: 12px 16px;
-            border: 1px solid var(--gray-light);
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-family: 'Inter', sans-serif;
-            transition: var(--transition-normal);
-            background: var(--lighter);
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.15);
-        }
-
-        .anonymous-option {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 8px;
-        }
-
-        .anonymous-option input {
-            width: 16px;
-            height: 16px;
-            accent-color: var(--primary);
-        }
-
-        .anonymous-option label {
-            font-size: 0.85rem;
-            color: var(--gray);
-            cursor: pointer;
-        }
-
-        textarea.form-control {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-
-        /* ===== FOOTER (R-QUEST STYLE) ===== */
-        .rquest-footer {
-            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
-            padding: 2rem 0 1rem 0;
-            border-top: 1px solid rgba(148, 163, 184, 0.08);
-            margin-top: 18px;
-        }
-
-        .rquest-footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .rquest-footer-main {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 2rem;
-        }
-
-        .rquest-footer-logo {
-            flex: 1;
-        }
-
-        .rquest-footer-logo h3 {
-            font-size: 1.4rem;
-            color: white;
-            margin-bottom: 0.4rem;
-            font-weight: 600;
-            font-family: var(--font-secondary);
-        }
-
-        .rquest-footer-logo p {
-            color: rgba(255, 255, 255, 0.78);
-            font-size: 0.85rem;
-            letter-spacing: 0.4px;
-            max-width: 260px;
-            text-align: justify;
-            font-family: var(--font-primary);
-        }
-
-        .rquest-footer-links {
-            display: flex;
-            gap: 3rem;
-        }
-
-        .rquest-footer-column h4 {
-            font-size: 1rem;
-            color: white;
-            margin-bottom: 1rem;
-            font-weight: 600;
-            font-family: var(--font-primary);
-        }
-
-        .rquest-footer-column ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .rquest-footer-column li {
-            margin-bottom: 0.5rem;
-        }
-
-        .rquest-footer-column a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            transition: color 0.2s;
-            font-size: 0.9rem;
-            font-family: var(--font-primary);
-        }
-
-        .rquest-footer-column a:hover {
-            color: #FFE4C4;
-        }
-
-        .rquest-social-section {
-            text-align: left;
-        }
-
-        .rquest-social-title {
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: white;
-            margin-bottom: 1.5rem;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            font-family: var(--font-primary);
-        }
-
-        .rquest-social-icons {
-            display: flex;
-            justify-content: flex-start;
-            gap: 1.2rem;
-        }
-
-        .rquest-social-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            color: white;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.1);
-            text-decoration: none;
-        }
-
-        .rquest-social-icon:hover {
-            transform: translateY(-3px);
-            background: var(--primary);
-            text-decoration: none;
-        }
-
-        .rquest-copyright {
-            text-align: center;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .rquest-copyright p {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.7rem;
-            letter-spacing: 0.5px;
-            margin: 0.5rem 0;
-            font-family: var(--font-primary);
-        }
-
-        /* Certificate Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 16px;
-            animation: fadeIn 0.3s ease;
-            overflow-y: auto;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            width: 100%;
-            max-width: 500px;
-            max-height: 85vh;
-            overflow-y: auto;
-            box-shadow: var(--shadow-xl);
-            animation: slideUp 0.4s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--gray-light);
-        }
-
-        .modal-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--dark);
-            line-height: 1.3;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--gray);
-            cursor: pointer;
-            transition: var(--transition-fast);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .close-btn:hover {
-            background: var(--gray-light);
-            color: var(--dark);
-        }
-
-        /* Responsive Design - Mobile Optimizations */
-        @media (max-width: 900px) {
-            .rquest-nav-menu {
-                gap: 1rem;
-            }
-
-            .rquest-footer-main {
-                flex-direction: column;
-                gap: 2rem;
-            }
-
-            .rquest-footer-links {
-                justify-content: space-between;
-                width: 100%;
-            }
-
-            .rquest-social-section {
-                text-align: center;
-                width: 100%;
-            }
-
-            .rquest-social-icons {
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 768px) {
-            body {
-                font-size: 14px;
-            }
-
-            .container {
-                padding: 0 12px;
-            }
-
-            .rquest-nav-menu {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                flex-direction: column;
-                background: linear-gradient(135deg, var(--darker) 0%, #3A2618 100%);
-                width: 280px;
-                height: 100vh;
-                transition: 0.3s ease-in-out;
-                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4);
-                padding: 5rem 2rem 2rem 2rem;
-                gap: 1.5rem;
-                z-index: 99;
-                margin: 0;
-            }
-
-            .rquest-nav-menu.active {
-                right: 0;
-            }
-
-            .rquest-nav-toggle {
-                display: flex;
-                z-index: 100;
-            }
-
-            .rquest-nav-logo h2 {
-                font-size: 1.3rem;
-            }
-
-            .rquest-nav-subtitle {
-                font-size: 0.7rem;
-                max-width: 270px;
-            }
-
-            .search-section {
-                margin-top: 20px;
-                max-width: 95%;
-                padding: 16px 12px;
-            }
-
-            .results-header {
-                padding: 16px 12px;
-            }
-
-            .score-display-section {
-                padding: 16px 12px;
-                gap: 16px;
-            }
-
-            .profile-card,
-            .score-card,
-            .message-card,
-            .certificate-card,
-            .info-card,
-            .answer-card {
-                padding: 16px;
-            }
-
-            .certificate-section,
-            .tabs-container,
-            .action-buttons {
-                padding: 0 12px 16px;
-            }
-
-            .message-card {
-                margin: 0 12px 16px;
-            }
-
-            .feedback-section {
-                padding: 20px;
-                margin: 20px 0;
-            }
-
-            .rquest-footer-links {
-                display: flex;
-                flex-direction: row;
-                gap: 3rem;
-                width: 100%;
-                justify-content: center;
-                align-items: flex-start;
-            }
-
-            .rquest-footer-column {
-                flex: 0 0 auto;
-                min-width: 140px;
-                text-align: left;
-            }
-
-            .rquest-social-icons {
-                gap: 0.8rem;
-            }
-
-            .rquest-social-icon {
-                width: 32px;
-                height: 32px;
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .rquest-section-title {
-                font-size: 1.5rem;
-                margin-bottom: 2rem;
-            }
-
-            .rquest-categories-grid,
-            .rquest-featured-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .rquest-footer-links {
-                flex-direction: row;
-                gap: 2rem;
-                justify-content: center;
-                width: 100%;
-            }
-
-            .rquest-footer-column {
-                flex: 0 0 auto;
-                min-width: 120px;
-            }
-
-            .rquest-nav-menu {
-                width: 250px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 10px;
-            }
-
-            .rquest-hero-title {
-                font-size: 1.8rem;
-            }
-
-            .rquest-hero-subtitle {
-                font-size: 1rem;
-            }
-
-            .rquest-hero-description {
-                font-size: 0.9rem;
-            }
-
-            .rquest-nav-menu {
-                width: 220px;
-                padding: 4rem 1.5rem 1.5rem 1.5rem;
-            }
-
-            .rquest-footer-main {
-                gap: 1.5rem;
-            }
-
-            .rquest-social-icons {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .rquest-footer-links {
-                flex-direction: row;
-                gap: 1.5rem;
-                justify-content: center;
-                flex-wrap: nowrap;
-            }
-
-            .rquest-footer-column {
-                flex: 0 0 auto;
-                text-align: center;
-            }
-
-            .certificate-btn {
-                padding: 8px 16px;
-                font-size: 0.8rem;
-            }
-        }
-
-        /* Utility Classes */
-        .text-center {
-            text-align: center;
-        }
-
-        .text-primary {
-            color: var(--primary);
-        }
-
-        .text-success {
-            color: var(--success);
-        }
-
-        .text-warning {
-            color: var(--warning);
-        }
-
-        .text-danger {
-            color: var(--danger);
-        }
-
-        .text-gray {
-            color: var(--gray);
-        }
-
-        .mb-16 {
-            margin-bottom: 16px;
-        }
-
-        .mb-20 {
-            margin-bottom: 20px;
-        }
-
-        .mt-16 {
-            margin-top: 16px;
-        }
-
-        .mt-20 {
-            margin-top: 20px;
-        }
-
-        .p-16 {
-            padding: 16px;
-        }
-
-        .p-20 {
-            padding: 20px;
-        }
-
-        .p-30 {
-            padding: 30px;
-        }
-
-        #emptyState .p-30 {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            min-height: 260px;
-        }
-
-        .mb-30 {
-            margin-bottom: 30px;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .flex {
-            display: flex;
-        }
-
-        .items-center {
-            align-items: center;
-        }
-
-        .justify-between {
-            justify-content: space-between;
-        }
-
-        .gap-8 {
-            gap: 8px;
-        }
-
-        .gap-12 {
-            gap: 12px;
-        }
-
-        .gap-16 {
-            gap: 16px;
-        }
-
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
-        }
-
-        /* Print styles: hide non-essential UI (header/footer/certificates/feedback) */
-        @media print {
-            /* Hide navigation, footer and interactive controls */
-            .rquest-nav,
-            .rquest-footer,
-            .rquest-nav-toggle,
-            .rquest-nav-menu,
-            .search-box .search-btn,
-            .tabs-navigation,
-            .action-buttons,
-            .certificate-section,
-            .feedback-section,
-            #certificateModal,
-            .certificate-card {
-                display: none !important;
-            }
-
-            /* Ensure the main results print cleanly */
-            body,
-            .container,
-            .results-container,
-            .results-header,
-            .score-display-section,
-            .answers-list,
-            .data-table {
-                background: white !important;
-                color: #000 !important;
-                box-shadow: none !important;
-            }
-
-            /* Avoid awkward page breaks inside certain blocks (allow answers to split across pages) */
-            .info-card,
-            .table-container {
-                page-break-inside: avoid;
-            }
-
-            /* Use full width for printed content */
-            .container {
-                max-width: 100% !important;
-                padding: 0 8px !important;
-            }
-
-            /* Preserve print colors when supported */
-            * {
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-        }
+    /* New Brown Earth Color Palette */
+    --primary: #8B4513; /* Saddle Brown */
+    --primary-light: #A0522D; /* Sienna */
+    --primary-dark: #654321; /* Dark Brown */
+    --secondary: #D2691E; /* Chocolate */
+    --accent: #CD853F; /* Peru */
+    --success: #228B22; /* Forest Green */
+    --warning: #DAA520; /* Goldenrod */
+    --danger: #B22222; /* Firebrick */
+    --dark: #2C1810; /* Dark Brown */
+    --darker: #1A0F0A; /* Very Dark Brown */
+    --light: #FAF3E9; /* Light Beige */
+    --lighter: #FFFDF9; /* Almost White */
+    --gray: #8B7D6B; /* Gray-Brown */
+    --gray-light: #E8E0D5; /* Light Brownish Gray */
+
+    /* Theme Variables */
+    --font-primary: 'Inter', sans-serif;
+    --font-secondary: 'Merriweather', serif;
+    --primary-gradient: linear-gradient(135deg, #8B4513 0%, #654321 100%);
+    --accent-gradient: linear-gradient(135deg, #8B4513, #A0522D);
+    --light-bg: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    --card-bg-light: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+    --text-dark: #0f172a;
+    --text-light: #f8fafc;
+    --text-muted-light: #64748b;
+    
+    /* Radii, shadows and transitions */
+    --radius-sm: 5px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-full: 9999px;
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.10);
+    --shadow-xl: 0 10px 30px rgba(0, 0, 0, 0.12);
+
+    --transition-fast: 0.12s ease;
+    --transition-normal: 0.25s ease;
+    --transition-smooth: 0.35s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #F8F1E4 0%, #EFE5D3 100%);
+    color: var(--dark);
+    line-height: 1.45;
+    min-height: 100vh;
+    padding: 0;
+    overflow-x: hidden;
+    font-size: 15px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 14px;
+}
+
+/* ===== HEADER (Sama dengan index.html) ===== */
+.main-header {
+    background: white;
+    padding: 14px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.logo-icon {
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.logo-text {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--primary-dark);
+    letter-spacing: -0.2px;
+}
+
+.tagline {
+    font-size: 11px;
+    color: var(--gray);
+    margin-top: 1px;
+}
+
+/* Search Section */
+.search-section {
+    background: transparent;
+    margin: 28px auto 10px;
+    padding: 5px 10px;
+    border-radius: 0;
+    box-shadow: none;
+    max-width: 850px;
+    position: relative;
+    z-index: 0;
+}
+
+.search-header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.search-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--darker);
+    margin-bottom: 5px;
+    line-height: 1.25;
+    font-family: 'Inter', sans-serif;
+}
+
+.search-subtitle {
+    color: var(--gray);
+    font-size: 0.85rem;
+    line-height: 1.35;
+    font-family: 'Inter', sans-serif;
+}
+
+.search-box {
+    display: flex;
+    gap: 8px;
+    max-width: 650px;
+    margin: 0 auto;
+    flex-direction: column;
+}
+
+@media (min-width: 480px) {
+    .search-box {
+        flex-direction: row;
+    }
+}
+
+.search-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid var(--gray-light);
+    border-radius: var(--radius-full);
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    transition: var(--transition-normal);
+    background: var(--lighter);
+    min-width: 0;
+}
+
+.search-input:disabled {
+    background-color: var(--gray-light);
+    color: var(--gray);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.search-btn:disabled {
+    background: linear-gradient(135deg, var(--gray) 0%, var(--gray-light) 100%);
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(139, 69, 19, 0.15);
+}
+
+.search-btn {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border: none;
+    border-radius: var(--radius-full);
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: var(--shadow-md);
+    white-space: nowrap;
+    min-width: 110px;
+    font-family: 'Inter', sans-serif;
+}
+
+.search-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary) 100%);
+}
+
+/* Results Container */
+.results-container {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.results-header {
+    background: linear-gradient(135deg, var(--darker) 0%, #3A2618 100%);
+    color: white;
+    padding: 18px 14px;
+    position: relative;
+    overflow: hidden;
+}
+
+.results-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 50%;
+    transform: translate(30%, -30%);
+}
+
+.results-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    position: relative;
+    z-index: 2;
+    line-height: 1.25;
+    font-family: 'Inter', sans-serif;
+}
+
+.results-subtitle {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    position: relative;
+    z-index: 2;
+    line-height: 1.35;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Score Display */
+.score-display-section {
+    padding: 18px 14px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+}
+
+@media (min-width: 768px) {
+    .score-display-section {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        padding: 20px 18px;
+    }
+}
+
+.profile-card {
+    background: linear-gradient(135deg, #F9F5F0 0%, #F1EBE1 100%);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    border: 1px solid var(--gray-light);
+    box-shadow: var(--shadow-sm);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.profile-avatar {
+    width: 46px;
+    height: 46px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    box-shadow: var(--shadow-md);
+    flex-shrink: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.profile-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.profile-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 3px;
+    line-height: 1.25;
+    word-break: break-word;
+    font-family: 'Inter', sans-serif;
+}
+
+.profile-username {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--gray);
+    font-size: 0.8rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.rank-badge {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--warning) 100%);
+    color: white;
+    padding: 5px 10px;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: var(--shadow-sm);
+    width: fit-content;
+    font-family: 'Inter', sans-serif;
+}
+
+.score-card {
+    background: linear-gradient(135deg, #FDF8F3 0%, #FAF1E6 100%);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    border: 1px solid #E0C9B1;
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+}
+
+.score-label {
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    font-family: 'Inter', sans-serif;
+}
+
+.score-value {
+    font-size: 2.7rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin: 10px 0;
+    line-height: 1;
+    position: relative;
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+}
+
+@media (min-width: 480px) {
+    .score-value {
+        font-size: 3rem;
+    }
+}
+
+.score-value::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, var(--primary) 50%, transparent 100%);
+    border-radius: 1px;
+}
+
+.score-max {
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-top: 6px;
+    font-family: 'Inter', sans-serif;
+}
+
+.score-progress {
+    margin-top: 14px;
+    height: 5px;
+    background: var(--gray-light);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.score-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--success) 100%);
+    border-radius: var(--radius-full);
+    transition: width 1s ease;
+}
+
+/* Message Card */
+.message-card {
+    background: linear-gradient(135deg, #FEF3E2 0%, #FDE8C8 100%);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    border: 1px solid #F0C78A;
+    margin: 0 14px 18px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+}
+
+.message-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--warning) 0%, var(--accent) 100%);
+}
+
+.message-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--darker);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1.25;
+    font-family: 'Inter', sans-serif;
+}
+
+.message-content {
+    color: #5D4037;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Certificate Section */
+.certificate-section {
+    padding: 0 14px 18px;
+}
+
+.section-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1.25;
+    font-family: 'Inter', sans-serif;
+}
+
+.certificate-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+}
+
+@media (min-width: 480px) {
+    .certificate-options {
+        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    }
+}
+
+.certificate-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    border: 1px solid var(--gray-light);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-normal);
+    text-align: center;
+}
+
+.certificate-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+
+.certificate-icon {
+    width: 46px;
+    height: 46px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.certificate-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 6px;
+    line-height: 1.25;
+    font-family: 'Inter', sans-serif;
+}
+
+.certificate-desc {
+    color: var(--gray);
+    font-size: 0.8rem;
+    margin-bottom: 14px;
+    line-height: 1.35;
+    font-family: 'Inter', sans-serif;
+}
+
+.certificate-btn {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    border: none;
+    border-radius: var(--radius-full);
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+}
+
+.certificate-btn:hover {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Tabs Navigation */
+.tabs-container {
+    padding: 0 14px 18px;
+}
+
+.tabs-navigation {
+    display: flex;
+    gap: 4px;
+    background: var(--gray-light);
+    padding: 3px;
+    border-radius: var(--radius-full);
+    margin-bottom: 18px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.tabs-navigation::-webkit-scrollbar {
+    display: none;
+}
+
+.tab-btn {
+    flex: 0 0 auto;
+    padding: 8px 12px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--gray);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    white-space: nowrap;
+    min-width: 90px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.tab-btn.active {
+    background: white;
+    color: var(--primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.tab-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.5);
+    color: var(--dark);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Tables */
+.table-container {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 18px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 650px;
+    font-size: 0.8rem;
+}
+
+.data-table thead {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+    color: white;
+}
+
+.data-table th {
+    padding: 12px 10px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    font-family: 'Inter', sans-serif;
+}
+
+.data-table tbody tr {
+    border-bottom: 1px solid var(--gray-light);
+    transition: var(--transition-fast);
+}
+
+.data-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+.data-table td {
+    padding: 12px 10px;
+    color: var(--dark);
+    font-size: 0.8rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.status-correct {
+    color: #059669;
+    font-weight: 600;
+    background: #d1fae5;
+    padding: 3px 8px;
+    border-radius: var(--radius-full);
+    display: inline-block;
+    font-size: 0.75rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.status-incorrect {
+    color: #dc2626;
+    font-weight: 600;
+    background: #fee2e2;
+    padding: 3px 8px;
+    border-radius: var(--radius-full);
+    display: inline-block;
+    font-size: 0.75rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.status-unanswered {
+    color: var(--gray);
+    font-weight: 600;
+    background: #f3f4f6;
+    padding: 3px 8px;
+    border-radius: var(--radius-full);
+    display: inline-block;
+    font-size: 0.75rem;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Answers Section */
+.answers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.answer-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    border: 1px solid var(--gray-light);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+}
+
+.answer-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-light);
+}
+
+.answer-header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+@media (min-width: 480px) {
+    .answer-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+    }
+}
+
+.answer-number {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1.25;
+    font-family: 'Inter', sans-serif;
+}
+
+.answer-number::before {
+    content: 'Q';
+    background: var(--primary);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.answer-question {
+    font-size: 0.9rem;
+    color: var(--dark);
+    margin-bottom: 14px;
+    line-height: 1.45;
+    text-align: justify;
+    font-family: 'Inter', sans-serif;
+}
+
+.answer-details {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+@media (min-width: 480px) {
+    .answer-details {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.user-answer-box,
+.correct-answer-box {
+    padding: 12px;
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+}
+
+.user-answer-box {
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+}
+
+.correct-answer-box {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+}
+
+.answer-box-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--gray);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    font-family: 'Inter', sans-serif;
+}
+
+.answer-box-content {
+    font-size: 0.85rem;
+    color: var(--dark);
+    font-weight: 500;
+    line-height: 1.35;
+    word-break: break-word;
+    font-family: 'Inter', sans-serif;
+}
+
+.explanation-box {
+    background: #f8fafc;
+    border-radius: var(--radius-md);
+    padding: 14px;
+    border-left: 4px solid var(--primary);
+    font-size: 0.85rem;
+}
+
+.explanation-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1.25;
+    font-family: 'Inter', sans-serif;
+}
+
+.explanation-content {
+    color: var(--dark);
+    line-height: 1.45;
+    font-family: 'Inter', sans-serif;
+    text-align: justify;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 18px 14px;
+}
+
+@media (min-width: 480px) {
+    .action-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+.action-btn {
+    flex: 1;
+    min-width: 100%;
+    padding: 14px 18px;
+    border-radius: var(--radius-lg);
+    border: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: var(--shadow-md);
+    font-family: 'Inter', sans-serif;
+}
+
+@media (min-width: 480px) {
+    .action-btn {
+        min-width: 180px;
+    }
+}
+
+.action-btn.primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+}
+
+.action-btn.secondary {
+    background: white;
+    color: var(--dark);
+    border: 2px solid var(--gray-light);
+}
+
+.action-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+
+.action-btn.primary:hover {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+}
+
+.action-btn.secondary:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* Info Cards */
+.info-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 18px 0;
+}
+
+@media (min-width: 768px) {
+    .info-cards {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+}
+
+.info-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    border: 1px solid var(--gray-light);
+    box-shadow: var(--shadow-md);
+}
+
+.info-card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.25;
+    font-family: 'Inter', sans-serif;
+}
+
+.info-card-content {
+    color: var(--gray);
+    line-height: 1.45;
+    font-size: 0.85rem;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Feedback Section */
+.feedback-section {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 22px;
+    margin: 26px 0;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--gray-light);
+}
+
+.feedback-section h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 14px;
+    font-family: var(--font-primary);
+}
+
+.feedback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--dark);
+    font-size: 0.85rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.form-control {
+    padding: 10px 14px;
+    border: 1px solid var(--gray-light);
+    border-radius: 7px;
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    transition: var(--transition-normal);
+    background: var(--lighter);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(139, 69, 19, 0.15);
+}
+
+.anonymous-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.anonymous-option input {
+    width: 15px;
+    height: 15px;
+    accent-color: var(--primary);
+}
+
+.anonymous-option label {
+    font-size: 0.8rem;
+    color: var(--gray);
+    cursor: pointer;
+}
+
+textarea.form-control {
+    min-height: 110px;
+    resize: vertical;
+}
+
+/* ===== FOOTER (Sama dengan index.html) ===== */
+.main-footer {
+    background: var(--darker);
+    color: white;
+    padding: 24px 0 16px;
+    margin-top: 24px;
+    font-size: 13px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.footer-section h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: white;
+    line-height: 1.3;
+}
+
+.footer-section p {
+    color: #cbd5e1;
+    margin-bottom: 16px;
+    line-height: 1.5;
+    font-size: 13px;
+}
+
+.social-links {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    transition: var(--transition-normal);
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.social-link:hover {
+    background: var(--primary);
+    transform: translateY(-1px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+/* Certificate Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 14px;
+    animation: fadeIn 0.3s ease;
+    overflow-y: auto;
+}
+
+.modal-content {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    width: 100%;
+    max-width: 480px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-xl);
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.modal-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.25;
+    font-family: 'Inter', sans-serif;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    color: var(--gray);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.close-btn:hover {
+    background: var(--gray-light);
+    color: var(--dark);
+}
+
+/* ===== LOCKED STATE MODAL ===== */
+.locked-modal {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 15, 10, 0.97);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    backdrop-filter: blur(4px);
+    overflow-y: auto; /* Tambahkan scroll jika konten terlalu panjang */
+}
+
+.locked-modal-content {
+    background: linear-gradient(135deg, #FFFDF9 0%, #FAF3E9 100%);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    width: 100%;
+    max-width: 420px; /* Kurangi max-width untuk mobile */
+    max-height: 90vh; /* Batasi tinggi maksimum */
+    overflow-y: auto; /* Tambahkan scroll internal jika perlu */
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--primary-light);
+    text-align: center;
+    position: relative;
+    margin: auto; /* Center vertically */
+}
+
+.locked-modal-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.locked-modal-content::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+}
+
+.locked-modal-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+}
+
+.locked-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    color: white;
+    font-size: 28px;
+    box-shadow: var(--shadow-lg);
+}
+
+.locked-title {
+    font-size: 1.3rem; /* Ukuran lebih kecil untuk mobile */
+    font-weight: 700;
+    color: var(--darker);
+    margin-bottom: 8px;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.3;
+}
+
+.locked-subtitle {
+    color: var(--gray);
+    font-size: 0.85rem; /* Ukuran lebih kecil */
+    margin-bottom: 20px;
+    line-height: 1.4;
+    font-family: 'Inter', sans-serif;
+}
+
+.timer-display {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin: 16px 0;
+    border: 1px solid var(--gray-light);
+    box-shadow: var(--shadow-sm);
+}
+
+.timer-label {
+    font-size: 0.8rem; /* Ukuran lebih kecil */
+    color: var(--gray);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+}
+
+.timer-countdown {
+    display: flex;
+    justify-content: center;
+    gap: 8px; /* Kurangi gap untuk mobile */
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.timer-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 55px; /* Lebih kecil untuk mobile */
+}
+
+.timer-value {
+    font-size: 1.8rem; /* Ukuran lebih kecil */
+    font-weight: 800;
+    color: var(--primary-dark);
+    line-height: 1;
+    font-family: 'Inter', sans-serif;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timer-label-unit {
+    font-size: 0.7rem; /* Ukuran lebih kecil */
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+    font-family: 'Inter', sans-serif;
+}
+
+.timer-separator {
+    font-size: 1.5rem; /* Ukuran lebih kecil */
+    color: var(--primary);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    min-height: 42px;
+}
+
+.estimated-date {
+    background: #FEF3E2;
+    border-radius: var(--radius-md);
+    padding: 12px;
+    margin: 16px 0;
+    border-left: 3px solid var(--warning);
+    font-size: 0.85rem; /* Ukuran lebih kecil */
+    text-align: left;
+}
+
+.estimated-date p {
+    margin: 0;
+    line-height: 1.4;
+}
+
+.estimated-date strong {
+    color: var(--darker);
+}
+
+.results-unavailable-btn,
+.results-available-btn {
+    border: none;
+    border-radius: var(--radius-full);
+    padding: 12px 20px;
+    font-size: 0.9rem; /* Ukuran lebih kecil */
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 16px;
+    font-family: 'Inter', sans-serif;
+    min-height: 44px; /* Tinggi minimum untuk touch */
+}
+
+.results-unavailable-btn {
+    background: linear-gradient(135deg, var(--gray) 0%, var(--gray-light) 100%);
+    color: white;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.results-available-btn {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-normal);
+}
+
+.results-available-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+}
+
+.locked-note {
+    font-size: 0.7rem; /* Ukuran lebih kecil */
+    color: var(--gray);
+    margin-top: 12px;
+    line-height: 1.3;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .locked-modal {
+        padding: 12px;
+        align-items: flex-start; /* Mulai dari atas untuk mobile */
+        padding-top: 40px; /* Beri ruang di atas */
+    }
+    
+    .locked-modal-content {
+        padding: 16px;
+        max-width: 100%;
+        max-height: calc(100vh - 80px); /* Pastikan tidak melebihi viewport */
+        margin: 0 auto;
+    }
+    
+    .locked-title {
+        font-size: 1.1rem;
+    }
+    
+    .locked-subtitle {
+        font-size: 0.8rem;
+        margin-bottom: 16px;
+    }
+    
+    .timer-unit {
+        min-width: 45px; /* Lebih kecil untuk mobile kecil */
+    }
+    
+    .timer-value {
+        font-size: 1.5rem;
+        min-height: 36px;
+    }
+    
+    .timer-separator {
+        font-size: 1.2rem;
+        min-height: 36px;
+    }
+    
+    .timer-label-unit {
+        font-size: 0.65rem;
+    }
+    
+    .results-unavailable-btn,
+    .results-available-btn {
+        font-size: 0.85rem;
+        padding: 10px 16px;
+        min-height: 40px;
+    }
+}
+
+@media (min-width: 768px) {
+    /* Desktop styles */
+    .locked-modal-content {
+        max-width: 480px;
+        padding: 24px;
+    }
+    
+    .locked-title {
+        font-size: 1.5rem;
+    }
+    
+    .locked-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .timer-unit {
+        min-width: 70px;
+    }
+    
+    .timer-value {
+        font-size: 2.2rem;
+    }
+    
+    .timer-separator {
+        font-size: 1.8rem;
+    }
+}
+
+/* Responsive Design - Mobile Optimizations */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px; /* Mobile base font size */
+    }
+
+    .container {
+        padding: 0 12px;
+    }
+
+    .search-section {
+        margin-top: 20px;
+        max-width: 95%;
+        padding: 12px;
+    }
+
+    .results-header {
+        padding: 16px 12px;
+    }
+
+    .score-display-section {
+        padding: 16px 12px;
+        gap: 16px;
+    }
+
+    .profile-card,
+    .score-card,
+    .message-card,
+    .certificate-card,
+    .info-card,
+    .answer-card {
+        padding: 16px;
+    }
+
+    .certificate-section,
+    .tabs-container,
+    .action-buttons {
+        padding: 0 12px 16px;
+    }
+
+    .message-card {
+        margin: 0 12px 16px;
+    }
+
+    .feedback-section {
+        padding: 18px;
+        margin: 20px 0;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+
+    /* Font sizes untuk mobile */
+    .search-title {
+        font-size: 1.2rem;
+    }
+    
+    .search-subtitle {
+        font-size: 0.8rem;
+    }
+    
+    .results-title {
+        font-size: 1.25rem;
+    }
+    
+    .section-title {
+        font-size: 1.1rem;
+    }
+    
+    .certificate-title {
+        font-size: 1rem;
+    }
+    
+    .answer-question,
+    .explanation-content,
+    .answer-box-content,
+    .user-answer-box,
+    .correct-answer-box {
+        font-size: 14px; /* Target ukuran untuk mobile */
+    }
+    
+    .answer-question {
+        line-height: 1.4;
+    }
+    
+    .explanation-content {
+        line-height: 1.4;
+    }
+}
+
+@media (max-width: 600px) {
+    .certificate-options {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 14px; /* Pastikan base size 14px untuk mobile */
+    }
+
+    .container {
+        padding: 0 10px;
+    }
+
+    .search-title {
+        font-size: 1.15rem;
+    }
+
+    .score-value {
+        font-size: 2.5rem;
+    }
+
+    .certificate-btn {
+        padding: 7px 14px;
+        font-size: 0.75rem;
+    }
+
+    .action-btn {
+        padding: 12px 14px;
+        font-size: 0.8rem;
+    }
+
+    /* Pastikan ukuran font 14px untuk konten utama di mobile */
+    .answer-question {
+        font-size: 14px;
+        line-height: 1.4;
+        margin-bottom: 12px;
+    }
+
+    .explanation-content {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .answer-box-content {
+        font-size: 14px;
+        line-height: 1.35;
+    }
+
+    .user-answer-box,
+    .correct-answer-box {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .info-card-content {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .message-content {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+}
+
+@media (min-width: 769px) {
+    /* Desktop font sizes */
+    .answer-question,
+    .explanation-content,
+    .answer-box-content,
+    .user-answer-box,
+    .correct-answer-box {
+        font-size: 15px;
+    }
+    
+    .answer-question {
+        line-height: 1.45;
+    }
+    
+    .explanation-content {
+        line-height: 1.45;
+    }
+}
+
+/* Utility Classes */
+.text-center {
+    text-align: center;
+}
+
+.text-primary {
+    color: var(--primary);
+}
+
+.text-success {
+    color: var(--success);
+}
+
+.text-warning {
+    color: var(--warning);
+}
+
+.text-danger {
+    color: var(--danger);
+}
+
+.text-gray {
+    color: var(--gray);
+}
+
+.mb-14 {
+    margin-bottom: 14px;
+}
+
+.mb-18 {
+    margin-bottom: 18px;
+}
+
+.mt-14 {
+    margin-top: 14px;
+}
+
+.mt-18 {
+    margin-top: 18px;
+}
+
+.p-14 {
+    padding: 14px;
+}
+
+.p-18 {
+    padding: 18px;
+}
+
+.p-26 {
+    padding: 26px;
+}
+
+#emptyState .p-30 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 250px;
+}
+
+.mb-26 {
+    margin-bottom: 26px;
+}
+
+.hidden {
+    display: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.gap-6 {
+    gap: 6px;
+}
+
+.gap-10 {
+    gap: 10px;
+}
+
+.gap-14 {
+    gap: 14px;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* Print styles */
+@media print {
+    .main-header,
+    .main-footer,
+    .search-box .search-btn,
+    .tabs-navigation,
+    .action-buttons,
+    .certificate-section,
+    .feedback-section,
+    #certificateModal,
+    .certificate-card {
+        display: none !important;
+    }
+
+    body,
+    .container,
+    .results-container,
+    .results-header,
+    .score-display-section,
+    .answers-list,
+    .data-table {
+        background: white !important;
+        color: #000 !important;
+        box-shadow: none !important;
+    }
+
+    .info-card,
+    .table-container {
+        page-break-inside: avoid;
+    }
+
+    .container {
+        max-width: 100% !important;
+        padding: 0 6px !important;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
     </style>
 </head>
 
 <body>
-    <!-- Header (R-QUEST Style) -->
-    <nav class="rquest-nav">
-        <div class="rquest-nav-content">
-            <div class="rquest-nav-logo">
-                <h2>R-QUEST</h2>
-                <p class="rquest-nav-subtitle">Raffi's Quizzes, Exercises, and Smart Training</p>
-            </div>
-            <ul class="rquest-nav-menu">
-                <li><a href="#home" class="active">Home</a></li>
-                <li><a href="#categories">Kategori</a></li>
-                <li><a href="#about">Tentang</a></li>
-                <li><a href="index.html">Halaman Utama</a></li>
-            </ul>
-            <div class="rquest-nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="logo-icon">RQ</div>
+                    <div>
+                        <div class="logo-text">R-QUEST</div>
+                        <div class="tagline">Quiz Chronicles</div>
+                    </div>
+                </div>
+                <!-- Logo Quiz di Kanan -->
+                <div style="flex: 1; display: flex; justify-content: flex-end; align-items: center;">
+                    <img src="https://res.cloudinary.com/dy6sxsb26/image/upload/v1767332925/QUIZ_CHRONICLES_sso5or.png" 
+                        alt="Quiz Chronicles Logo" 
+                        style="height: 40px; width: auto; max-width: 120px; object-fit: contain;">
+                </div>
             </div>
         </div>
-    </nav>
+    </header>
 
     <!-- Search Section -->
     <section class="search-section">
@@ -2038,14 +2093,14 @@
                 <p class="results-subtitle">Enter your username to begin</p>
             </div>
             <div class="p-30 text-center">
-                <div class="certificate-icon" style="margin: 0 auto 30px;">
+                <div class="certificate-icon" style="margin: 0 auto 20px;">
                     <i class="fas fa-search"></i>
                 </div>
                 <h3 class="section-title">No Results Yet</h3>
                 <p class="text-gray mb-30">Enter your username in the search box above to view your quiz results,
                     certificate, and detailed performance analysis.</p>
                 <button class="search-btn" onclick="document.getElementById('usernameInput').focus()"
-                    style="max-width: 300px; margin: 0 auto;">
+                    style="max-width: 300px; margin-top: 10px;">
                     <i class="fas fa-search"></i> Search Username
                 </button>
             </div>
@@ -2075,62 +2130,102 @@
         </section>
     </main>
 
-    <!-- Footer (R-QUEST Style) -->
-    <footer class="rquest-footer">
-        <div class="rquest-footer-content">
-            <div class="rquest-footer-main">
-                <div class="rquest-footer-logo">
-                    <h3>R-QUEST</h3>
-                    <p>Raffi's Quizzes, Exercises, and Smart Training</p>
-                </div>
-                <div class="rquest-footer-links">
-                    <div class="rquest-footer-column">
-                        <h4>Menu Utama</h4>
-                        <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="index.html#categories">Kategori</a></li>
-                            <li><a href="index.html#about">Tentang</a></li>
-                        </ul>
-                    </div>
-                    <div class="rquest-footer-column">
-                        <h4>Kategori</h4>
-                        <ul>
-                            <li><a href="index.html#categories">Matematika</a></li>
-                            <li><a href="index.html#categories">Sains</a></li>
-                            <li><a href="index.html#categories">Bahasa</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="rquest-social-section">
-                    <h4 class="rquest-social-title">Terhubung Dengan Kami</h4>
-                    <div class="rquest-social-icons">
-                        <a href="https://youtube.com/@raffizahrandhika" class="rquest-social-icon" title="YouTube">
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>R-QUEST - Quiz Chronicles</h3>
+                    <p>Quiz Chronicles The Unfolding Past adalah kuis yang menggabungkan pengetahuan sejarah dengan tantangan interaktif dengan tujuan meningkatkan wawasan dan pemahaman.</p>
+                    <div class="social-links">
+                        <a href="https://youtube.com/@raffizahrandhika" class="social-link" title="YouTube">
                             <i class="fab fa-youtube"></i>
                         </a>
-                        <a href="https://instagram.com/raffizahrandhika" class="rquest-social-icon" title="Instagram">
+                        <a href="https://instagram.com/raffizahrandhika" class="social-link" title="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://t.me/raffizahrandhika" class="rquest-social-icon" title="Telegram">
+                        <a href="https://t.me/raffizahrandhika" class="social-link" title="Telegram">
                             <i class="fab fa-telegram-plane"></i>
                         </a>
-                        <a href="https://tiktok.com/@raffizahrandhika" class="rquest-social-icon" title="TikTok">
+                        <a href="https://tiktok.com/@raffizahrandhika" class="social-link" title="TikTok">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                        <a href="https://x.com/mrffzd" class="rquest-social-icon" title="Twitter">
+                        <a href="https://x.com/mrffzd" class="social-link" title="Twitter">
                             <i class="fab fa-twitter"></i>
                         </a>
                         <a href="https://www.linkedin.com/in/muhammad-raffi-zahrandhika-7a6537378"
-                            class="rquest-social-icon" title="LinkedIn">
+                            class="social-link" title="LinkedIn">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
                     </div>
                 </div>
+                <div class="footer-section">
+                    <h4 style="margin-bottom: 10px;">Kontak</h4>
+                    <p><i class="fas fa-envelope"></i> raffismartlab@gmail.com</p>
+                </div>
             </div>
-            <div class="rquest-copyright">
+            <div class="footer-bottom">
                 <p>© 2025 Muhammad Raffi Zahrandhika. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+    <!-- Locked State Modal -->
+<div class="locked-modal" id="lockedModal">
+    <div class="locked-modal-content">
+        <div class="locked-icon">
+            <i class="fas fa-lock"></i>
+        </div>
+        
+        <h2 class="locked-title">Hasil Kuis Sedang Diproses</h2>
+        <p class="locked-subtitle">
+            Tim penyelenggara masih merekap jawaban dari seluruh peserta. 
+            Hasil dan sertifikat akan tersedia setelah proses selesai.
+        </p>
+        
+        <div class="timer-display">
+            <div class="timer-label">Estimasi Waktu Tersisa</div>
+            <div class="timer-countdown">
+                <div class="timer-unit">
+                    <span class="timer-value" id="days">00</span>
+                    <span class="timer-label-unit">Hari</span>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-unit">
+                    <span class="timer-value" id="hours">00</span>
+                    <span class="timer-label-unit">Jam</span>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-unit">
+                    <span class="timer-value" id="minutes">00</span>
+                    <span class="timer-label-unit">Menit</span>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-unit">
+                    <span class="timer-value" id="seconds">00</span>
+                    <span class="timer-label-unit">Detik</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="estimated-date">
+            <p><strong><i class="fas fa-calendar-alt"></i> Estimasi selesai:</strong> <br>28 Januari 2026, 16:30 WIB</p>
+        </div>
+        
+        <button class="results-unavailable-btn" id="lockedBtn" disabled>
+            <i class="fas fa-clock"></i> Hasil Akan Tersedia Setelah Timer
+        </button>
+        
+        <button class="results-available-btn hidden" id="unlockedBtn">
+            <i class="fas fa-check-circle"></i> LIHAT HASIL KUIS
+        </button>
+        
+        <p class="locked-note">
+            <i class="fas fa-info-circle"></i> Halaman ini akan otomatis menampilkan hasil kuis ketika timer mencapai 0.
+            Anda juga dapat menekan tombol di atas untuk melihat hasil.
+        </p>
+    </div>
+</div>
 
     <!-- Certificate Modal -->
     <div class="modal" id="certificateModal">
@@ -2415,604 +2510,1027 @@
             tzOffsetHours: 7 // timezone offset hours for QR timestamp (GMT+7)
         };
 
-        // ===== FUNGSI BANTU =====
-        function calculateScore(username) {
-            const participant = quizData.participants[username];
-            if (!participant) return 0;
-
-            let totalScore = 0;
-            const answers = participant.answers;
-
-            for (let i = 0; i < answers.length; i++) {
-                const questionNum = i + 1;
-                const userAnswer = answers[i]?.toUpperCase();
-                const question = quizData.questions[questionNum];
-                const weightItem = quizData.weightData.find(w => w.no === questionNum);
-
-                if (!userAnswer || userAnswer === "0" || !question || !weightItem) continue;
-
-                const isCorrect = userAnswer === question.correctAnswer;
-                if (isCorrect) {
-                    totalScore += parseFloat(weightItem.finalWeight) || 0;
-                }
-            }
-            return Math.round(totalScore);
+        // ===== LOCKED STATE FUNCTIONALITY =====
+function initializeLockedState() {
+    const lockedModal = document.getElementById('lockedModal');
+    const lockedBtn = document.getElementById('lockedBtn');
+    const unlockedBtn = document.getElementById('unlockedBtn');
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+    
+    if (!lockedModal || !daysEl || !hoursEl || !minutesEl || !secondsEl) {
+        console.error('Locked modal elements not found!');
+        return;
+    }
+    
+    // Set target date: 28 Januari 2026, 16:30 WIB (GMT+7)
+    const targetDate = new Date('2026-01-05T11:18:00+07:00');
+    
+    let countdownInterval;
+    
+    // Function to update countdown
+    function updateCountdown() {
+        const now = new Date();
+        const diff = targetDate - now;
+        
+        if (diff <= 0) {
+            // Time's up - unlock the results
+            unlockResults();
+            return;
         }
-
-        function calculateAllRanks() {
-            const participants = quizData.participants;
-            const scoreList = [];
-
-            for (const username in participants) {
-                scoreList.push({
-                    username,
-                    score: calculateScore(username)
-                });
-            }
-
-            scoreList.sort((a, b) => b.score - a.score);
-
-            const ranks = {};
-            const scores = {};
-
-            let currentRank = 1;
-            let lastScore = null;
-
-            for (let i = 0; i < scoreList.length; i++) {
-                const item = scoreList[i];
-                scores[item.username] = item.score;
-
-                if (item.score !== lastScore) {
-                    currentRank = i + 1;
-                    lastScore = item.score;
-                }
-                ranks[item.username] = currentRank;
-            }
-
-            return { scores, ranks };
+        
+        // Calculate days, hours, minutes, seconds
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        
+        // Update display
+        daysEl.textContent = days.toString().padStart(2, '0');
+        hoursEl.textContent = hours.toString().padStart(2, '0');
+        minutesEl.textContent = minutes.toString().padStart(2, '0');
+        secondsEl.textContent = seconds.toString().padStart(2, '0');
+    }
+    
+    // Function to unlock results
+    function unlockResults() {
+        console.log('Hasil kuis telah dibuka!');
+        
+        // Hide locked modal
+        lockedModal.style.display = 'none';
+        
+        // Show unlocked button and hide locked button
+        if (lockedBtn) lockedBtn.classList.add('hidden');
+        if (unlockedBtn) unlockedBtn.classList.remove('hidden');
+        
+        // Enable search functionality
+        const searchBtn = document.getElementById('searchBtn');
+        const usernameInput = document.getElementById('usernameInput');
+        
+        if (searchBtn) {
+            searchBtn.disabled = false;
+            searchBtn.style.opacity = '1';
+            searchBtn.style.cursor = 'pointer';
+            searchBtn.innerHTML = '<i class="fas fa-search"></i> View Results';
         }
-
-        // ===== STATE GLOBAL =====
-        let globalScores = {};
-        let globalRanks = {};
-
-        // Initialize when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function () {
-            const rankData = calculateAllRanks();
-            globalScores = rankData.scores;
-            globalRanks = rankData.ranks;
-
-            // DOM Elements
-            const usernameInput = document.getElementById('usernameInput');
-            const searchBtn = document.getElementById('searchBtn');
-            const resultsContainer = document.getElementById('resultsContainer');
-            const emptyState = document.getElementById('emptyState');
-            const participantName = document.getElementById('participantName');
-            const participantUsername = document.getElementById('participantUsername');
-            const participantRank = document.getElementById('participantRank');
-            const totalParticipants = document.getElementById('totalParticipants');
-            const totalScore = document.getElementById('totalScore');
-            const scoreProgress = document.getElementById('scoreProgress');
-            const congratsMessage = document.getElementById('congratsMessage');
-            const profileAvatar = document.getElementById('profileAvatar');
-            const answersList = document.getElementById('answersList');
-            const answerDetails = document.getElementById('answerDetails');
-            const weightTable = document.getElementById('weightTable');
-            const cognitiveAnalysis = document.getElementById('cognitiveAnalysis');
-            const recommendations = document.getElementById('recommendations');
-            const progressTracking = document.getElementById('progressTracking');
-            const shareResultsBtn = document.getElementById('shareResultsBtn');
-            const certificateNameInput = document.getElementById('certificateNameInput');
-            let currentCertParticipantUsername = null;
-
-            // Tab functionality
-            const tabBtns = document.querySelectorAll('.tab-btn');
-            tabBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    tabBtns.forEach(b => b.classList.remove('active'));
-                    document.querySelectorAll('.tab-content').forEach(content => {
-                        content.classList.remove('active');
-                    });
-                    btn.classList.add('active');
-                    const tabId = btn.getAttribute('data-tab');
-                    document.getElementById(`${tabId}-tab`).classList.add('active');
-                });
-            });
-
-            // Search functionality
-            searchBtn.addEventListener('click', searchUser);
-            usernameInput.addEventListener('keypress', function (e) {
-                if (e.key === 'Enter') searchUser();
-            });
-
-            // Mobile menu toggle
-            const navToggle = document.querySelector('.rquest-nav-toggle');
-            const navMenu = document.querySelector('.rquest-nav-menu');
+        
+        if (usernameInput) {
+            usernameInput.disabled = false;
+            usernameInput.placeholder = "Enter your username (e.g., raffizahrandhika)";
+            usernameInput.style.backgroundColor = '';
+        }
+        
+        // Stop the countdown
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+        }
+        
+        // Show notification
+        showUnlockNotification();
+    }
+    
+    // Function to show unlock notification
+    function showUnlockNotification() {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = 'unlock-notification';
+        notification.innerHTML = `
+            <div style="
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, var(--success) 0%, #2E7D32 100%);
+                color: white;
+                padding: 12px 16px;
+                border-radius: var(--radius-md);
+                box-shadow: var(--shadow-lg);
+                z-index: 3000;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                animation: slideInRight 0.5s ease;
+                max-width: 320px;
+                font-size: 0.9rem;
+            ">
+                <i class="fas fa-check-circle" style="font-size: 1.1rem;"></i>
+                <div>
+                    <strong>Hasil Kuis Tersedia!</strong><br>
+                    <span style="font-size: 0.8rem;">Sekarang Anda dapat melihat hasil dan sertifikat.</span>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Remove notification after 5 seconds
+        setTimeout(() => {
+            notification.style.animation = 'slideOutRight 0.5s ease forwards';
+            setTimeout(() => notification.remove(), 500);
+        }, 5000);
+    }
+    
+    // Add CSS animation for notification
+    if (!document.querySelector('#unlock-animations')) {
+        const style = document.createElement('style');
+        style.id = 'unlock-animations';
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
             
-            if (navToggle && navMenu) {
-                navToggle.addEventListener('click', () => {
-                    navMenu.classList.toggle('active');
-                    navToggle.classList.toggle('active');
-                });
-            }
-
-            // Disable share until user searches and results are shown
-            if (shareResultsBtn) shareResultsBtn.disabled = true;
-
-            function searchUser() {
-                const username = usernameInput.value.trim().toLowerCase();
-                if (!username) {
-                    alert('Please enter a username');
-                    return;
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
                 }
-
-                const participant = quizData.participants[username];
-                if (participant) {
-                    resultsContainer.style.display = 'block';
-                    emptyState.style.display = 'none';
-
-                    const score = globalScores[username] || 0;
-                    const rank = globalRanks[username] || 1;
-                    const totalParts = Object.keys(quizData.participants).length;
-
-                    participantName.textContent = participant.name;
-                    participantUsername.textContent = username;
-                    participantRank.textContent = rank;
-                    totalParticipants.textContent = totalParts;
-                    totalScore.textContent = score;
-
-                    const progressPercent = (score / 1000) * 100;
-                    scoreProgress.style.width = `${Math.min(100, progressPercent)}%`;
-
-                    const initials = participant.name.split(' ').map(n => n[0]).join('').toUpperCase();
-                    profileAvatar.textContent = initials.substring(0, 2);
-
-                    updateCongratsMessage(score);
-
-                    displayAnswers(participant, username);
-                    displayAnswerDetails(participant, username);
-                    displayWeightTable();
-                    updateAnalysis(participant, username, score, rank);
-
-                    if (shareResultsBtn) shareResultsBtn.disabled = false;
-
-                    resultsContainer.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                    alert('Username not found. Please try again.');
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
                 }
             }
-
-            function renderCertificateCanvas(name) {
-                const canvas = document.getElementById('certificatePreview');
-                const ctx = canvas.getContext('2d');
-                const width = 2000;
-                const height = 1414;
-                canvas.width = width;
-                canvas.height = height;
-
-                const img = new Image();
-                img.crossOrigin = "anonymous";
-                img.src = 'https://res.cloudinary.com/dy6sxsb26/image/upload/v1767161868/Sertifikat_Kuis_cl65ec.png';
-
-                img.onload = function () {
-                    ctx.drawImage(img, 0, 0, width, height);
-
-                    const drawName = function () {
-                        ctx.font = '400 120px MonteCarlo, cursive';
-                        ctx.fillStyle = '#501711';
-                        ctx.textBaseline = 'middle';
-                        const yPos = height * 0.45;
-                        let xPos = width / 2;
-                        if (typeof certificateConfig !== 'undefined' && certificateConfig.nameAlign === 'left') {
-                            ctx.textAlign = 'left';
-                            // Allow different computation methods for left margin
-                            if (certificateConfig.nameLeftMode === 'factor') {
-                                xPos = Math.round(width * (certificateConfig.nameLeftFactor || 0.24));
-                            } else if (certificateConfig.nameLeftMode === 'chars') {
-                                const chars = Math.max(1, name.length);
-                                xPos = Math.round((certificateConfig.charOffset || 12) * chars);
-                            } else {
-                                xPos = certificateConfig.nameLeftMargin || 140;
-                            }
-                        } else {
-                            ctx.textAlign = 'center';
-                            xPos = width / 2;
-                        }
-
-                        ctx.fillText(name, xPos, yPos);
-                        ctx.shadowColor = 'rgba(0,0,0,0.1)';
-                        ctx.shadowBlur = 2;
-                        ctx.fillText(name, xPos, yPos);
-                        ctx.shadowBlur = 0;
-                    };
-
-                    if (document.fonts && document.fonts.load) {
-                        document.fonts.load('50px MonteCarlo').then(drawName).catch(drawName);
-                    } else {
-                        drawName();
-                    }
-                    // After name is drawn, also render QR and date
-                    const drawExtras = function () {
-                        try {
-                            const now = new Date();
-                            certificateConfig.lastGeneratedAt = now;
-                            const dateStr = now.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
-
-                            // Build timestamp in GMT+X (certificateConfig.tzOffsetHours) in 24-hour format
-                            const tzHours = certificateConfig.tzOffsetHours || 7;
-                            const utcMs = now.getTime() + (now.getTimezoneOffset() * 60000);
-                            const tzDate = new Date(utcMs + (tzHours * 3600000));
-                            const pad = (n) => n.toString().padStart(2, '0');
-                            const formattedTimestamp = `${tzDate.getFullYear()}-${pad(tzDate.getMonth()+1)}-${pad(tzDate.getDate())} ${pad(tzDate.getHours())}:${pad(tzDate.getMinutes())}:${pad(tzDate.getSeconds())}`;
-
-                            // QR payload: Name | Event | Timestamp (GMT+tz converted), but without explicit 'GMT' suffix
-                            const verificationText = `${name}|${certificateConfig.eventName || 'R-QUEST Quiz'}|${formattedTimestamp}`;
-
-                            const qrSize = Math.round(width * 0.08); // ~8% of canvas width
-                            const margin = Math.round(width * 0.03);
-                            const xQR = width - margin - qrSize;
-                            const yQR = height - margin - qrSize;
-
-                            // Generate QR data URL (prefer Qrious if available, fallback to Google Chart API)
-                            let qrDataUrl;
-                            if (window.QRious) {
-                                try {
-                                    const qr = new QRious({ value: verificationText, size: qrSize, level: 'M' });
-                                    qrDataUrl = qr.toDataURL();
-                                } catch (err) {
-                                    qrDataUrl = 'https://chart.googleapis.com/chart?chs=' + qrSize + 'x' + qrSize + '&cht=qr&chl=' + encodeURIComponent(verificationText);
-                                }
-                            } else {
-                                qrDataUrl = 'https://chart.googleapis.com/chart?chs=' + qrSize + 'x' + qrSize + '&cht=qr&chl=' + encodeURIComponent(verificationText);
-                            }
-
-                            const qrImg = new Image();
-                            qrImg.crossOrigin = 'anonymous';
-                            qrImg.src = qrDataUrl;
-                            qrImg.onload = function () {
-                                ctx.drawImage(qrImg, xQR, yQR, qrSize, qrSize);
-
-                                // Draw small date text above the QR
-                                const dateX = xQR + Math.round(qrSize / 2);
-                                const dateY = yQR - Math.round(qrSize * 0.12);
-                                ctx.font = Math.round(qrSize * 0.16) + 'px Inter, sans-serif';
-                                ctx.fillStyle = '#501711';
-                                ctx.textAlign = 'center';
-                                ctx.textBaseline = 'bottom';
-                                ctx.fillText(dateStr, dateX, dateY);
-                            };
-                        } catch (e) {
-                            console.error('Error drawing extras (QR/date):', e);
-                        }
-                    };
-                    // call extras after a short timeout to ensure name rendering completed
-                    setTimeout(drawExtras, 80);
-                };
-
-                img.onerror = function () {
-                    console.error('Gagal memuat gambar sertifikat');
-                    ctx.fillStyle = '#000';
-                    ctx.font = '20px sans-serif';
-                    ctx.textAlign = 'center';
-                    ctx.fillText('Gagal memuat sertifikat', width / 2, height / 2);
-                };
-            }
-
-            function updateCongratsMessage(score) {
-                let message = '';
-                let emoji = '';
-                if (score >= 900) {
-                    message = "Outstanding performance! You've demonstrated exceptional knowledge of world landmarks. Your score places you in the top tier of participants.";
-                    emoji = "🏆";
-                } else if (score >= 700) {
-                    message = "Excellent work! You have a strong understanding of global landmarks and their historical significance.";
-                    emoji = "⭐";
-                } else if (score >= 500) {
-                    message = "Good job! You've shown solid knowledge with room for further exploration of world wonders.";
-                    emoji = "👍";
-                } else if (score >= 300) {
-                    message = "Fair attempt! You have basic knowledge but could benefit from further study of world landmarks.";
-                    emoji = "📚";
-                } else {
-                    message = "Keep learning! Every expert was once a beginner. Use these results to identify areas for improvement.";
-                    emoji = "💪";
-                }
-                congratsMessage.innerHTML = `<strong>${emoji} ${message}</strong>`;
-            }
-
-            function displayAnswers(participant, username) {
-                answersList.innerHTML = '';
-                for (let i = 0; i < participant.answers.length; i++) {
-                    const questionNum = i + 1;
-                    const questionData = quizData.questions[questionNum] || {
-                        materi: `Question ${questionNum}`,
-                        question: `Question content for question ${questionNum}`,
-                        options: { A: "Option A", B: "Option B", C: "Option C", D: "Option D" },
-                        correctAnswer: "A",
-                        explanation: "Explanation not available"
-                    };
-
-                    const userAnswer = (participant.answers[i] || "0").toUpperCase();
-                    const isAnswered = userAnswer !== "0";
-                    const correctAnswer = questionData.correctAnswer;
-                    const isCorrect = isAnswered && userAnswer === correctAnswer;
-
-                    let statusClass, statusText;
-                    if (!isAnswered) {
-                        statusClass = 'status-unanswered';
-                        statusText = 'Not Answered';
-                    } else if (isCorrect) {
-                        statusClass = 'status-correct';
-                        statusText = 'Correct';
-                    } else {
-                        statusClass = 'status-incorrect';
-                        statusText = 'Incorrect';
-                    }
-
-                    const answerCard = document.createElement('div');
-                    answerCard.className = 'answer-card';
-                    answerCard.innerHTML = `
-                    <div class="answer-header">
-                        <div class="answer-number">${questionNum}. ${questionData.materi}</div>
-                        <span class="${statusClass}">${statusText}</span>
-                    </div>
-                    <div class="answer-question">${questionData.question}</div>
-                    <div class="answer-details">
-                        <div class="user-answer-box">
-                            <div class="answer-box-label">Your Answer</div>
-                            <div class="answer-box-content">
-                                ${isAnswered
-                            ? `${userAnswer}. ${questionData.options[userAnswer] || 'Unknown option'}`
-                            : 'Not answered'}
-                            </div>
-                        </div>
-                        <div class="correct-answer-box">
-                            <div class="answer-box-label">Correct Answer</div>
-                            <div class="answer-box-content">
-                                ${correctAnswer}. ${questionData.options[correctAnswer]}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="explanation-box">
-                        <div class="explanation-label">
-                            <i class="fas fa-lightbulb"></i> Explanation
-                        </div>
-                        <div class="explanation-content">
-                            ${questionData.explanation}
-                        </div>
-                    </div>
-                `;
-                    answersList.appendChild(answerCard);
-                }
-            }
-
-            function displayAnswerDetails(participant, username) {
-                answerDetails.innerHTML = '';
-                const score = globalScores[username] || 0;
-                let cumulative = 0;
-
-                for (let i = 0; i < participant.answers.length; i++) {
-                    const questionNum = i + 1;
-                    const questionData = quizData.questions[questionNum] || { materi: `Question ${questionNum}` };
-                    const userAnswer = (participant.answers[i] || "0").toUpperCase();
-                    const weightItem = quizData.weightData.find(w => w.no === questionNum);
-                    const isAnswered = userAnswer !== "0";
-                    const isCorrect = isAnswered && userAnswer === questionData.correctAnswer;
-
-                    const pointsEarned = isCorrect && weightItem ? parseFloat(weightItem.finalWeight) : 0;
-                    cumulative += pointsEarned;
-
-                    const row = document.createElement('tr');
-                    let statusCell, resultCell;
-
-                    if (!isAnswered) {
-                        statusCell = '<span class="status-unanswered">Not Answered</span>';
-                        resultCell = '-';
-                    } else if (isCorrect) {
-                        statusCell = '<span class="status-correct">Answered</span>';
-                        resultCell = '<span class="status-correct">Correct</span>';
-                    } else {
-                        statusCell = '<span class="status-incorrect">Answered</span>';
-                        resultCell = '<span class="status-incorrect">Incorrect</span>';
-                    }
-
-                    row.innerHTML = `
-                    <td>${questionNum}</td>
-                    <td>${questionData.materi}</td>
-                    <td>${statusCell}</td>
-                    <td>${resultCell}</td>
-                    <td><strong>${Math.round(pointsEarned)}</strong></td>
-                `;
-                    answerDetails.appendChild(row);
-                }
-            }
-
-            function displayWeightTable() {
-                weightTable.innerHTML = '';
-                quizData.weightData.forEach(item => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                    <td>${item.no}</td>
-                    <td>${item.landmark}</td>
-                    <td>${item.a}</td>
-                    <td>${item.b}</td>
-                    <td>${item.c}</td>
-                    <td>${item.d}</td>
-                    <td><strong>${item.key}</strong></td>
-                    <td>${item.difficulty}</td>
-                    <td>${item.initialWeight}</td>
-                    <td><strong>${item.finalWeight}</strong></td>
-                `;
-                    weightTable.appendChild(row);
-                });
-            }
-
-            function updateAnalysis(participant, username, score, rank) {
-                const totalQuestions = participant.answers.length;
-                const answered = participant.answers.filter(a => a !== "0").length;
-                const correctCount = participant.answers.filter((ans, i) => {
-                    const userAns = ans.toUpperCase();
-                    return userAns !== "0" && userAns === quizData.questions[i + 1]?.correctAnswer;
-                }).length;
-                const accuracy = answered > 0 ? Math.round((correctCount / answered) * 100) : 0;
-                const totalParts = Object.keys(quizData.participants).length;
-                const percentile = Math.round(((totalParts - rank + 1) / totalParts) * 100);
-
-                cognitiveAnalysis.innerHTML = `
-                <p>You answered <strong>${answered}/${totalQuestions}</strong> questions (<strong>${Math.round((answered / totalQuestions) * 100)}%</strong> attempt rate).</p>
-                <p>Your accuracy was <strong>${accuracy}%</strong> on attempted questions.</p>
-                <p>Based on IRT scoring, your performance indicates <strong>${accuracy >= 80 ? 'strong' : accuracy >= 60 ? 'moderate' : 'developing'}</strong> understanding of the subject matter.</p>
-            `;
-
-                recommendations.innerHTML = `
-                <p><strong>Recommended focus areas:</strong></p>
-                <ul style="padding-left: 20px; margin-top: 10px;">
-                    ${accuracy < 70 ? '<li>Review landmark historical contexts</li>' : ''}
-                    ${accuracy < 80 ? '<li>Study architectural significance</li>' : ''}
-                    <li>Explore cultural impacts of world wonders</li>
-                    <li>Practice with more IRT-based assessments</li>
-                </ul>
-            `;
-
-                progressTracking.innerHTML = `
-                <p>Your score of <strong>${score}/1000</strong> places you in the <strong>top ${percentile}%</strong> of participants.</p>
-                <p>Compared to average performance: <strong>${score > 500 ? 'Above' : 'Below'} average</strong></p>
-                <p>Next milestone: <strong>${1000 - score} points</strong> to perfect score</p>
-            `;
-            }
-
-            // Certificate Modal functionality
-            const certificateModal = document.getElementById('certificateModal');
-            const closeCertificateModal = document.getElementById('closeCertificateModal');
-            const downloadCertificateBtn = document.getElementById('downloadCertificateBtn');
-            const confirmDownloadBtn = document.getElementById('confirmDownloadBtn');
-
-            downloadCertificateBtn.addEventListener('click', () => {
-                const username = usernameInput.value.trim().toLowerCase();
-                const participant = quizData.participants[username];
-                if (!participant) {
-                    alert('Please search for your username first');
-                    return;
-                }
-                // set current user for modal and prefill custom name input
-                currentCertParticipantUsername = username;
-                if (certificateNameInput) certificateNameInput.value = participant.name || '';
-                renderCertificateCanvas(certificateNameInput && certificateNameInput.value.trim() ? certificateNameInput.value.trim() : participant.name);
-                certificateModal.style.display = 'flex';
-            });
-
-            closeCertificateModal.addEventListener('click', () => {
-                certificateModal.style.display = 'none';
-            });
-
-            // re-render certificate preview when user edits the custom name
-            if (certificateNameInput) {
-                certificateNameInput.addEventListener('input', () => {
-                    const nameVal = certificateNameInput.value.trim();
-                    // if a participant is selected, use participant's name as fallback
-                    const fallback = (currentCertParticipantUsername && quizData.participants[currentCertParticipantUsername]) ? quizData.participants[currentCertParticipantUsername].name : '';
-                    renderCertificateCanvas(nameVal || fallback);
-                });
-            }
-
-            confirmDownloadBtn.addEventListener('click', () => {
-                const canvas = document.getElementById('certificatePreview');
-                if (!canvas || !canvas.toBlob) {
-                    alert('Canvas not supported in your browser for download.');
-                    return;
-                }
-
-                const username = usernameInput.value.trim().toLowerCase();
-                const participant = quizData.participants[username];
-                if (!participant) {
-                    alert('Peserta tidak ditemukan. Silakan cari username Anda terlebih dahulu.');
-                    return;
-                }
-
-                // prefer custom name from input if provided
-                const customName = (certificateNameInput && certificateNameInput.value.trim()) ? certificateNameInput.value.trim() : null;
-                const name = customName || participant.name;
-
-                canvas.toBlob(function (blob) {
-                    const link = document.createElement('a');
-                    link.download = `R-QUEST_Certificate_${name.replace(/\s+/g, '_')}.png`;
-                    link.href = URL.createObjectURL(blob);
-                    link.click();
-                    URL.revokeObjectURL(link.href);
-                }, 'image/png');
-            });
-
-            window.addEventListener('click', (e) => {
-                if (e.target === certificateModal) certificateModal.style.display = 'none';
-            });
-
-            // Feedback form submission
-            document.getElementById('feedbackForm').addEventListener('submit', function (e) {
-                e.preventDefault();
-                const message = document.getElementById('feedbackMessage').value;
-                if (!message.trim()) {
-                    alert('Please enter your feedback');
-                    return;
-                }
-                console.log('Feedback submitted');
-                alert('Thank you for your feedback!');
-                this.reset();
-                
-                // Reset anonymous checkbox
-                const anonymousCheckbox = document.getElementById('anonymousCheckbox');
-                const feedbackNameInput = document.getElementById('feedbackName');
-                anonymousCheckbox.checked = false;
-                feedbackNameInput.value = '';
-                feedbackNameInput.disabled = false;
-            });
-
-            // Anonymous checkbox functionality
-            const anonymousCheckbox = document.getElementById('anonymousCheckbox');
-            const feedbackNameInput = document.getElementById('feedbackName');
-            anonymousCheckbox.addEventListener('change', function () {
-                if (this.checked) {
-                    feedbackNameInput.value = 'Anonymous';
-                    feedbackNameInput.disabled = true;
-                    feedbackNameInput.style.backgroundColor = '#f8f5f2';
-                    feedbackNameInput.style.color = '#8B7D6B';
-                } else {
-                    feedbackNameInput.value = '';
-                    feedbackNameInput.disabled = false;
-                    feedbackNameInput.style.backgroundColor = '';
-                    feedbackNameInput.style.color = '';
-                }
-            });
-
-            // Button handlers
-            document.getElementById('downloadResultsBtn').addEventListener('click', () => {
-                window.print();
-            });
             
-            if (shareResultsBtn) {
-                shareResultsBtn.addEventListener('click', () => {
-                    const username = usernameInput.value.trim().toLowerCase();
-                    if (!username) {
-                        alert('Please search for your username first before sharing results.');
-                        return;
-                    }
-
-                    if (!navigator.share) {
-                        alert('Sharing is not available: the Web Share API requires a secure context (HTTPS) and a supported browser. Try opening this page via HTTPS or use a compatible mobile browser.');
-                        return;
-                    }
-
-                    const score = globalScores[username] || 0;
-                    navigator.share({
-                        title: 'My Quiz Results',
-                        text: `I scored ${score}/1000 on the Wonders of Earth Quiz!`,
-                        url: window.location.href
-                    }).catch(err => console.log('Share failed:', err));
-                });
+            .unlock-notification {
+                pointer-events: none;
             }
-
-            // Awal: tampilkan weight table
-            displayWeightTable();
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // Add click handler for unlocked button
+    if (unlockedBtn) {
+        unlockedBtn.addEventListener('click', () => {
+            lockedModal.style.display = 'none';
         });
+    }
+    
+    // Check if target date has passed
+    const now = new Date();
+    
+    if (now >= targetDate) {
+        console.log('Tanggal target telah tercapai - membuka hasil kuis');
+        unlockResults();
+        lockedModal.style.display = 'none';
+    } else {
+        // Show locked modal and start countdown
+        console.log('Hasil kuis masih terkunci - menampilkan modal');
+        lockedModal.style.display = 'flex';
+        
+        // Disable search functionality initially
+        const searchBtn = document.getElementById('searchBtn');
+        const usernameInput = document.getElementById('usernameInput');
+        
+        if (searchBtn) {
+            searchBtn.disabled = true;
+            searchBtn.style.opacity = '0.5';
+            searchBtn.style.cursor = 'not-allowed';
+            searchBtn.innerHTML = '<i class="fas fa-clock"></i> Results Locked';
+        }
+        
+        if (usernameInput) {
+            usernameInput.disabled = true;
+            usernameInput.placeholder = "Waiting for results to be available...";
+            usernameInput.style.backgroundColor = 'var(--gray-light)';
+        }
+        
+        // Initial update
+        updateCountdown();
+        
+        // Start countdown interval
+        countdownInterval = setInterval(updateCountdown, 1000);
+        
+        // Store interval ID for cleanup
+        window.lockedCountdownInterval = countdownInterval;
+    }
+}
+
+        // ===== FUNGSI BANTU =====
+function calculateScore(username) {
+    const participant = quizData.participants[username];
+    if (!participant) return 0;
+
+    let totalScore = 0;
+    const answers = participant.answers;
+
+    for (let i = 0; i < answers.length; i++) {
+        const questionNum = i + 1;
+        const userAnswer = answers[i]?.toUpperCase();
+        const question = quizData.questions[questionNum];
+        const weightItem = quizData.weightData.find(w => w.no === questionNum);
+
+        if (!userAnswer || userAnswer === "0" || !question || !weightItem) continue;
+
+        const isCorrect = userAnswer === question.correctAnswer;
+        if (isCorrect) {
+            totalScore += parseFloat(weightItem.finalWeight) || 0;
+        }
+    }
+    return Math.round(totalScore);
+}
+
+function calculateAllRanks() {
+    const participants = quizData.participants;
+    const scoreList = [];
+
+    for (const username in participants) {
+        scoreList.push({
+            username,
+            score: calculateScore(username)
+        });
+    }
+
+    scoreList.sort((a, b) => b.score - a.score);
+
+    const ranks = {};
+    const scores = {};
+
+    let currentRank = 1;
+    let lastScore = null;
+
+    for (let i = 0; i < scoreList.length; i++) {
+        const item = scoreList[i];
+        scores[item.username] = item.score;
+
+        if (item.score !== lastScore) {
+            currentRank = i + 1;
+            lastScore = item.score;
+        }
+        ranks[item.username] = currentRank;
+    }
+
+    return { scores, ranks };
+}
+
+// ===== STATE GLOBAL =====
+let globalScores = {};
+let globalRanks = {};
+
+// ===== LOCKED STATE FUNCTIONALITY =====
+function initializeLockedState() {
+    const lockedModal = document.getElementById('lockedModal');
+    const lockedBtn = document.getElementById('lockedBtn');
+    const unlockedBtn = document.getElementById('unlockedBtn');
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+    
+    if (!lockedModal || !daysEl || !hoursEl || !minutesEl || !secondsEl) {
+        console.error('Locked modal elements not found!');
+        return;
+    }
+    
+    // Set target date: 28 Januari 2026, 16:30 WIB (GMT+7)
+    const targetDate = new Date('2026-01-05T11:30:00+07:00');
+    
+    let countdownInterval;
+    
+    // Function to update countdown
+    function updateCountdown() {
+        const now = new Date();
+        const diff = targetDate - now;
+        
+        if (diff <= 0) {
+            // Time's up - unlock the results
+            unlockResults();
+            return;
+        }
+        
+        // Calculate days, hours, minutes, seconds
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        
+        // Update display
+        daysEl.textContent = days.toString().padStart(2, '0');
+        hoursEl.textContent = hours.toString().padStart(2, '0');
+        minutesEl.textContent = minutes.toString().padStart(2, '0');
+        secondsEl.textContent = seconds.toString().padStart(2, '0');
+    }
+    
+    // Function to unlock results
+    function unlockResults() {
+        console.log('Hasil kuis telah dibuka!');
+        
+        // Hide locked modal
+        lockedModal.style.display = 'none';
+        
+        // Show unlocked button and hide locked button
+        if (lockedBtn) lockedBtn.classList.add('hidden');
+        if (unlockedBtn) unlockedBtn.classList.remove('hidden');
+        
+        // Enable search functionality
+        const searchBtn = document.getElementById('searchBtn');
+        const usernameInput = document.getElementById('usernameInput');
+        
+        if (searchBtn) {
+            searchBtn.disabled = false;
+            searchBtn.style.opacity = '1';
+            searchBtn.style.cursor = 'pointer';
+            searchBtn.innerHTML = '<i class="fas fa-search"></i> View Results';
+        }
+        
+        if (usernameInput) {
+            usernameInput.disabled = false;
+            usernameInput.placeholder = "Enter your username (e.g., raffizahrandhika)";
+            usernameInput.style.backgroundColor = '';
+        }
+        
+        // Stop the countdown
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+        }
+        
+        // Show notification
+        showUnlockNotification();
+    }
+    
+    // Function to show unlock notification
+    function showUnlockNotification() {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = 'unlock-notification';
+        notification.innerHTML = `
+            <div style="
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, var(--success) 0%, #2E7D32 100%);
+                color: white;
+                padding: 12px 16px;
+                border-radius: var(--radius-md);
+                box-shadow: var(--shadow-lg);
+                z-index: 3000;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                animation: slideInRight 0.5s ease;
+                max-width: 320px;
+                font-size: 0.9rem;
+            ">
+                <i class="fas fa-check-circle" style="font-size: 1.1rem;"></i>
+                <div>
+                    <strong>Hasil Kuis Tersedia!</strong><br>
+                    <span style="font-size: 0.8rem;">Sekarang Anda dapat melihat hasil dan sertifikat.</span>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Remove notification after 5 seconds
+        setTimeout(() => {
+            notification.style.animation = 'slideOutRight 0.5s ease forwards';
+            setTimeout(() => notification.remove(), 500);
+        }, 5000);
+    }
+    
+    // Add CSS animation for notification
+    if (!document.querySelector('#unlock-animations')) {
+        const style = document.createElement('style');
+        style.id = 'unlock-animations';
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+            
+            .unlock-notification {
+                pointer-events: none;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // Add click handler for unlocked button
+    if (unlockedBtn) {
+        unlockedBtn.addEventListener('click', () => {
+            lockedModal.style.display = 'none';
+        });
+    }
+    
+    // Check if target date has passed
+    const now = new Date();
+    
+    if (now >= targetDate) {
+        console.log('Tanggal target telah tercapai - membuka hasil kuis');
+        unlockResults();
+        lockedModal.style.display = 'none';
+    } else {
+        // Show locked modal and start countdown
+        console.log('Hasil kuis masih terkunci - menampilkan modal');
+        lockedModal.style.display = 'flex';
+        
+        // Disable search functionality initially
+        const searchBtn = document.getElementById('searchBtn');
+        const usernameInput = document.getElementById('usernameInput');
+        
+        if (searchBtn) {
+            searchBtn.disabled = true;
+            searchBtn.style.opacity = '0.5';
+            searchBtn.style.cursor = 'not-allowed';
+            searchBtn.innerHTML = '<i class="fas fa-clock"></i> Results Locked';
+        }
+        
+        if (usernameInput) {
+            usernameInput.disabled = true;
+            usernameInput.placeholder = "Waiting for results to be available...";
+            usernameInput.style.backgroundColor = 'var(--gray-light)';
+        }
+        
+        // Initial update
+        updateCountdown();
+        
+        // Start countdown interval
+        countdownInterval = setInterval(updateCountdown, 1000);
+        
+        // Store interval ID for cleanup
+        window.lockedCountdownInterval = countdownInterval;
+    }
+}
+
+// ===== FUNGSI UTAMA =====
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('DOM loaded, initializing...');
+    
+    // Initialize locked state FIRST
+    initializeLockedState();
+    
+    // Auto-fill username from URL parameters if present
+    const urlParams = new URLSearchParams(window.location.search);
+    const usernameFromURL = urlParams.get('username');
+    if (usernameFromURL) {
+        document.getElementById('usernameInput').value = usernameFromURL;
+        // Auto-search setelah delay kecil
+        setTimeout(() => {
+            if (document.getElementById('searchBtn') && !document.getElementById('searchBtn').disabled) {
+                searchUser();
+            }
+        }, 800);
+    }
+    
+    const rankData = calculateAllRanks();
+    globalScores = rankData.scores;
+    globalRanks = rankData.ranks;
+
+    // DOM Elements
+    const usernameInput = document.getElementById('usernameInput');
+    const searchBtn = document.getElementById('searchBtn');
+    const resultsContainer = document.getElementById('resultsContainer');
+    const emptyState = document.getElementById('emptyState');
+    const participantName = document.getElementById('participantName');
+    const participantUsername = document.getElementById('participantUsername');
+    const participantRank = document.getElementById('participantRank');
+    const totalParticipants = document.getElementById('totalParticipants');
+    const totalScore = document.getElementById('totalScore');
+    const scoreProgress = document.getElementById('scoreProgress');
+    const congratsMessage = document.getElementById('congratsMessage');
+    const profileAvatar = document.getElementById('profileAvatar');
+    const answersList = document.getElementById('answersList');
+    const answerDetails = document.getElementById('answerDetails');
+    const weightTable = document.getElementById('weightTable');
+    const cognitiveAnalysis = document.getElementById('cognitiveAnalysis');
+    const recommendations = document.getElementById('recommendations');
+    const progressTracking = document.getElementById('progressTracking');
+    const shareResultsBtn = document.getElementById('shareResultsBtn');
+    const certificateNameInput = document.getElementById('certificateNameInput');
+    let currentCertParticipantUsername = null;
+
+    // Tab functionality
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabBtns.forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            btn.classList.add('active');
+            const tabId = btn.getAttribute('data-tab');
+            document.getElementById(`${tabId}-tab`).classList.add('active');
+        });
+    });
+
+    // Search functionality
+    searchBtn.addEventListener('click', searchUser);
+    usernameInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') searchUser();
+    });
+
+    // Disable share until user searches and results are shown
+    if (shareResultsBtn) shareResultsBtn.disabled = true;
+
+    function searchUser() {
+        // Check if still locked (fail-safe)
+        const searchBtn = document.getElementById('searchBtn');
+        if (searchBtn && searchBtn.disabled) {
+            alert('Hasil kuis belum tersedia. Silakan tunggu hingga timer selesai.');
+            return;
+        }
+        
+        const username = usernameInput.value.trim().toLowerCase();
+        if (!username) {
+            alert('Please enter a username');
+            return;
+        }
+
+        const participant = quizData.participants[username];
+        if (participant) {
+            resultsContainer.style.display = 'block';
+            emptyState.style.display = 'none';
+
+            const score = globalScores[username] || 0;
+            const rank = globalRanks[username] || 1;
+            const totalParts = Object.keys(quizData.participants).length;
+
+            participantName.textContent = participant.name;
+            participantUsername.textContent = username;
+            participantRank.textContent = rank;
+            totalParticipants.textContent = totalParts;
+            totalScore.textContent = score;
+
+            const progressPercent = (score / 1000) * 100;
+            scoreProgress.style.width = `${Math.min(100, progressPercent)}%`;
+
+            const initials = participant.name.split(' ').map(n => n[0]).join('').toUpperCase();
+            profileAvatar.textContent = initials.substring(0, 2);
+
+            updateCongratsMessage(score);
+
+            displayAnswers(participant, username);
+            displayAnswerDetails(participant, username);
+            displayWeightTable();
+            updateAnalysis(participant, username, score, rank);
+
+            if (shareResultsBtn) shareResultsBtn.disabled = false;
+
+            resultsContainer.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            alert('Username not found. Please try again.');
+        }
+    }
+
+    function renderCertificateCanvas(name) {
+        const canvas = document.getElementById('certificatePreview');
+        const ctx = canvas.getContext('2d');
+        const width = 2000;
+        const height = 1414;
+        canvas.width = width;
+        canvas.height = height;
+
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.src = 'https://res.cloudinary.com/dy6sxsb26/image/upload/v1767509996/Cerificate-Quiz_zdbtz9.png';
+
+        img.onload = function () {
+            ctx.drawImage(img, 0, 0, width, height);
+
+            const drawName = function () {
+                ctx.font = '400 120px MonteCarlo, cursive';
+                ctx.fillStyle = '#501711';
+                ctx.textBaseline = 'middle';
+                const yPos = height * 0.45;
+                let xPos = width / 2;
+                if (typeof certificateConfig !== 'undefined' && certificateConfig.nameAlign === 'left') {
+                    ctx.textAlign = 'left';
+                    // Allow different computation methods for left margin
+                    if (certificateConfig.nameLeftMode === 'factor') {
+                        xPos = Math.round(width * (certificateConfig.nameLeftFactor || 0.24));
+                    } else if (certificateConfig.nameLeftMode === 'chars') {
+                        const chars = Math.max(1, name.length);
+                        xPos = Math.round((certificateConfig.charOffset || 12) * chars);
+                    } else {
+                        xPos = certificateConfig.nameLeftMargin || 140;
+                    }
+                } else {
+                    ctx.textAlign = 'center';
+                    xPos = width / 2;
+                }
+
+                ctx.fillText(name, xPos, yPos);
+                ctx.shadowColor = 'rgba(0,0,0,0.1)';
+                ctx.shadowBlur = 2;
+                ctx.fillText(name, xPos, yPos);
+                ctx.shadowBlur = 0;
+            };
+
+            if (document.fonts && document.fonts.load) {
+                document.fonts.load('50px MonteCarlo').then(drawName).catch(drawName);
+            } else {
+                drawName();
+            }
+            
+            // After name is drawn, also render QR and date
+            const drawExtras = function () {
+                try {
+                    const now = new Date();
+                    certificateConfig.lastGeneratedAt = now;
+                    const dateStr = now.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+
+                    // Build timestamp in GMT+X (certificateConfig.tzOffsetHours) in 24-hour format
+                    const tzHours = certificateConfig.tzOffsetHours || 7;
+                    const utcMs = now.getTime() + (now.getTimezoneOffset() * 60000);
+                    const tzDate = new Date(utcMs + (tzHours * 3600000));
+                    const pad = (n) => n.toString().padStart(2, '0');
+                    const formattedTimestamp = `${tzDate.getFullYear()}-${pad(tzDate.getMonth()+1)}-${pad(tzDate.getDate())} ${pad(tzDate.getHours())}:${pad(tzDate.getMinutes())}:${pad(tzDate.getSeconds())}`;
+
+                    // QR payload: Link ke halaman ini dengan username otomatis terisi
+                    const currentUrl = window.location.href.split('?')[0]; // Hapus query parameters lama
+                    const username = currentCertParticipantUsername || 'raffizahrandhika'; // Default fallback
+                    const qrLink = `${currentUrl}?username=${encodeURIComponent(username)}&from_cert=true&t=${Date.now()}`;
+                    const verificationText = qrLink;
+
+                    const qrSize = Math.round(width * 0.08); // ~8% of canvas width
+                    const margin = Math.round(width * 0.03);
+                    const xQR = width - margin - qrSize;
+                    const yQR = height - margin - qrSize;
+
+                    // Generate QR data URL (prefer Qrious if available, fallback to Google Chart API)
+                    let qrDataUrl;
+                    if (window.QRious) {
+                        try {
+                            const qr = new QRious({ value: verificationText, size: qrSize, level: 'M' });
+                            qrDataUrl = qr.toDataURL();
+                        } catch (err) {
+                            qrDataUrl = 'https://chart.googleapis.com/chart?chs=' + qrSize + 'x' + qrSize + '&cht=qr&chl=' + encodeURIComponent(verificationText);
+                        }
+                    } else {
+                        qrDataUrl = 'https://chart.googleapis.com/chart?chs=' + qrSize + 'x' + qrSize + '&cht=qr&chl=' + encodeURIComponent(verificationText);
+                    }
+
+                    const qrImg = new Image();
+                    qrImg.crossOrigin = 'anonymous';
+                    qrImg.src = qrDataUrl;
+                    qrImg.onload = function () {
+                        ctx.drawImage(qrImg, xQR, yQR, qrSize, qrSize);
+
+                        // Draw small date text above the QR
+                        const dateX = xQR + Math.round(qrSize / 2);
+                        const dateY = yQR - Math.round(qrSize * 0.12);
+                        ctx.font = Math.round(qrSize * 0.16) + 'px Inter, sans-serif';
+                        ctx.fillStyle = '#501711';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+                        ctx.fillText(dateStr, dateX, dateY);
+                    };
+                } catch (e) {
+                    console.error('Error drawing extras (QR/date):', e);
+                }
+            };
+            // call extras after a short timeout to ensure name rendering completed
+            setTimeout(drawExtras, 80);
+        };
+
+        img.onerror = function () {
+            console.error('Gagal memuat gambar sertifikat');
+            ctx.fillStyle = '#000';
+            ctx.font = '20px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('Gagal memuat sertifikat', width / 2, height / 2);
+        };
+    }
+
+    function updateCongratsMessage(score) {
+        let message = '';
+        let emoji = '';
+        if (score >= 900) {
+            message = "Outstanding performance! You've demonstrated exceptional knowledge of world landmarks. Your score places you in the top tier of participants.";
+            emoji = "🏆";
+        } else if (score >= 700) {
+            message = "Excellent work! You have a strong understanding of global landmarks and their historical significance.";
+            emoji = "⭐";
+        } else if (score >= 500) {
+            message = "Good job! You've shown solid knowledge with room for further exploration of world wonders.";
+            emoji = "👍";
+        } else if (score >= 300) {
+            message = "Fair attempt! You have basic knowledge but could benefit from further study of world landmarks.";
+            emoji = "📚";
+        } else {
+            message = "Keep learning! Every expert was once a beginner. Use these results to identify areas for improvement.";
+            emoji = "💪";
+        }
+        congratsMessage.innerHTML = `<strong>${emoji} ${message}</strong>`;
+    }
+
+    function displayAnswers(participant, username) {
+        answersList.innerHTML = '';
+        for (let i = 0; i < participant.answers.length; i++) {
+            const questionNum = i + 1;
+            const questionData = quizData.questions[questionNum] || {
+                materi: `Question ${questionNum}`,
+                question: `Question content for question ${questionNum}`,
+                options: { A: "Option A", B: "Option B", C: "Option C", D: "Option D" },
+                correctAnswer: "A",
+                explanation: "Explanation not available"
+            };
+
+            const userAnswer = (participant.answers[i] || "0").toUpperCase();
+            const isAnswered = userAnswer !== "0";
+            const correctAnswer = questionData.correctAnswer;
+            const isCorrect = isAnswered && userAnswer === correctAnswer;
+
+            let statusClass, statusText;
+            if (!isAnswered) {
+                statusClass = 'status-unanswered';
+                statusText = 'Not Answered';
+            } else if (isCorrect) {
+                statusClass = 'status-correct';
+                statusText = 'Correct';
+            } else {
+                statusClass = 'status-incorrect';
+                statusText = 'Incorrect';
+            }
+
+            const answerCard = document.createElement('div');
+            answerCard.className = 'answer-card';
+            answerCard.innerHTML = `
+            <div class="answer-header">
+                <div class="answer-number">${questionNum}. ${questionData.materi}</div>
+                <span class="${statusClass}">${statusText}</span>
+            </div>
+            <div class="answer-question">${questionData.question}</div>
+            <div class="answer-details">
+                <div class="user-answer-box">
+                    <div class="answer-box-label">Your Answer</div>
+                    <div class="answer-box-content">
+                        ${isAnswered
+                        ? `${userAnswer}. ${questionData.options[userAnswer] || 'Unknown option'}`
+                        : 'Not answered'}
+                    </div>
+                </div>
+                <div class="correct-answer-box">
+                    <div class="answer-box-label">Correct Answer</div>
+                    <div class="answer-box-content">
+                        ${correctAnswer}. ${questionData.options[correctAnswer]}
+                    </div>
+                </div>
+            </div>
+            <div class="explanation-box">
+                <div class="explanation-label">
+                    <i class="fas fa-lightbulb"></i> Explanation
+                </div>
+                <div class="explanation-content">
+                    ${questionData.explanation}
+                </div>
+            </div>
+        `;
+            answersList.appendChild(answerCard);
+        }
+    }
+
+    function displayAnswerDetails(participant, username) {
+        answerDetails.innerHTML = '';
+        const score = globalScores[username] || 0;
+        let cumulative = 0;
+
+        for (let i = 0; i < participant.answers.length; i++) {
+            const questionNum = i + 1;
+            const questionData = quizData.questions[questionNum] || { materi: `Question ${questionNum}` };
+            const userAnswer = (participant.answers[i] || "0").toUpperCase();
+            const weightItem = quizData.weightData.find(w => w.no === questionNum);
+            const isAnswered = userAnswer !== "0";
+            const isCorrect = isAnswered && userAnswer === questionData.correctAnswer;
+
+            const pointsEarned = isCorrect && weightItem ? parseFloat(weightItem.finalWeight) : 0;
+            cumulative += pointsEarned;
+
+            const row = document.createElement('tr');
+            let statusCell, resultCell;
+
+            if (!isAnswered) {
+                statusCell = '<span class="status-unanswered">Not Answered</span>';
+                resultCell = '-';
+            } else if (isCorrect) {
+                statusCell = '<span class="status-correct">Answered</span>';
+                resultCell = '<span class="status-correct">Correct</span>';
+            } else {
+                statusCell = '<span class="status-incorrect">Answered</span>';
+                resultCell = '<span class="status-incorrect">Incorrect</span>';
+            }
+
+            row.innerHTML = `
+            <td>${questionNum}</td>
+            <td>${questionData.materi}</td>
+            <td>${statusCell}</td>
+            <td>${resultCell}</td>
+            <td><strong>${Math.round(pointsEarned)}</strong></td>
+        `;
+            answerDetails.appendChild(row);
+        }
+    }
+
+    function displayWeightTable() {
+        weightTable.innerHTML = '';
+        quizData.weightData.forEach(item => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+            <td>${item.no}</td>
+            <td>${item.landmark}</td>
+            <td>${item.a}</td>
+            <td>${item.b}</td>
+            <td>${item.c}</td>
+            <td>${item.d}</td>
+            <td><strong>${item.key}</strong></td>
+            <td>${item.difficulty}</td>
+            <td>${item.initialWeight}</td>
+            <td><strong>${item.finalWeight}</strong></td>
+        `;
+            weightTable.appendChild(row);
+        });
+    }
+
+    function updateAnalysis(participant, username, score, rank) {
+        const totalQuestions = participant.answers.length;
+        const answered = participant.answers.filter(a => a !== "0").length;
+        const correctCount = participant.answers.filter((ans, i) => {
+            const userAns = ans.toUpperCase();
+            return userAns !== "0" && userAns === quizData.questions[i + 1]?.correctAnswer;
+        }).length;
+        const accuracy = answered > 0 ? Math.round((correctCount / answered) * 100) : 0;
+        const totalParts = Object.keys(quizData.participants).length;
+        const percentile = Math.round(((totalParts - rank + 1) / totalParts) * 100);
+
+        cognitiveAnalysis.innerHTML = `
+        <p>You answered <strong>${answered}/${totalQuestions}</strong> questions (<strong>${Math.round((answered / totalQuestions) * 100)}%</strong> attempt rate).</p>
+        <p>Your accuracy was <strong>${accuracy}%</strong> on attempted questions.</p>
+        <p>Based on IRT scoring, your performance indicates <strong>${accuracy >= 80 ? 'strong' : accuracy >= 60 ? 'moderate' : 'developing'}</strong> understanding of the subject matter.</p>
+    `;
+
+        recommendations.innerHTML = `
+        <p><strong>Recommended focus areas:</strong></p>
+        <ul style="padding-left: 20px; margin-top: 10px;">
+            ${accuracy < 70 ? '<li>Review landmark historical contexts</li>' : ''}
+            ${accuracy < 80 ? '<li>Study architectural significance</li>' : ''}
+            <li>Explore cultural impacts of world wonders</li>
+            <li>Practice with more IRT-based assessments</li>
+        </ul>
+    `;
+
+        progressTracking.innerHTML = `
+        <p>Your score of <strong>${score}/1000</strong> places you in the <strong>top ${percentile}%</strong> of participants.</p>
+        <p>Compared to average performance: <strong>${score > 500 ? 'Above' : 'Below'} average</strong></p>
+        <p>Next milestone: <strong>${1000 - score} points</strong> to perfect score</p>
+    `;
+    }
+
+    // Certificate Modal functionality
+    const certificateModal = document.getElementById('certificateModal');
+    const closeCertificateModal = document.getElementById('closeCertificateModal');
+    const downloadCertificateBtn = document.getElementById('downloadCertificateBtn');
+    const confirmDownloadBtn = document.getElementById('confirmDownloadBtn');
+
+    downloadCertificateBtn.addEventListener('click', () => {
+        const username = usernameInput.value.trim().toLowerCase();
+        const participant = quizData.participants[username];
+        if (!participant) {
+            alert('Please search for your username first');
+            return;
+        }
+        // set current user for modal and prefill custom name input
+        currentCertParticipantUsername = username;
+        if (certificateNameInput) certificateNameInput.value = participant.name || '';
+        renderCertificateCanvas(certificateNameInput && certificateNameInput.value.trim() ? certificateNameInput.value.trim() : participant.name);
+        certificateModal.style.display = 'flex';
+    });
+
+    closeCertificateModal.addEventListener('click', () => {
+        certificateModal.style.display = 'none';
+    });
+
+    // re-render certificate preview when user edits the custom name
+    if (certificateNameInput) {
+        certificateNameInput.addEventListener('input', () => {
+            const nameVal = certificateNameInput.value.trim();
+            // if a participant is selected, use participant's name as fallback
+            const fallback = (currentCertParticipantUsername && quizData.participants[currentCertParticipantUsername]) ? quizData.participants[currentCertParticipantUsername].name : '';
+            renderCertificateCanvas(nameVal || fallback);
+        });
+    }
+
+    confirmDownloadBtn.addEventListener('click', () => {
+        const canvas = document.getElementById('certificatePreview');
+        if (!canvas || !canvas.toBlob) {
+            alert('Canvas not supported in your browser for download.');
+            return;
+        }
+
+        const username = usernameInput.value.trim().toLowerCase();
+        const participant = quizData.participants[username];
+        if (!participant) {
+            alert('Peserta tidak ditemukan. Silakan cari username Anda terlebih dahulu.');
+            return;
+        }
+
+        // prefer custom name from input if provided
+        const customName = (certificateNameInput && certificateNameInput.value.trim()) ? certificateNameInput.value.trim() : null;
+        const name = customName || participant.name;
+
+        canvas.toBlob(function (blob) {
+            const link = document.createElement('a');
+            link.download = `R-QUEST_Certificate_${name.replace(/\s+/g, '_')}.png`;
+            link.href = URL.createObjectURL(blob);
+            link.click();
+            URL.revokeObjectURL(link.href);
+        }, 'image/png');
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === certificateModal) certificateModal.style.display = 'none';
+    });
+
+    // Feedback form submission
+    document.getElementById('feedbackForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const message = document.getElementById('feedbackMessage').value;
+        if (!message.trim()) {
+            alert('Please enter your feedback');
+            return;
+        }
+        console.log('Feedback submitted');
+        alert('Thank you for your feedback!');
+        this.reset();
+        
+        // Reset anonymous checkbox
+        const anonymousCheckbox = document.getElementById('anonymousCheckbox');
+        const feedbackNameInput = document.getElementById('feedbackName');
+        anonymousCheckbox.checked = false;
+        feedbackNameInput.value = '';
+        feedbackNameInput.disabled = false;
+    });
+
+    // Anonymous checkbox functionality
+    const anonymousCheckbox = document.getElementById('anonymousCheckbox');
+    const feedbackNameInput = document.getElementById('feedbackName');
+    anonymousCheckbox.addEventListener('change', function () {
+        if (this.checked) {
+            feedbackNameInput.value = 'Anonymous';
+            feedbackNameInput.disabled = true;
+            feedbackNameInput.style.backgroundColor = '#f8f5f2';
+            feedbackNameInput.style.color = '#8B7D6B';
+        } else {
+            feedbackNameInput.value = '';
+            feedbackNameInput.disabled = false;
+            feedbackNameInput.style.backgroundColor = '';
+            feedbackNameInput.style.color = '';
+        }
+    });
+
+    // Button handlers
+    document.getElementById('downloadResultsBtn').addEventListener('click', () => {
+        window.print();
+    });
+    
+    if (shareResultsBtn) {
+        shareResultsBtn.addEventListener('click', () => {
+            const username = usernameInput.value.trim().toLowerCase();
+            if (!username) {
+                alert('Please search for your username first before sharing results.');
+                return;
+            }
+
+            if (!navigator.share) {
+                alert('Sharing is not available: the Web Share API requires a secure context (HTTPS) and a supported browser. Try opening this page via HTTPS or use a compatible mobile browser.');
+                return;
+            }
+
+            const score = globalScores[username] || 0;
+            navigator.share({
+                title: 'My Quiz Results',
+                text: `I scored ${score}/1000 on the Wonders of Earth Quiz!`,
+                url: window.location.href
+            }).catch(err => console.log('Share failed:', err));
+        });
+    }
+
+    // Awal: tampilkan weight table
+    displayWeightTable();
+});
     </script>
 </body>
 </html>
