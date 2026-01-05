@@ -86,14 +86,14 @@ body {
 
 /* ========== SIMULATION BANNER ========== */
 .simulation-banner {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;
     background: linear-gradient(90deg, #ff0000 0%, #ff4444 25%, #ff0000 50%, #ff4444 75%, #ff0000 100%);
     color: white;
     text-align: center;
-    padding: 8px 0;
+    padding: 10px 0;
     z-index: 1001;
     font-size: 14px;
     font-weight: 700;
@@ -134,32 +134,16 @@ body {
     }
 }
 
-/* Adjust header position */
-.main-header {
-    margin-top: 40px; /* Height of the banner */
-}
-
-/* For mobile */
-@media (max-width: 767px) {
-    .simulation-banner {
-        font-size: 12px;
-        padding: 6px 0;
-    }
-    
-    .main-header {
-        margin-top: 35px;
-    }
-}
-
 /* Header - Minimalist */
 .main-header {
     background: var(--white);
     padding: var(--space-md) 0; /* DITAMBAH dari var(--space-sm) */
     position: sticky;
-    top: 0;
+    top: 45px; /* Height of banner (10px padding-top + 10px padding-bottom + 25px line height) */
     z-index: 100;
     box-shadow: var(--shadow-sm);
     border-bottom: 1px solid var(--border);
+    margin-top: 0 !important;
 }
 
 .header-content {
@@ -851,6 +835,15 @@ body::-moz-selection {
         font-size: 14px; /* DITAMBAH dari 13px */
     }
     
+    .simulation-banner {
+        font-size: 12px;
+        padding: 8px 0;
+    }
+    
+    .main-header {
+        top: 40px; /* Adjusted for mobile */
+    }
+    
     .container {
         padding: 0 var(--space-md); /* DITAMBAH dari var(--space-sm) */
     }
@@ -928,9 +921,33 @@ body::-moz-selection {
     }
 }
 
+@media (max-width: 480px) {
+    .simulation-banner {
+        font-size: 11px;
+        padding: 7px 0;
+    }
+    
+    .main-header {
+        top: 38px; /* Adjusted for smaller mobile */
+    }
+    
+    .simulation-banner-content span {
+        margin: 0 20px;
+    }
+}
+
 @media (max-width: 360px) {
     body {
         font-size: 13px; /* DITAMBAH dari 12px */
+    }
+    
+    .simulation-banner {
+        font-size: 10px;
+        padding: 6px 0;
+    }
+    
+    .main-header {
+        top: 35px;
     }
     
     .quiz-title {
@@ -3148,5 +3165,6 @@ console.log('✅ Quiz system with schedule restriction activated');
 </body>
 
 </html>
+
 
 
