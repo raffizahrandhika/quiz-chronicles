@@ -1774,8 +1774,8 @@ let lockCountdownInterval = null;
 
 // ========== QUIZ ACCESS SCHEDULE ==========
 const QUIZ_SCHEDULE = {
-    startDate: new Date('2026-01-10T07:00:00+07:00'),  // 10 Jan 2026, 07:00 WIB
-    endDate: new Date('2026-01-12T23:59:59+07:00')    // 12 Jan 2026, 23:59 WIB
+    startDate: new Date('2026-01-05T21:00:00+07:00'),  // 10 Jan 2026, 07:00 WIB
+    endDate: new Date('2026-01-06T23:59:59+07:00')    // 12 Jan 2026, 23:59 WIB
 };
 
 // ========== DATE CHECKING FUNCTIONS ==========
@@ -1876,11 +1876,11 @@ function showQuizLockedOverlay() {
         datesContainer.innerHTML = `
             <div class="date-item">
                 <span class="date-label">Tanggal Mulai:</span>
-                <span class="date-value">10 Januari 2026 (07:00 WIB)</span>
+                <span class="date-value">05 Januari 2026 (21:00 WIB)</span>
             </div>
             <div class="date-item">
                 <span class="date-label">Tanggal Berakhir:</span>
-                <span class="date-value">12 Januari 2026 (23:59 WIB)</span>
+                <span class="date-value">06 Januari 2026 (23:59 WIB)</span>
             </div>
         `;
     }
@@ -1947,11 +1947,11 @@ function showQuizLockedOverlay() {
             datesContainer.innerHTML = `
                 <div class="date-item">
                     <span class="date-label">Tanggal Mulai:</span>
-                    <span class="date-value">10 Januari 2026</span>
+                    <span class="date-value">05 Januari 2026</span>
                 </div>
                 <div class="date-item">
                     <span class="date-label">Tanggal Berakhir:</span>
-                    <span class="date-value">12 Januari 2026 (23:59 WIB)</span>
+                    <span class="date-value">06 Januari 2026 (23:59 WIB)</span>
                 </div>
                 <div class="date-item">
                     <span class="date-label">Status:</span>
@@ -2460,7 +2460,7 @@ async function submitToGoogleForm() {
     // Check if still within schedule
     if (!isQuizAccessible()) {
         showAlert('⏰ Waktu Habis', 
-            'Maaf, waktu pengumpulan quiz telah berakhir (12 Januari 2026, 23:59 WIB).\nAnda tidak dapat mengirim jawaban.');
+            'Maaf, waktu pengumpulan quiz telah berakhir (06 Januari 2026, 23:59 WIB).\nAnda tidak dapat mengirim jawaban.');
         return false;
     }
     
@@ -2587,7 +2587,7 @@ function setupEventListeners() {
         submitQuizBtn.onclick = () => {
             // Check if quiz is accessible
             if (!isQuizAccessible()) {
-                showAlert('⏰ Waktu Habis', 'Waktu pengumpulan quiz telah berakhir (12 Januari 2026, 23:59 WIB).');
+                showAlert('⏰ Waktu Habis', 'Waktu pengumpulan quiz telah berakhir (06 Januari 2026, 23:59 WIB).');
                 return;
             }
             
@@ -2632,7 +2632,7 @@ function setupEventListeners() {
         saveProgressBtn.onclick = () => {
             // Check if quiz is accessible
             if (!isQuizAccessible()) {
-                showAlert('⏰ Waktu Habis', 'Waktu pengerjaan quiz telah berakhir (12 Januari 2026, 23:59 WIB).');
+                showAlert('⏰ Waktu Habis', 'Waktu pengerjaan quiz telah berakhir (06 Januari 2026, 23:59 WIB).');
                 return;
             }
             
@@ -2649,7 +2649,7 @@ function setupEventListeners() {
         resetQuizBtn.onclick = () => {
             // Check if quiz is accessible
             if (!isQuizAccessible()) {
-                showAlert('⏰ Waktu Habis', 'Waktu pengerjaan quiz telah berakhir (12 Januari 2026, 23:59 WIB).');
+                showAlert('⏰ Waktu Habis', 'Waktu pengerjaan quiz telah berakhir (06 Januari 2026, 23:59 WIB).');
                 return;
             }
             
@@ -2673,7 +2673,7 @@ function setupEventListeners() {
         prevBtn.onclick = () => {
             const submitted = localStorage.getItem('quizSubmitted') === 'true';
             if (!isQuizAccessible() && !submitted) {
-                showAlert('⏰ Waktu Habis', 'Waktu pengerjaan quiz telah berakhir (12 Januari 2026, 23:59 WIB).');
+                showAlert('⏰ Waktu Habis', 'Waktu pengerjaan quiz telah berakhir (06 Januari 2026, 23:59 WIB).');
                 return;
             }
             
@@ -2690,7 +2690,7 @@ function setupEventListeners() {
         nextBtn.onclick = () => {
             const submitted = localStorage.getItem('quizSubmitted') === 'true';
             if (!isQuizAccessible() && !submitted) {
-                showAlert('⏰ Waktu Habis', 'Waktu pengerjaan quiz telah berakhir (12 Januari 2026, 23:59 WIB).');
+                showAlert('⏰ Waktu Habis', 'Waktu pengerjaan quiz telah berakhir (06 Januari 2026, 23:59 WIB).');
                 return;
             }
             
@@ -2750,7 +2750,7 @@ function setupSubmittedStateListeners() {
             // Check if quiz is currently accessible
             if (!isQuizAccessible()) {
                 showAlert('⏰ Waktu Habis', 
-                    'Waktu pengerjaan quiz telah berakhir (12 Januari 2026, 23:59 WIB).\nAnda tidak dapat memulai quiz baru.');
+                    'Waktu pengerjaan quiz telah berakhir (06 Januari 2026, 23:59 WIB).\nAnda tidak dapat memulai quiz baru.');
                 return;
             }
             
@@ -2782,7 +2782,7 @@ function setupModalListeners() {
             
             // Check if quiz is still accessible
             if (!isQuizAccessible()) {
-                showAlert('⏰ Waktu Habis', 'Maaf, waktu pengumpulan quiz telah berakhir (12 Januari 2026, 23:59 WIB).');
+                showAlert('⏰ Waktu Habis', 'Maaf, waktu pengumpulan quiz telah berakhir (06 Januari 2026, 23:59 WIB).');
                 document.getElementById('dataModal').style.display = 'none';
                 return;
             }
@@ -2890,7 +2890,7 @@ function setupModalListeners() {
         confirmationConfirmBtn.onclick = () => {
             // Check if quiz is still accessible before resetting
             if (!isQuizAccessible()) {
-                showAlert('⏰ Waktu Habis', 'Waktu pengerjaan quiz telah berakhir (12 Januari 2026, 23:59 WIB).');
+                showAlert('⏰ Waktu Habis', 'Waktu pengerjaan quiz telah berakhir (06 Januari 2026, 23:59 WIB).');
                 document.getElementById('confirmationModal').style.display = 'none';
                 return;
             }
@@ -3025,3 +3025,4 @@ console.log('✅ Quiz system with schedule restriction activated');
 </body>
 
 </html>
+
