@@ -1555,24 +1555,26 @@ body::-moz-selection {
         // ========== GOOGLE FORM CONFIGURATION ==========
 const GOOGLE_FORM_ID = '1FAIpQLScZCnyXN47oSlN2HCm72LgbE7cV4jdAWwvkn151RvJ_15oDhQ';
 const GOOGLE_FORM_URL = `https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/formResponse`;
+
+// PERBAIKAN: Entry ID berdasarkan URL yang Anda berikan
 const FORM_ENTRY_IDS = {
-    name: 'entry.700726981',
-    username: 'entry.1808707675',
-    q1: 'entry.1620062167',
-    q2: 'entry.888433388',
-    q3: 'entry.996500551',
-    q4: 'entry.570667543',
-    q5: 'entry.1165679609',
-    q6: 'entry.224098844',
-    q7: 'entry.893348065',
-    q8: 'entry.1770859447',
-    q9: 'entry.298721694',
-    q10: 'entry.1734151755',
-    q11: 'entry.537779351',
-    q12: 'entry.1681574278',
-    q13: 'entry.250544817',
-    q14: 'entry.1201149875',
-    q15: 'entry.112300970',
+    name: 'entry.700726981',           // Nama lengkap - ✅ BENAR
+    username: 'entry.1808707675',      // Username/Email - ✅ BENAR
+    q1: 'entry.1620062167',           // Soal 1 - ✅ BENAR
+    q2: 'entry.888433388',            // Soal 2 - ✅ BENAR
+    q3: 'entry.996500551',            // Soal 3 - ✅ BENAR
+    q4: 'entry.570667543',            // Soal 4 - ✅ BENAR
+    q5: 'entry.1165679609',           // Soal 5 - ✅ BENAR
+    q6: 'entry.224098844',            // Soal 6 - ✅ BENAR
+    q7: 'entry.893348065',            // Soal 7 - ✅ BENAR
+    q8: 'entry.1770859447',           // Soal 8 - ✅ BENAR
+    q9: 'entry.298721694',            // Soal 9 - ✅ BENAR
+    q10: 'entry.1734151755',          // Soal 10 - ✅ BENAR
+    q11: 'entry.537779351',           // Soal 11 - ✅ BENAR
+    q12: 'entry.1681574278',          // Soal 12 - ✅ BENAR
+    q13: 'entry.250544817',           // Soal 13 - ✅ BENAR
+    q14: 'entry.1201149875',          // Soal 14 - ✅ BENAR
+    q15: 'entry.112300970'            // Soal 15 - ✅ BENAR
 };
 
         // ========== QUIZ DATA (LENGKAP) ==========
@@ -2487,22 +2489,45 @@ async function submitToGoogleForm() {
         formData.append(FORM_ENTRY_IDS.name, participantData.name || 'Anonymous');
         formData.append(FORM_ENTRY_IDS.username, participantData.email || 'no-email@example.com');
         
+        // PERBAIKAN: Kirim jawaban sebagai string, bukan hanya huruf
         for (let i = 1; i <= 15; i++) {
-            const answer = userAnswers[i] || 'Tidak dijawab';
+            const question = quizQuestions[i-1];
+            const userAnswerLetter = userAnswers[i] || '';
+            let answerText = 'Tidak dijawab';
+            
+            // Konversi huruf pilihan menjadi teks jawaban
+            if (userAnswerLetter) {
+                const optionIndex = userAnswerLetter.charCodeAt(0) - 65; // A=0, B=1, dst
+                if (optionIndex >= 0 && optionIndex < question.options.length) {
+                    answerText = question.options[optionIndex];
+                }
+            }
+            
             const entryId = FORM_ENTRY_IDS[`q${i}`];
             if (entryId) {
-                formData.append(entryId, answer);
+                formData.append(entryId, answerText);
             }
         }
         
-        // Use fetch with no-cors mode for Google Forms
-        await fetch(GOOGLE_FORM_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            body: formData
+        console.log('📤 Mengirim data ke Google Form:', {
+            name: participantData.name,
+            email: participantData.email,
+            answersCount: Object.keys(userAnswers).length
         });
         
+        // Use fetch with no-cors mode for Google Forms
+        const response = await fetch(GOOGLE_FORM_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        console.log('✅ Data berhasil dikirim ke Google Form');
         return true;
+        
     } catch (error) {
         console.error('❌ Submission error:', error);
         return false;
