@@ -1,0 +1,3043 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Sejarah - R-QUEST</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+    /* Brown Earth Color Palette - Updated */
+    --primary: #8B4513;
+    --primary-light: #A0522D;
+    --primary-dark: #654321;
+    --secondary: #D2691E;
+    --accent: #CD853F;
+    --success: #2E8B57;
+    --warning: #DAA520;
+    --danger: #B22222;
+    --dark: #2C1810;
+    --darker: #1A0F0A;
+    --light: #FAF3E9;
+    --lighter: #FFFDF9;
+    --gray: #8B7D6B;
+    --gray-light: #E8E0D5;
+    --white: #FFFFFF;
+    --blue: #2196F3;
+    --blue-light: #64B5F6;
+    --blue-dark: #1976D2;
+    --blue-accent: #BBDEFB;
+    
+    /* New variables */
+    --surface: #FFFBF5;
+    --border: #E0D6C8;
+    
+    /* Shadows - Lighter */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.1);
+    
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-full: 50px;
+    
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 12px;
+    --space-lg: 16px;
+    --space-xl: 20px;
+    --space-2xl: 24px;
+    
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.25s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #F9F5F0 0%, #F1EAE0 100%);
+    color: var(--dark);
+    line-height: 1.4;
+    min-height: 100vh;
+    font-size: 16px; /* DINAIIKKAN dari 14px */
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+}
+
+/* Header - Minimalist */
+.main-header {
+    background: var(--white);
+    padding: var(--space-md) 0; /* DITAMBAH dari var(--space-sm) */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+    border-bottom: 1px solid var(--border);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex: 1;
+}
+
+.logo-icon {
+    width: 32px; /* DITAMBAH dari 28px */
+    height: 32px; /* DITAMBAH dari 28px */
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px; /* DITAMBAH dari 12px */
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.logo-text {
+    font-weight: 700;
+    font-size: 17px; /* DITAMBAH dari 15px */
+    color: var(--primary-dark);
+    letter-spacing: -0.3px;
+}
+
+.tagline {
+    font-size: 12px; /* DITAMBAH dari 10px */
+    color: var(--gray);
+    margin-top: 2px; /* DITAMBAH dari 1px */
+}
+
+/* Quiz Logo di Kanan */
+.quiz-logo-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.quiz-logo {
+    height: 32px; /* DITAMBAH dari 28px */
+    width: auto;
+    max-width: 140px; /* DITAMBAH dari 120px */
+    object-fit: contain;
+}
+
+/* Quiz Header - No container, clean design */
+.quiz-header {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+    color: white;
+    padding: var(--space-xl) var(--space-md); /* DITAMBAH dari var(--space-lg) */
+    margin-bottom: var(--space-xl); /* DITAMBAH dari var(--space-lg) */
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.quiz-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M24 22v-2h-2v2h-2v2h2v2h2v-2h2v-2h-2zm0-20V0h-2v2h-2v2h2v2h2V4h2V2h-2zM2 22v-2H0v2H-2v2h2v2h2v-2h2v-2H2zM2 2V0H0v2H-2v2h2v2h2V4h2V2H2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.quiz-header-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.quiz-title {
+    font-size: 20px; /* DITAMBAH dari 18px */
+    font-weight: 700;
+    margin-bottom: var(--space-sm); /* DITAMBAH dari var(--space-xs) */
+    line-height: 1.3;
+}
+
+.quiz-subtitle {
+    font-size: 13px; /* DITAMBAH dari 11px */
+    opacity: 0.9;
+    margin-bottom: var(--space-md); /* DITAMBAH dari var(--space-sm) */
+}
+
+.google-integration {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px; /* DITAMBAH dari 10px */
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 12px; /* DITAMBAH dari 4px 10px */
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-lg); /* DITAMBAH dari var(--space-md) */
+    backdrop-filter: blur(4px);
+}
+
+.quiz-meta {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-md); /* DITAMBAH dari var(--space-sm) */
+    margin-top: var(--space-lg); /* DITAMBAH dari var(--space-md) */
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px; /* DITAMBAH dari 5px */
+    background: rgba(255, 255, 255, 0.15);
+    padding: 6px 12px; /* DITAMBAH dari 5px 10px */
+    border-radius: var(--radius-full);
+    font-size: 12px; /* DITAMBAH dari 10px */
+    font-weight: 500;
+    backdrop-filter: blur(4px);
+}
+
+/* Progress Bar - Compact */
+.progress-container {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg); /* DITAMBAH dari var(--space-md) */
+    margin: 0 auto var(--space-xl); /* DITAMBAH dari var(--space-lg) */
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    max-width: 800px;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md); /* DITAMBAH dari var(--space-sm) */
+}
+
+.progress-label {
+    font-size: 13px; /* DITAMBAH dari 11px */
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.progress-percent {
+    font-size: 13px; /* DITAMBAH dari 11px */
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.progress-bar {
+    height: 8px; /* DITAMBAH dari 6px */
+    background: var(--gray-light);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+    border-radius: var(--radius-full);
+    transition: width 0.3s ease;
+    width: 0%;
+}
+
+/* Question Navigation - Compact */
+.question-nav {
+    display: flex;
+    gap: var(--space-sm); /* DITAMBAH dari var(--space-xs) */
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto var(--space-xl); /* DITAMBAH dari var(--space-lg) */
+    max-width: 800px;
+}
+
+.nav-item {
+    width: 36px; /* DITAMBAH dari 32px */
+    height: 36px; /* DITAMBAH dari 32px */
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--white);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px; /* DITAMBAH dari 12px */
+    color: var(--dark);
+    transition: var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.nav-item:hover {
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.nav-item.answered {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.nav-item.current {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(139, 69, 19, 0.15);
+    transform: translateY(-1px);
+}
+
+/* Question Card - Minimalist */
+.question-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl); /* DITAMBAH dari var(--space-lg) */
+    margin: 0 auto var(--space-xl); /* DITAMBAH dari var(--space-lg) */
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    max-width: 800px;
+    transition: var(--transition-normal);
+}
+
+.question-card:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-lg); /* DITAMBAH dari var(--space-md) */
+    gap: var(--space-lg); /* DITAMBAH dari var(--space-md) */
+    flex-wrap: wrap;
+}
+
+.question-number {
+    font-size: 14px; /* DITAMBAH dari 12px */
+    font-weight: 700;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md); /* DITAMBAH dari var(--space-sm) */
+}
+
+.question-number::before {
+    content: 'Soal';
+    background: var(--primary);
+    color: white;
+    padding: 4px 10px; /* DITAMBAH dari 3px 8px */
+    border-radius: var(--radius-full);
+    font-size: 12px; /* DITAMBAH dari 10px */
+    font-weight: 600;
+}
+
+.question-topic {
+    background: linear-gradient(135deg, var(--light) 0%, #F1EBE1 100%);
+    padding: 5px 12px; /* DITAMBAH dari 4px 10px */
+    border-radius: var(--radius-full);
+    font-size: 12px; /* DITAMBAH dari 10px */
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.question-text {
+    font-size: 15px; /* DITAMBAH dari 13px */
+    font-weight: 500;
+    color: var(--dark);
+    margin-bottom: var(--space-xl); /* DITAMBAH dari var(--space-lg) */
+    line-height: 1.5;
+    text-align: justify;
+}
+
+/* Options - Compact */
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md); /* DITAMBAH dari var(--space-sm) */
+}
+
+.option-item {
+    position: relative;
+}
+
+.option-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.option-label {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md); /* DITAMBAH dari var(--space-sm) */
+    padding: var(--space-lg); /* DITAMBAH dari var(--space-md) */
+    background: var(--lighter);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-normal);
+}
+
+.option-label:hover {
+    border-color: var(--primary-light);
+    background: #FFF9F0;
+}
+
+.option-input:checked + .option-label {
+    border-color: var(--primary);
+    background: linear-gradient(135deg, #FEF7EE 0%, #FCEFDF 100%);
+}
+
+.option-letter {
+    width: 26px; /* DITAMBAH dari 22px */
+    height: 26px; /* DITAMBAH dari 22px */
+    background: var(--gray-light);
+    color: var(--dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px; /* DITAMBAH dari 11px */
+    font-weight: 700;
+    flex-shrink: 0;
+    transition: var(--transition-fast);
+}
+
+.option-input:checked + .option-label .option-letter {
+    background: var(--primary);
+    color: white;
+}
+
+.option-text {
+    font-size: 14px; /* DITAMBAH dari 12px */
+    color: var(--dark);
+    line-height: 1.4;
+    padding-top: 2px; /* DITAMBAH dari 1px */
+    flex: 1;
+}
+
+/* Question Controls */
+.question-controls {
+    display: flex;
+    gap: var(--space-md); /* DITAMBAH dari var(--space-sm) */
+    justify-content: center;
+    margin: 0 auto var(--space-xl); /* DITAMBAH dari var(--space-lg) */
+    max-width: 800px;
+    width: 100%;
+}
+
+.nav-btn {
+    min-width: 110px; /* DITAMBAH dari 100px */
+    padding: 10px 14px; /* DITAMBAH dari 8px 12px */
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 14px; /* DITAMBAH dari 12px */
+}
+
+/* Action Buttons - Compact */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md); /* DITAMBAH dari var(--space-sm) */
+    max-width: 800px;
+    margin: 0 auto var(--space-xl); /* DITAMBAH dari var(--space-xl) */
+    justify-content: center;
+}
+
+.action-btn {
+    flex: 1;
+    min-width: 100%;
+    padding: 14px 18px; /* DITAMBAH dari 12px 16px */
+    border-radius: var(--radius-md);
+    border: none;
+    font-size: 14px; /* DITAMBAH dari 12px */
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md); /* DITAMBAH dari var(--space-sm) */
+    box-shadow: var(--shadow-md);
+}
+
+.action-btn.primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+}
+
+.action-btn.secondary {
+    background: var(--white);
+    color: var(--dark);
+    border: 1px solid var(--border);
+}
+
+.action-btn.danger {
+    background: linear-gradient(135deg, var(--danger) 0%, #D32F2F 100%);
+    color: white;
+}
+
+.action-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+
+.action-btn.primary:hover {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+}
+
+.action-btn.secondary:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.action-btn.danger:hover {
+    background: linear-gradient(135deg, #9A1B1B 0%, var(--danger) 100%);
+}
+
+/* Footer - Compact */
+.main-footer {
+    background: var(--darker);
+    color: white;
+    padding: var(--space-2xl) 0 var(--space-lg); /* DITAMBAH dari var(--space-xl) */
+    margin-top: var(--space-2xl); /* DITAMBAH dari var(--space-xl) */
+    font-size: 13px; /* DITAMBAH dari 11px */
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl); /* DITAMBAH dari var(--space-xl) */
+    margin-bottom: var(--space-2xl); /* DITAMBAH dari var(--space-xl) */
+}
+
+.footer-section h3 {
+    font-size: 16px; /* DITAMBAH dari 14px */
+    font-weight: 700;
+    margin-bottom: var(--space-lg); /* DITAMBAH dari var(--space-md) */
+    color: white;
+    line-height: 1.3;
+}
+
+.footer-section p {
+    color: #cbd5e1;
+    margin-bottom: var(--space-lg); /* DITAMBAH dari var(--space-md) */
+    line-height: 1.5;
+    font-size: 13px; /* DITAMBAH dari 11px */
+}
+
+.social-links {
+    display: flex;
+    gap: var(--space-md); /* DITAMBAH dari var(--space-sm) */
+    margin-top: var(--space-lg); /* DITAMBAH dari var(--space-md) */
+    flex-wrap: wrap;
+}
+
+.social-link {
+    width: 34px; /* DITAMBAH dari 30px */
+    height: 34px; /* DITAMBAH dari 30px */
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px; /* DITAMBAH dari 12px */
+    transition: var(--transition-normal);
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.social-link:hover {
+    background: var(--primary);
+    transform: translateY(-1px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: var(--space-lg); /* DITAMBAH dari var(--space-md) */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+    font-size: 10px; /* DITAMBAH dari 10px */
+    line-height: 1.6;
+}
+
+/* Modals - Compact */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-lg); /* DITAMBAH dari var(--space-md) */
+    animation: fadeIn 0.2s ease;
+}
+
+.modal-content {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl); /* DITAMBAH dari var(--space-lg) */
+    width: 100%;
+    max-width: 420px; /* DITAMBAH dari 400px */
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.3s ease;
+    border: 1px solid var(--border);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg); /* DITAMBAH dari var(--space-md) */
+    padding-bottom: var(--space-md); /* DITAMBAH dari var(--space-sm) */
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-title {
+    font-size: 16px; /* DITAMBAH dari 14px */
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.3;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 20px; /* DITAMBAH dari 18px */
+    color: var(--gray);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    width: 32px; /* DITAMBAH dari 28px */
+    height: 32px; /* DITAMBAH dari 28px */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.close-btn:hover {
+    background: var(--gray-light);
+    color: var(--dark);
+}
+
+/* Form Elements */
+.form-input {
+    width: 100%;
+    padding: 12px 14px; /* DITAMBAH dari 10px 12px */
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 14px; /* DITAMBAH dari 12px */
+    background: var(--lighter);
+    color: var(--dark);
+    transition: var(--transition-normal);
+    margin-bottom: var(--space-lg); /* DITAMBAH dari var(--space-md) */
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 2px rgba(139, 69, 19, 0.1);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 6px; /* DITAMBAH dari 5px */
+    font-weight: 600;
+    font-size: 13px; /* DITAMBAH dari 11px */
+    color: var(--dark);
+}
+
+/* Countdown Timer */
+.countdown-grid {
+    display: flex;
+    gap: var(--space-md); /* DITAMBAH dari var(--space-sm) */
+    justify-content: center;
+    margin: var(--space-lg) 0; /* DITAMBAH dari var(--space-md) */
+}
+
+.countdown-box {
+    background: white;
+    color: var(--darker);
+    padding: 10px 12px; /* DITAMBAH dari 8px 10px */
+    border-radius: var(--radius-sm);
+    min-width: 56px; /* DITAMBAH dari 50px */
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px; /* DITAMBAH dari 14px */
+}
+
+.countdown-label {
+    display: block;
+    font-size: 11px; /* DITAMBAH dari 9px */
+    font-weight: 600;
+    color: var(--gray);
+    margin-top: 5px; /* DITAMBAH dari 4px */
+}
+
+/* Completion Message */
+.completion-message {
+    text-align: center;
+    padding: var(--space-xl); /* DITAMBAH dari var(--space-lg) */
+    background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+    border-radius: var(--radius-lg);
+    margin: var(--space-xl) auto; /* DITAMBAH dari var(--space-lg) */
+    border: 1px solid #BAE6FD;
+    max-width: 800px;
+}
+
+.completion-title {
+    font-size: 16px; /* DITAMBAH dari 14px */
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: var(--space-md); /* DITAMBAH dari var(--space-sm) */
+}
+
+.completion-text {
+    color: var(--dark);
+    font-size: 14px; /* DITAMBAH dari 12px */
+    line-height: 1.5;
+}
+
+/* Already Submitted State */
+.submitted-state {
+    display: none;
+}
+
+/* Utility Classes */
+.text-center { text-align: center; }
+.mb-10 { margin-bottom: var(--space-lg); } /* DITAMBAH dari var(--space-md) */
+.mb-15 { margin-bottom: var(--space-xl); } /* DITAMBAH dari var(--space-lg) */
+.mt-10 { margin-top: var(--space-lg); } /* DITAMBAH dari var(--space-md) */
+.hidden { display: none !important; }
+.show { display: block !important; }
+
+/* Tambahkan di bagian CSS */
+.question-text, .option-text {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    
+    /* Mencegah drag */
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+}
+
+/* Optional: Tampilkan pesan jika mencoba select */
+body::selection {
+    background: rgba(139, 69, 19, 0.2);
+}
+
+body::-moz-selection {
+    background: rgba(139, 69, 19, 0.2);
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 767px) {
+    body {
+        font-size: 14px; /* DITAMBAH dari 13px */
+    }
+    
+    .container {
+        padding: 0 var(--space-md); /* DITAMBAH dari var(--space-sm) */
+    }
+    
+    .quiz-header {
+        padding: var(--space-lg) var(--space-md); /* DITAMBAH dari var(--space-md) */
+        margin-bottom: var(--space-lg); /* DITAMBAH dari var(--space-md) */
+    }
+    
+    .quiz-title {
+        font-size: 18px; /* DITAMBAH dari 16px */
+    }
+    
+    .quiz-subtitle {
+        font-size: 12px; /* DITAMBAH dari 10px */
+    }
+    
+    .google-integration {
+        font-size: 11px; /* DITAMBAH dari 9px */
+        padding: 5px 10px; /* DITAMBAH dari 3px 8px */
+    }
+    
+    .meta-item {
+        font-size: 11px; /* DITAMBAH dari 9px */
+        padding: 5px 10px; /* DITAMBAH dari 4px 8px */
+    }
+    
+    .progress-container {
+        padding: var(--space-md); /* DITAMBAH dari var(--space-sm) */
+        margin-bottom: var(--space-lg); /* DITAMBAH dari var(--space-md) */
+    }
+    
+    .question-card {
+        padding: var(--space-lg); /* DITAMBAH dari var(--space-md) */
+        margin-bottom: var(--space-lg); /* DITAMBAH dari var(--space-md) */
+    }
+    
+    .question-text {
+        font-size: 14px; /* DITAMBAH dari 12px */
+    }
+    
+    .option-label {
+        padding: 12px 14px; /* DITAMBAH dari 10px 12px */
+    }
+    
+    .option-text {
+        font-size: 13px; /* DITAMBAH dari 11px */
+    }
+    
+    .nav-item {
+        width: 32px; /* DITAMBAH dari 28px */
+        height: 32px; /* DITAMBAH dari 28px */
+        font-size: 13px; /* DITAMBAH dari 11px */
+    }
+    
+    .action-btn {
+        padding: 12px 14px; /* DITAMBAH dari 10px 12px */
+        font-size: 13px; /* DITAMBAH dari 11px */
+    }
+    
+    .modal-content {
+        padding: var(--space-lg); /* DITAMBAH dari var(--space-md) */
+    }
+    
+    .countdown-box {
+        min-width: 46px; /* DITAMBAH dari 40px */
+        padding: 8px 10px; /* DITAMBAH dari 6px 8px */
+        font-size: 14px; /* DITAMBAH dari 12px */
+    }
+    
+    /* Logo quiz di header untuk mobile */
+    .quiz-logo {
+        height: 28px; /* DITAMBAH dari 24px */
+        max-width: 120px; /* DITAMBAH dari 100px */
+    }
+}
+
+@media (max-width: 360px) {
+    body {
+        font-size: 13px; /* DITAMBAH dari 12px */
+    }
+    
+    .quiz-title {
+        font-size: 17px; /* DITAMBAH dari 15px */
+    }
+    
+    .question-text {
+        font-size: 13px; /* DITAMBAH dari 11px */
+    }
+    
+    .option-label {
+        padding: 10px 12px; /* DITAMBAH dari 8px 10px */
+    }
+    
+    .option-letter {
+        width: 24px; /* DITAMBAH dari 20px */
+        height: 24px; /* DITAMBAH dari 20px */
+        font-size: 12px; /* DITAMBAH dari 10px */
+    }
+    
+    .nav-item {
+        width: 30px; /* DITAMBAH dari 26px */
+        height: 30px; /* DITAMBAH dari 26px */
+    }
+    
+    /* Logo quiz di header untuk very small mobile */
+    .quiz-logo {
+        height: 26px; /* DITAMBAH dari 22px */
+        max-width: 100px; /* DITAMBAH dari 80px */
+    }
+}
+
+@media (max-width: 400px) {
+    .nav-btn {
+        min-width: 0;
+        padding: 8px 10px; /* DITAMBAH dari 6px 8px */
+        font-size: 13px; /* DITAMBAH dari 11px */
+    }
+}
+
+/* Tablet and larger */
+@media (min-width: 768px) {
+    .container {
+        max-width: 800px;
+        padding: 0 var(--space-xl); /* DITAMBAH dari var(--space-lg) */
+    }
+    
+    .footer-content {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* DITAMBAH dari 180px */
+    }
+    
+    .action-buttons {
+        flex-direction: row;
+    }
+    
+    .action-btn {
+        min-width: 0;
+    }
+    
+    .quiz-logo {
+        height: 36px; /* DITAMBAH dari 32px */
+        max-width: 160px; /* DITAMBAH dari 140px */
+    }
+}
+
+/* Tambahkan di bagian CSS */
+.penalty-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+    z-index: 9998;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-md);
+}
+
+.penalty-modal {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    border: 2px solid var(--danger);
+    z-index: 9999;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(178, 34, 34, 0.4); }
+    50% { box-shadow: 0 0 0 10px rgba(178, 34, 34, 0); }
+}
+
+.penalty-icon {
+    font-size: 48px;
+    color: var(--danger);
+    margin-bottom: var(--space-md);
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.penalty-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--danger);
+    margin-bottom: var(--space-sm);
+}
+
+.penalty-text {
+    font-size: 12px;
+    color: var(--dark);
+    margin-bottom: var(--space-lg);
+    line-height: 1.5;
+}
+
+.penalty-timer {
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--danger);
+    margin: var(--space-xl) 0;
+    font-family: 'Courier New', monospace;
+    background: var(--lighter);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    border: 2px solid var(--border);
+}
+
+.penalty-subtext {
+    font-size: 11px;
+    color: var(--gray);
+    margin-top: var(--space-md);
+}
+
+.locked-quiz {
+    filter: blur(10px) grayscale(100%);
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.5;
+}
+
+/* ========== QUIZ LOCKED STATE ========== */
+.quiz-locked-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(44, 24, 16, 0.95) 0%, rgba(26, 15, 10, 0.98) 100%);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-lg);
+    overflow-y: auto; /* PERUBAHAN: biar bisa scroll */
+}
+
+.quiz-locked-modal {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    border: 2px solid var(--primary);
+    animation: slideUp 0.3s ease;
+    margin: auto; /* PERUBAHAN: center vertikal */
+    max-height: 90vh; /* PERUBAHAN: batasi tinggi */
+    overflow-y: auto; /* PERUBAHAN: scroll jika konten panjang */
+}
+
+/* PERUBAHAN: Responsive height untuk mobile */
+@media (max-height: 600px) {
+    .quiz-locked-modal {
+        max-height: 80vh;
+        margin: 20px auto;
+    }
+}
+
+.locked-icon {
+    font-size: 64px;
+    color: var(--primary);
+    margin-bottom: var(--space-lg);
+}
+
+.locked-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: var(--space-md);
+}
+
+.locked-subtitle {
+    font-size: 14px;
+    color: var(--dark);
+    margin-bottom: var(--space-lg);
+    line-height: 1.5;
+}
+
+.locked-dates {
+    background: var(--lighter);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    margin: var(--space-lg) 0;
+    border: 1px solid var(--border);
+}
+
+.date-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.date-item:last-child {
+    border-bottom: none;
+}
+
+.date-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.date-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.countdown-locked {
+    font-size: 28px; /* Dikurangi dari 32px */
+    font-weight: 900;
+    color: var(--primary);
+    margin: var(--space-xl) 0;
+    font-family: 'Courier New', monospace;
+    background: var(--lighter);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    border: 2px solid var(--border);
+    line-height: 1.3;
+    min-height: 80px; /* PERUBAHAN: biar konsisten tinggi */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.locked-message {
+    font-size: 12px;
+    color: var(--gray);
+    margin-top: var(--space-lg);
+    font-style: italic;
+    line-height: 1.4;
+}
+
+/* Untuk state ketika quiz terkunci */
+.quiz-disabled {
+    filter: blur(3px);
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.7;
+    overflow: hidden; /* PERUBAHAN: hindari double scroll */
+}
+
+/* PERUBAHAN: Animasi untuk modal lock */
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* PERUBAHAN DI CSS - Tambahkan animasi biru */
+@keyframes pulse-blue {
+    0%, 100% { 
+        box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.4);
+        border-color: #2196F3;
+    }
+    50% { 
+        box-shadow: 0 0 0 10px rgba(33, 150, 243, 0);
+        border-color: #64B5F6;
+    }
+}
+
+@keyframes pulse-warning {
+    0%, 100% { 
+        box-shadow: 0 0 0 0 rgba(218, 165, 32, 0.4);
+        border-color: var(--warning);
+    }
+    50% { 
+        box-shadow: 0 0 0 10px rgba(218, 165, 32, 0);
+        border-color: #FFD700;
+    }
+}
+
+@keyframes pulse-danger {
+    0%, 100% { 
+        box-shadow: 0 0 0 0 rgba(178, 34, 34, 0.4);
+        border-color: var(--danger);
+    }
+    50% { 
+        box-shadow: 0 0 0 10px rgba(178, 34, 34, 0);
+        border-color: #FF5252;
+    }
+}
+
+.quiz-locked-modal {
+    animation: fadeInScale 0.3s ease;
+}
+
+/* PERUBAHAN: Responsive untuk mobile */
+@media (max-width: 480px) {
+    .quiz-locked-overlay {
+        padding: var(--space-md);
+        align-items: flex-start; /* Mulai dari atas di mobile */
+        padding-top: 40px; /* Beri jarak dari atas */
+    }
+    
+    .quiz-locked-modal {
+        padding: var(--space-lg);
+        max-height: 85vh;
+        margin: 0 auto 20px;
+    }
+    
+    .locked-icon {
+        font-size: 48px;
+        margin-bottom: var(--space-md);
+    }
+    
+    .locked-title {
+        font-size: 18px;
+    }
+    
+    .locked-subtitle {
+        font-size: 13px;
+    }
+    
+    .countdown-locked {
+        font-size: 24px;
+        min-height: 70px;
+        padding: var(--space-sm);
+        margin: var(--space-lg) 0;
+    }
+    
+    .locked-dates {
+        padding: var(--space-md);
+    }
+    
+    .date-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        padding: 10px 0;
+    }
+    
+    .date-label, .date-value {
+        width: 100%;
+    }
+}
+
+/* PERUBAHAN: Untuk sangat kecil */
+@media (max-width: 360px) {
+    .quiz-locked-modal {
+        padding: var(--space-md);
+    }
+    
+    .countdown-locked {
+        font-size: 20px;
+        min-height: 60px;
+    }
+    
+    .locked-title {
+        font-size: 16px;
+    }
+}
+
+/* Tambahkan di CSS */
+.penalty-info {
+    font-size: 10px;
+    color: var(--gray);
+    margin-top: var(--space-md);
+    padding: var(--space-sm);
+    background: var(--lighter);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--primary);
+}
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <!-- Header -->
+<header class="main-header">
+    <div class="container">
+        <div class="header-content">
+            <div class="logo-container">
+                <div class="logo-icon">RQ</div>
+                <div>
+                    <div class="logo-text">R-QUEST</div>
+                    <div class="tagline">Quiz Chronicles</div>
+                </div>
+            </div>
+            <!-- Logo Quiz di Kanan -->
+            <div style="flex: 1; display: flex; justify-content: flex-end; align-items: center;">
+                <img src="https://res.cloudinary.com/dy6sxsb26/image/upload/v1767332925/QUIZ_CHRONICLES_sso5or.png" 
+                     alt="Quiz Chronicles Logo" 
+                     style="height: 40px; width: auto; max-width: 120px; object-fit: contain;">
+            </div>
+        </div>
+    </div>
+</header>
+
+    <!-- Quiz Header (No container) -->
+    <section class="quiz-header">
+        <div class="quiz-header-content">
+            <h1 class="quiz-title">Quiz Sejarah Dunia dan Nusantara</h1>
+            <p class="quiz-subtitle">Literasi & Wawasan Pengetahuan</p>
+            <div class="google-integration">
+                <i class="fab fa-google" style="color:#4285F4;"></i>
+                <span>Terintegrasi dengan Google Form</span>
+            </div>
+            <div class="quiz-meta">
+                <div class="meta-item">
+                    <i class="fas fa-question-circle"></i>
+                    <span>15 Soal Pilihan Ganda</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Tidak Ada Batas Waktu</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-book"></i>
+                    <span>Sejarah & Pengetahuan Umum</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== STATE 1: QUIZ ACTIVE (Default) ========== -->
+    <div id="quizActiveState">
+        <!-- Progress Bar -->
+        <div class="container">
+            <div class="progress-container">
+                <div class="progress-header">
+                    <div class="progress-label">Progress Pengerjaan</div>
+                    <div class="progress-percent" id="progressPercent">0%</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question Navigation -->
+        <div class="container">
+            <div id="questionNav" class="question-nav"></div>
+        </div>
+
+        <!-- Questions Container -->
+        <main class="container">
+            <div class="questions-container" id="questionsContainer">
+                <!-- Questions will be loaded here by JavaScript -->
+            </div>
+
+            <!-- Completion Message -->
+            <div class="completion-message hidden" id="completionMessage">
+                <h3 class="completion-title">Quiz Selesai!</h3>
+                <p class="completion-text">Anda telah menjawab semua soal. Silakan klik "Kumpulkan Jawaban" untuk mengirim jawaban Anda.</p>
+            </div>
+
+            <!-- Question Controls -->
+            <div class="question-controls">
+                <button class="action-btn secondary nav-btn" id="prevQuestionBtn">
+                    <i class="fas fa-chevron-left"></i> Sebelumnya
+                </button>
+                <button class="action-btn secondary nav-btn" id="nextQuestionBtn">
+                    Berikutnya <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="action-btn primary" id="submitQuizBtn">
+                    <i class="fas fa-paper-plane"></i> Kumpulkan Jawaban
+                </button>
+                <button class="action-btn secondary" id="saveProgressBtn">
+                    <i class="fas fa-save"></i> Simpan Sementara
+                </button>
+                <button class="action-btn danger" id="resetQuizBtn">
+                    <i class="fas fa-redo"></i> Ulangi Pengerjaan
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- ========== STATE 2: ALREADY SUBMITTED ========== -->
+    <div id="alreadySubmittedState" class="hidden">
+        <div class="container">
+            <div class="completion-message show">
+                <h3 class="completion-title">✅ Quiz Telah Dikumpulkan</h3>
+                <p class="completion-text">
+                    <strong>Terima kasih telah berpartisipasi!</strong><br>
+                    Anda sudah mengumpulkan jawaban untuk quiz ini. <br>
+                    Data Anda sudah tersimpan di sistem.
+                </p>
+                
+                <div class="countdown-grid mt-10">
+                    <div class="countdown-box" id="submittedCdDays">0<span class="countdown-label">Hari</span></div>
+                    <div class="countdown-box" id="submittedCdHours">0<span class="countdown-label">Jam</span></div>
+                    <div class="countdown-box" id="submittedCdMins">0<span class="countdown-label">Menit</span></div>
+                    <div class="countdown-box" id="submittedCdSecs">0<span class="countdown-label">Detik</span></div>
+                </div>
+                
+                <p class="completion-text mt-10">
+                    <strong>Pengumuman Hasil:</strong> 28 Januari 2026, 16:30 WIB<br>
+                    <small>Countdown di atas menunjukkan waktu tersisa.</small>
+                </p>
+                
+                <div class="action-buttons mt-10" style="max-width: 400px;">
+                    <button class="action-btn primary" id="viewResultsBtn">
+                        <i class="fas fa-chart-bar"></i> Lihat Statistik
+                    </button>
+                    <button class="action-btn secondary" id="newQuizBtn">
+                        <i class="fas fa-redo"></i> Mulai Quiz Baru
+                    </button>
+                </div>
+                
+                <p class="completion-text mt-10" style="font-size: 10px; color: var(--gray);">
+                    <i class="fas fa-info-circle"></i> Untuk mencegah pengiriman ganda, Anda tidak dapat mengirim jawaban lagi.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>R-QUEST - Quiz Chronicles</h3>
+                    <p>Quiz Chronicles The Unfolding Past adalah kuis yang menggabungkan pengetahuan sejarah dengan tantangan interaktif dengan tujuan meningkatkan wawasan dan pemahaman.</p>
+                    <div class="social-links">
+                        <a href="https://youtube.com/@raffizahrandhika" class="social-link" title="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://instagram.com/raffizahrandhika" class="social-link" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://t.me/raffizahrandhika" class="social-link" title="Telegram">
+                            <i class="fab fa-telegram-plane"></i>
+                        </a>
+                        <a href="https://tiktok.com/@raffizahrandhika" class="social-link" title="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://x.com/mrffzd" class="social-link" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/muhammad-raffi-zahrandhika-7a6537378"
+                            class="social-link" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 style="margin-bottom: 10px;">Kontak</h4>
+                    <p><i class="fas fa-envelope"></i> raffismartlab@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Muhammad Raffi Zahrandhika. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Konfirmasi</h3>
+                <button class="close-btn" id="closeModalBtn">&times;</button>
+            </div>
+            <div class="mb-10">
+                <p id="modalMessage">Apakah Anda yakin ingin mengulangi pengerjaan quiz? Semua jawaban akan dihapus.</p>
+            </div>
+            <div class="action-buttons" style="margin-bottom: 0;">
+                <button class="action-btn secondary" id="confirmationCancelBtn">Batal</button>
+                <button class="action-btn danger" id="confirmationConfirmBtn">Ya, Ulangi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Collection Modal -->
+    <div class="modal" id="dataModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Data Peserta</h3>
+                <button class="close-btn" id="closeDataModal">&times;</button>
+            </div>
+            <form id="participantForm">
+                <div class="mb-10">
+                    <label class="form-label">Nama Lengkap</label>
+                    <input type="text" class="form-input" id="participantName" placeholder="Masukkan nama lengkap" required>
+                </div>
+                <div class="mb-10">
+                    <label class="form-label">Username Instagram atau Email</label>
+                    <input type="text" class="form-input" id="participantEmail" placeholder="Username atau email" required>
+                </div>
+                <button type="submit" class="action-btn primary" style="width: 100%;">
+                    <i class="fas fa-paper-plane"></i> Kirim ke Google Form
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Alert Modal -->
+    <div class="modal" id="alertModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="alertModalTitle">Notifikasi</h3>
+                <button class="close-btn" id="alertModalClose">&times;</button>
+            </div>
+            <div class="mb-10">
+                <p id="alertModalMessage">Pesan akan muncul di sini.</p>
+            </div>
+            <div class="action-buttons" style="margin-bottom: 0;">
+                <button class="action-btn secondary" id="alertCancelBtn" style="display:none;">Batal</button>
+                <button class="action-btn primary" id="alertConfirmBtn">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== QUIZ LOCKED OVERLAY ========== -->
+<div class="quiz-locked-overlay hidden" id="quizLockedOverlay">
+    <div class="quiz-locked-modal">
+        <div class="locked-icon">
+            <i class="fas fa-lock" id="lockIcon"></i>
+        </div>
+        <h2 class="locked-title" id="lockTitle">Quiz Belum/Tidak Dapat Diakses</h2>
+        
+        <!-- Info tanggal (selalu tampil) -->
+        <div class="locked-dates" id="lockDatesContainer">
+            <!-- Isi akan diupdate oleh JavaScript -->
+        </div>
+        
+        <!-- Countdown (hanya tampil sebelum/sesudah) -->
+        <div class="countdown-locked" id="lockCountdownContainer">
+            <div id="lockCountdown">--:--:--</div>
+        </div>
+        
+        <!-- Tombol Mulai Mengerjakan (hanya tampil saat sedang berlangsung) -->
+        <div class="action-buttons" id="startButtonContainer" style="max-width: 300px; margin: 20px auto; display: none;">
+            <button class="action-btn primary" id="startQuizBtn">
+                <i class="fas fa-play-circle"></i> Mulai Mengerjakan
+            </button>
+        </div>
+        
+        <!-- Tombol Refresh Status (hanya tampil saat belum/sudah) -->
+        <div class="action-buttons" id="refreshButtonContainer" style="max-width: 300px; margin: 20px auto;">
+            <button class="action-btn secondary" id="refreshLockBtn">
+                <i class="fas fa-sync-alt"></i> Refresh Status
+            </button>
+        </div>
+        
+        <p class="locked-message">
+            <i class="fas fa-info-circle"></i> 
+            Jika sudah melewati batas waktu, Anda tidak dapat mengirim jawaban baru.
+            <br>Peserta yang sudah submit tetap dapat melihat countdown hasil.
+        </p>
+    </div>
+</div>
+
+    <script>
+        // ========== GOOGLE FORM CONFIGURATION ==========
+const GOOGLE_FORM_ID = '1FAIpQLScZCnyXN47oSlN2HCm72LgbE7cV4jdAWwvkn151RvJ_15oDhQ';
+const GOOGLE_FORM_URL = `https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/formResponse`;
+const FORM_ENTRY_IDS = {
+    name: 'entry.700726981',
+    username: 'entry.1808707675',
+    q1: 'entry.1620062167',
+    q2: 'entry.888433388',
+    q3: 'entry.996500551',
+    q4: 'entry.570667543',
+    q5: 'entry.1165679609',
+    q6: 'entry.224098844',
+    q7: 'entry.893348065',
+    q8: 'entry.1770859447',
+    q9: 'entry.298721694',
+    q10: 'entry.1734151755',
+    q11: 'entry.537779351',
+    q12: 'entry.1681574278',
+    q13: 'entry.250544817',
+    q14: 'entry.1201149875',
+    q15: 'entry.112300970',
+};
+
+        // ========== QUIZ DATA (LENGKAP) ==========
+const quizQuestions = [
+    {
+        id: 1,
+        level: "Level 1",
+        topic: "Pergerakan Nasional (STOVIA)",
+        question: "Pada awal abad ke-20, pemerintah kolonial Belanda mendirikan STOVIA (School tot Opleiding van Inlandsche Artsen) sebagai sekolah kedokteran untuk pribumi. Meskipun tujuannya mencetak tenaga medis murah, sekolah ini justru melahirkan tokoh-tokoh intelektual yang sadar akan ketidakadilan kolonial. Salah satu organisasi pelopor kesadaran nasional yang lahir dari alumni STOVIA adalah...",
+        options: [
+            "Perhimpunan Indonesia",
+            "Sarekat Dagang Islam",
+            "Partai Nasional Indonesia",
+            "Budi Utomo"
+        ],
+        correctAnswer: "D"
+    },
+    {
+        id: 2,
+        level: "Level 1",
+        topic: "Perlawanan Pangeran Diponegoro",
+        question: "Pangeran Diponegoro memimpin perlawanan besar terhadap Belanda pada tahun 1825–1830. Dalam menghadapi pasukan kolonial yang memiliki persenjataan lebih modern, strategi perang yang digunakan Diponegoro adalah...",
+        options: [
+            "Perang gerilya dengan taktik bersembunyi di hutan",
+            "Serangan mendadak menggunakan armada kapal laut",
+            "Diplomasi meja bundar sejak awal konflik",
+            "Perang terbuka di lapangan luas"
+        ],
+        correctAnswer: "A"
+    },
+    {
+        id: 3,
+        level: "Level 1",
+        topic: "Semboyan Negara Indonesia",
+        question: "Bhinneka Tunggal Ika merupakan semboyan negara Indonesia yang diambil dari kitab kuno peninggalan masa Majapahit. Semboyan ini memiliki arti 'Berbeda-beda tetapi tetap satu'. Dalam kitab apakah kalimat tersebut pertama kali tertulis?",
+        options: [
+            "Kitab Arjunawiwaha",
+            "Kitab Sutasoma",
+            "Kitab Negarakertagama",
+            "Kitab Pararaton"
+        ],
+        correctAnswer: "B"
+    },
+    {
+        id: 4,
+        level: "Level 1",
+        topic: "Penemuan Mesin Cetak",
+        question: "Sebelum abad ke-15, buku di Eropa harus disalin tangan sehingga sangat mahal dan langka. Pada tahun 1450-an, Johannes Gutenberg menciptakan mesin cetak dengan huruf cetak bergerak (movable type). Penemuan ini dianggap sebagai revolusi dalam peradaban manusia karena...",
+        options: [
+            "Mempercepat penyebaran informasi secara luas kepada masyarakat",
+            "Membuat harga kertas menjadi setara dengan emas",
+            "Menghilangkan minat masyarakat terhadap seni lukis",
+            "Menghapus penggunaan bahasa Latin di seluruh Eropa"
+        ],
+        correctAnswer: "A"
+    },
+    {
+        id: 5,
+        level: "Level 1",
+        topic: "Kerajaan Kutai",
+        question: "Kerajaan Kutai merupakan kerajaan Hindu tertua di Indonesia yang terletak di Kalimantan Timur. Keberadaan kerajaan ini dibuktikan dengan penemuan tujuh buah tiang batu tertulis dari abad ke-4 Masehi. Apa nama prasasti batu yang menjadi bukti sejarah tersebut?",
+        options: [
+            "Prasasti Kedukan Bukit",
+            "Prasasti Ciaruteun",
+            "Prasasti Yupa",
+            "Prasasti Tugu"
+        ],
+        correctAnswer: "C"
+    },
+    {
+        id: 6,
+        level: "Level 1",
+        topic: "Penjelajah Belanda Pertama",
+        question: "Pada tahun 1596, empat kapal Belanda pertama kali berlabuh di pelabuhan Banten setelah menempuh perjalanan panjang. Kedatangan ini menjadi awal mula keterlibatan Belanda dalam perdagangan rempah di Nusantara. Siapakah pemimpin ekspedisi Belanda yang pertama kali mendarat di Banten tersebut?",
+        options: [
+            "Thomas Stamford Raffles",
+            "Baron van Hoevell",
+            "Jan Pieterszoon Coen",
+            "Cornelis de Houtman"
+        ],
+        correctAnswer: "D"
+    },
+    {
+        id: 7,
+        level: "Level 2",
+        topic: "Revolusi Industri",
+        question: "Revolusi Industri di Inggris pada abad ke-18 membawa perubahan besar. Manakah pernyataan berikut yang paling tepat menggambarkan dampak sosial dari transisi tenaga manusia ke mesin?",
+        options: [
+            "Meningkatnya kualitas udara di kota-kota besar karena pengurangan limbah pertanian",
+            "Terjadinya urbanisasi besar-besaran karena penduduk desa pindah ke kota untuk bekerja di pabrik",
+            "Penghapusan sistem kelas sosial dalam masyarakat Inggris",
+            "Menurunnya angka kelahiran karena biaya hidup di kota yang murah"
+        ],
+        correctAnswer: "B"
+    },
+    {
+        id: 8,
+        level: "Level 2",
+        topic: "Runtuhnya VOC",
+        question: "Vereenigde Oostindische Compagnie (VOC) pernah menjadi perusahaan terkaya di dunia, namun akhirnya dibubarkan pada 31 Desember 1799. Meskipun memiliki hak istimewa (Octroi), VOC hancur bukan karena kalah perang secara total, melainkan karena masalah internal yang kronis. Faktor utama yang dianggap sebagai penyebab hancurnya VOC adalah...",
+        options: [
+            "Penolakan petani Nusantara untuk menanam rempah-rempah",
+            "Revolusi industri yang membuat rempah-rempah tidak lagi bernilai",
+            "Praktik korupsi di kalangan pejabat VOC dan beban utang besar",
+            "Serangan masif dari armada laut Inggris"
+        ],
+        correctAnswer: "C"
+    },
+    {
+        id: 9,
+        level: "Level 2",
+        topic: "Politik Etis (Trias Van Deventer)",
+        question: "Di bawah tekanan kritik dari kaum liberal di Belanda, diterapkanlah Politik Etis sebagai bentuk 'balas budi' kepada rakyat Nusantara. Salah satu programnya adalah edukasi. Namun, dalam perkembangannya, program edukasi ini memberikan dampak yang tidak diduga oleh pemerintah kolonial, yaitu...",
+        options: [
+            "Lahirnya golongan terpelajar yang justru menjadi pemimpin gerakan kemerdekaan",
+            "Hilangnya sistem kasta sosial tradisional di masyarakat pedesaan secara bertahap",
+            "Menurunnya angka urbanisasi ke kota-kota besar di Pulau Jawa",
+            "Rakyat pribumi menjadi loyal sepenuhnya kepada sistem pemerintahan kolonial Belanda"
+        ],
+        correctAnswer: "A"
+    },
+    {
+        id: 10,
+        level: "Level 2",
+        topic: "Perubahan Sila Pertama di Piagam Jakarta",
+        question: "Pada tanggal 18 Agustus 1945, terjadi perubahan krusial pada rumusan sila pertama Pancasila dari yang semula berbunyi 'Ketuhanan dengan kewajiban menjalankan syariat Islam bagi pemeluk-pemeluknya' menjadi 'Ketuhanan Yang Maha Esa'. Alasan utama di balik perubahan tersebut adalah...",
+        options: [
+            "Desakan dari tokoh agama Hindu dan Buddha untuk mendapat pengakuan setara",
+            "Usulan dari para founding fathers untuk mengadopsi model negara sekuler Barat",
+            "Karena rumusan awal dianggap terlalu panjang dan sulit dihafalkan",
+            "Menjaga persatuan dan mengakomodasi keberagaman agama seluruh wilayah Indonesia"
+        ],
+        correctAnswer: "D"
+    },
+    {
+        id: 11,
+        level: "Level 2",
+        topic: "Dampak Agrikultur Tanam Paksa",
+        question: "Sistem Tanam Paksa sering dikenal karena penderitaan yang ditimbulkannya bagi petani Nusantara. Namun, dari sisi agrikultur, sistem ini memiliki dampak jangka panjang yang masih terasa hingga sekarang, yaitu...",
+        options: [
+            "Berhentinya perdagangan rempah-rempah secara total di pasar dunia",
+            "Terciptanya sistem kepemilikan tanah pribadi bagi seluruh petani",
+            "Dikenalkannya jenis tanaman ekspor baru seperti kopi, teh, dan kina ke masyarakat lokal",
+            "Berkembangnya sistem irigasi modern di seluruh wilayah pertanian Jawa dan Sumatera"
+        ],
+        correctAnswer: "C"
+    },
+    {
+        id: 12,
+        level: "Level 3",
+        topic: "Tokoh Nasional (H.O.S. Tjokroaminoto)",
+        question: "H.O.S. Tjokroaminoto dikenal sebagai 'Guru Bangsa' yang melahirkan berbagai tokoh dengan ideologi berbeda (Soekarno, Musso, Kartosoewirjo). Apa pelajaran utama yang bisa ditarik dari cara beliau memimpin Syarikat Islam pada masa itu?",
+        options: [
+            "Beliau mengintegrasikan nilai Islam, kebangsaan, dan sosial dalam melawan kolonialisme",
+            "Beliau menjadikan Syarikat Islam sebagai organisasi yang eksklusif untuk kalangan bangsawan",
+            "Beliau hanya berfokus pada kegiatan ekonomi tanpa menyentuh ranah politik sama sekali",
+            "Beliau mewajibkan seluruh anggotanya untuk hanya mempelajari satu ideologi politik"
+        ],
+        correctAnswer: "A"
+    },
+    {
+        id: 13,
+        level: "Level 3",
+        topic: "Diplomasi Kemerdekaan (Linggarjati)",
+        question: "Setelah kemerdekaan 1945, Indonesia menghadapi dilema antara diplomasi (perundingan) dan perjuangan fisik (perang). Kelompok yang pro-diplomasi (seperti Sutan Sjahrir) berpendapat bahwa diplomasi penting untuk mendapatkan pengakuan kedaulatan internasional. Apa risiko terbesar yang dialami Indonesia akibat memilih jalur perundingan seperti Perjanjian Linggarjati?",
+        options: [
+            "Republik Indonesia harus menyerahkan seluruh aset militer kepada pemerintah Belanda",
+            "Terjadinya perang saudara antara pendukung AS dan Uni Soviet di Jakarta",
+            "Wilayah kedaulatan RI secara de facto menjadi sangat sempit (hanya Jawa, Madura, dan Sumatera)",
+            "TNI dibubarkan oleh PBB dan digantikan dengan pasukan internasional di seluruh wilayah"
+        ],
+        correctAnswer: "C"
+    },
+    {
+        id: 14,
+        level: "Level 3",
+        topic: "Pendudukan Jepang (Propaganda 3A)",
+        question: "Saat pertama kali datang ke Indonesia, Jepang menyebarkan propaganda 'Jepang Pemimpin Asia, Jepang Pelindung Asia, Jepang Cahaya Asia'. Namun, di balik itu, Jepang menerapkan sistem kerja paksa (Romusha) yang sangat menyengsara rakyat. Analisislah mengapa banyak tokoh nasionalis Indonesia awalnya bersedia bekerja sama dengan pemerintah pendudukan Jepang?",
+        options: [
+            "Karena tokoh nasionalis tidak mengetahui adanya praktik kerja paksa di pedesaan",
+            "Karena Jepang menjanjikan kemerdekaan dan ruang untuk memobilisasi massa secara legal",
+            "Karena tokoh nasionalis sangat menyukai ideologi militerisme Jepang",
+            "Karena Belanda memerintahkan mereka untuk bekerja sama demi menjaga keamanan wilayah"
+        ],
+        correctAnswer: "B"
+    },
+    {
+        id: 15,
+        level: "Level 3",
+        topic: "Sumpah Pemuda dan Identitas Nasional",
+        question: "Sumpah Pemuda 1928 mengakui 'Bahasa Indonesia' sebagai bahasa persatuan. Secara sosiolinguistik, mengapa para pemuda memilih bahasa Melayu (yang kemudian menjadi Bahasa Indonesia) daripada bahasa Jawa yang memiliki jumlah penutur terbanyak saat itu?",
+        options: [
+            "Karena bahasa Melayu adalah bahasa asli yang digunakan di seluruh kerajaan di Jawa",
+            "Karena pemerintah Belanda melarang penggunaan bahasa Jawa dalam rapat organisasi",
+            "Karena bahasa Jawa dianggap terlalu sulit dipelajari oleh orang asing",
+            "Untuk menghindari dominasi satu etnis dan menciptakan kesetaraan antar suku bangsa"
+        ],
+        correctAnswer: "D"
+    }
+];
+
+        const answerKey = {
+    1: "D", 2: "A", 3: "B", 4: "A", 5: "C",
+    6: "D", 7: "B", 8: "C", 9: "A", 10: "D",
+    11: "C", 12: "A", 13: "C", 14: "B", 15: "D"
+};
+
+// ========== APP STATE ==========
+let currentQuestionIndex = 0;
+let userAnswers = {};
+let participantData = { name: '', email: '' };
+let isSubmitting = false;
+let countdownInterval = null;
+let lockCountdownInterval = null;
+
+// ========== QUIZ ACCESS SCHEDULE ==========
+const QUIZ_SCHEDULE = {
+    startDate: new Date('2026-01-05T07:00:00+07:00'),  // 10 Jan 2026, 07:00 WIB
+    endDate: new Date('2026-01-12T23:59:59+07:00')    // 12 Jan 2026, 23:59 WIB
+};
+
+// ========== DATE CHECKING FUNCTIONS ==========
+function isQuizAccessible() {
+    const now = new Date();
+    return now >= QUIZ_SCHEDULE.startDate && now <= QUIZ_SCHEDULE.endDate;
+}
+
+function getTimeUntilStart() {
+    const now = new Date();
+    const diff = QUIZ_SCHEDULE.startDate - now;
+    
+    if (diff <= 0) return null;
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+    
+    return {
+        days,
+        hours,
+        minutes,
+        seconds,
+        totalMs: diff
+    };
+}
+
+function getTimeUntilEnd() {
+    const now = new Date();
+    const diff = QUIZ_SCHEDULE.endDate - now;
+    
+    if (diff <= 0) return null;
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+    
+    return {
+        days,
+        hours,
+        minutes,
+        seconds,
+        totalMs: diff
+    };
+}
+
+function getTimeSinceEnd() {
+    const now = new Date();
+    const diff = now - QUIZ_SCHEDULE.endDate;
+    
+    if (diff <= 0) return null;
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    
+    return {
+        days,
+        hours,
+        minutes,
+        totalMs: diff
+    };
+}
+
+function showQuizLockedOverlay() {
+    console.log('🔄 showQuizLockedOverlay() dipanggil');
+    
+    const overlay = document.getElementById('quizLockedOverlay');
+    const iconEl = document.getElementById('lockIcon');
+    const titleEl = document.getElementById('lockTitle');
+    const quizContent = document.getElementById('quizActiveState');
+    const countdownContainer = document.getElementById('lockCountdownContainer');
+    const startButtonContainer = document.getElementById('startButtonContainer');
+    const datesContainer = document.getElementById('lockDatesContainer');
+    const refreshButtonContainer = document.getElementById('refreshButtonContainer');
+    const modalContent = document.querySelector('.quiz-locked-modal');
+    
+    if (!overlay) {
+        console.error('❌ ERROR: Element quizLockedOverlay tidak ditemukan!');
+        return;
+    }
+    
+    const now = new Date();
+    const timeUntilStart = getTimeUntilStart();
+    const timeUntilEnd = getTimeUntilEnd();
+    const timeSinceEnd = getTimeSinceEnd();
+    
+    // Reset all containers
+    if (countdownContainer) countdownContainer.style.display = 'block';
+    if (startButtonContainer) startButtonContainer.style.display = 'none';
+    if (datesContainer) datesContainer.style.display = 'block';
+    if (refreshButtonContainer) refreshButtonContainer.style.display = 'block';
+    
+    // Update dates container
+    if (datesContainer) {
+        datesContainer.innerHTML = `
+            <div class="date-item">
+                <span class="date-label">Tanggal Mulai:</span>
+                <span class="date-value">10 Januari 2026 (07:00 WIB)</span>
+            </div>
+            <div class="date-item">
+                <span class="date-label">Tanggal Berakhir:</span>
+                <span class="date-value">12 Januari 2026 (23:59 WIB)</span>
+            </div>
+        `;
+    }
+    
+    // Update icon, title and status based on time
+    if (now < QUIZ_SCHEDULE.startDate) {
+        // BEFORE QUIZ STARTS
+        console.log('⏳ Quiz belum dimulai');
+        iconEl.className = 'fas fa-lock';
+        iconEl.style.color = 'var(--warning)';
+        titleEl.textContent = 'Quiz Belum Dimulai';
+        
+        // Update modal border color
+        if (modalContent) {
+            modalContent.style.borderColor = 'var(--warning)';
+            modalContent.style.boxShadow = '0 0 15px rgba(218, 165, 32, 0.3)';
+            modalContent.style.animation = 'pulse-yellow 2s infinite';
+        }
+        
+        // Show countdown to start
+        updateLockCountdown(timeUntilStart, 'start');
+        if (lockCountdownInterval) clearInterval(lockCountdownInterval);
+        lockCountdownInterval = setInterval(() => {
+            const updatedTime = getTimeUntilStart();
+            if (!updatedTime) {
+                clearInterval(lockCountdownInterval);
+                location.reload(); // Reload when quiz starts
+            } else {
+                updateLockCountdown(updatedTime, 'start');
+            }
+        }, 1000);
+        
+        // Update dates with status
+        if (datesContainer) {
+            datesContainer.innerHTML += `
+                <div class="date-item">
+                    <span class="date-label">Status:</span>
+                    <span class="date-value" style="color: var(--warning); font-weight: 700;">BELUM DIMULAI</span>
+                </div>
+            `;
+        }
+        
+    } else if (now >= QUIZ_SCHEDULE.startDate && now <= QUIZ_SCHEDULE.endDate) {
+        // QUIZ IS ACTIVE - WARNA BIRU
+        console.log('✅ Quiz sedang berlangsung');
+        iconEl.className = 'fas fa-hourglass-half';
+        iconEl.style.color = '#2196F3'; // WARNA BIRU
+        titleEl.textContent = 'Quiz Sedang Berlangsung';
+        
+        // Update modal border color to BLUE
+        if (modalContent) {
+            modalContent.style.borderColor = '#2196F3'; // WARNA BIRU
+            modalContent.style.boxShadow = '0 0 15px rgba(33, 150, 243, 0.3)'; // BAYANGAN BIRU
+            modalContent.style.animation = 'pulse-blue 2s infinite';
+        }
+        
+        // Hide countdown, show start button
+        if (countdownContainer) countdownContainer.style.display = 'none';
+        if (startButtonContainer) startButtonContainer.style.display = 'block';
+        if (refreshButtonContainer) refreshButtonContainer.style.display = 'none';
+        
+        // Show time until end in dates container - WARNA BIRU
+        if (timeUntilEnd && datesContainer) {
+            datesContainer.innerHTML = `
+                <div class="date-item">
+                    <span class="date-label">Tanggal Mulai:</span>
+                    <span class="date-value">10 Januari 2026</span>
+                </div>
+                <div class="date-item">
+                    <span class="date-label">Tanggal Berakhir:</span>
+                    <span class="date-value">12 Januari 2026 (23:59 WIB)</span>
+                </div>
+                <div class="date-item">
+                    <span class="date-label">Status:</span>
+                    <span class="date-value" style="color: #2196F3; font-weight: 700;">SEDANG BERLANGSUNG</span>
+                </div>
+                <div class="date-item">
+                    <span class="date-label">Waktu Tersisa:</span>
+                    <span class="date-value" style="color: #2196F3; font-weight: 700;">
+                        ${timeUntilEnd.days} Hari ${timeUntilEnd.hours} Jam ${timeUntilEnd.minutes} Menit ${timeUntilEnd.seconds} Detik
+                    </span>
+                </div>
+            `;
+            
+            // Update waktu tersisa real-time
+            if (lockCountdownInterval) clearInterval(lockCountdownInterval);
+            lockCountdownInterval = setInterval(() => {
+                const updatedTime = getTimeUntilEnd();
+                if (!updatedTime) {
+                    clearInterval(lockCountdownInterval);
+                    location.reload();
+                } else {
+                    // Update waktu tersisa di dates container
+                    const timeValueEl = datesContainer.querySelector('.date-item:last-child .date-value');
+                    if (timeValueEl) {
+                        timeValueEl.innerHTML = `${updatedTime.days} Hari ${updatedTime.hours} Jam ${updatedTime.minutes} Menit ${updatedTime.seconds} Detik`;
+                    }
+                }
+            }, 1000);
+        }
+        
+        // Update tombol "Mulai Mengerjakan" agar biru
+        const startQuizBtn = document.getElementById('startQuizBtn');
+        if (startQuizBtn) {
+            startQuizBtn.style.background = 'linear-gradient(135deg, #2196F3 0%, #64B5F6 100%)';
+            startQuizBtn.style.border = 'none';
+            startQuizBtn.style.color = 'white';
+        }
+        
+    } else if (now > QUIZ_SCHEDULE.endDate) {
+        // AFTER QUIZ ENDS
+        console.log('❌ Quiz telah berakhir');
+        iconEl.className = 'fas fa-lock';
+        iconEl.style.color = 'var(--danger)';
+        titleEl.textContent = 'Quiz Telah Berakhir';
+        
+        // Update modal border color
+        if (modalContent) {
+            modalContent.style.borderColor = 'var(--danger)';
+            modalContent.style.boxShadow = '0 0 15px rgba(178, 34, 34, 0.3)';
+            modalContent.style.animation = '';
+        }
+        
+        // Show time since end
+        updateLockCountdown(timeSinceEnd, 'end');
+        
+        // Update every minute for end time
+        if (lockCountdownInterval) clearInterval(lockCountdownInterval);
+        lockCountdownInterval = setInterval(() => {
+            const updatedTime = getTimeSinceEnd();
+            updateLockCountdown(updatedTime, 'end');
+        }, 60000); // Update every minute
+        
+        // Update dates with status
+        if (datesContainer) {
+            datesContainer.innerHTML += `
+                <div class="date-item">
+                    <span class="date-label">Status:</span>
+                    <span class="date-value" style="color: var(--danger); font-weight: 700;">SUDAH BERAKHIR</span>
+                </div>
+            `;
+        }
+    }
+    
+    // Show overlay
+    overlay.classList.remove('hidden');
+    
+    // Blur quiz content
+    if (quizContent) {
+        quizContent.classList.add('quiz-disabled');
+    }
+    
+    // PREVENT CLOSING BY CLICKING OUTSIDE
+    overlay.onclick = (e) => {
+        if (e.target === overlay) {
+            // Jika quiz sedang berlangsung, jangan izinkan close
+            if (now >= QUIZ_SCHEDULE.startDate && now <= QUIZ_SCHEDULE.endDate) {
+                console.log('⚠️ Modal tidak bisa ditutup saat quiz berlangsung');
+                return;
+            }
+        }
+    };
+}
+
+function updateLockCountdown(time, type) {
+    const countdownEl = document.getElementById('lockCountdown');
+    if (!countdownEl) return;
+    
+    if (type === 'start') {
+        countdownEl.innerHTML = `
+            <div style="font-size: 14px; margin-bottom: 5px; color: var(--gray);">
+                Quiz akan dibuka dalam:
+            </div>
+            ${time.days.toString().padStart(2, '0')} Hari
+            ${time.hours.toString().padStart(2, '0')}:${time.minutes.toString().padStart(2, '0')}:${time.seconds.toString().padStart(2, '0')}
+        `;
+    } else if (type === 'end') {
+        countdownEl.innerHTML = `
+            <div style="font-size: 14px; margin-bottom: 5px; color: var(--gray);">
+                Quiz telah ditutup selama:
+            </div>
+            ${time.days} Hari ${time.hours} Jam ${time.minutes} Menit
+        `;
+    }
+}
+
+function startQuiz() {
+    console.log('🎯 startQuiz() dipanggil');
+    hideQuizLockedOverlay();
+    enableQuizInteractions();
+    
+    // Initialize quiz if not already loaded
+    if (Object.keys(userAnswers).length === 0) {
+        loadSavedAnswers();
+        renderNav();
+        renderQuestion();
+        updateProgress();
+    }
+}
+
+function hideQuizLockedOverlay() {
+    const overlay = document.getElementById('quizLockedOverlay');
+    const quizContent = document.getElementById('quizActiveState');
+    const modalContent = document.querySelector('.quiz-locked-modal');
+    
+    if (overlay) {
+        overlay.classList.add('hidden');
+    }
+    
+    if (quizContent) {
+        quizContent.classList.remove('quiz-disabled');
+    }
+    
+    // Reset modal animation
+    if (modalContent) {
+        modalContent.style.animation = '';
+        modalContent.style.borderColor = ''; // Reset border color
+        modalContent.style.boxShadow = ''; // Reset shadow
+    }
+    
+    // Reset tombol start
+    const startQuizBtn = document.getElementById('startQuizBtn');
+    if (startQuizBtn) {
+        startQuizBtn.style.background = '';
+        startQuizBtn.style.border = '';
+        startQuizBtn.style.color = '';
+    }
+    
+    // Clear interval
+    if (lockCountdownInterval) {
+        clearInterval(lockCountdownInterval);
+        lockCountdownInterval = null;
+    }
+}
+
+function disableQuizInteractions() {
+    // Disable all buttons
+    const buttons = ['submitQuizBtn', 'saveProgressBtn', 'resetQuizBtn', 
+                    'prevQuestionBtn', 'nextQuestionBtn', 'viewResultsBtn'];
+    
+    buttons.forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) {
+            btn.disabled = true;
+            btn.style.opacity = '0.5';
+            btn.style.cursor = 'not-allowed';
+        }
+    });
+    
+    // Disable option inputs
+    document.querySelectorAll('.option-input').forEach(input => {
+        input.disabled = true;
+        input.style.cursor = 'not-allowed';
+    });
+    
+    // Disable form inputs
+    document.querySelectorAll('.form-input').forEach(input => {
+        input.disabled = true;
+        if (!input.getAttribute('data-original-placeholder')) {
+            input.setAttribute('data-original-placeholder', input.placeholder);
+        }
+        input.placeholder = 'Tidak dapat diisi (quiz terkunci)';
+    });
+    
+    // Disable navigation items
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.style.pointerEvents = 'none';
+        item.style.opacity = '0.5';
+    });
+}
+
+function enableQuizInteractions() {
+    // Enable all buttons
+    const buttons = ['submitQuizBtn', 'saveProgressBtn', 'resetQuizBtn', 
+                    'prevQuestionBtn', 'nextQuestionBtn', 'viewResultsBtn'];
+    
+    buttons.forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) {
+            btn.disabled = false;
+            btn.style.opacity = '1';
+            btn.style.cursor = 'pointer';
+        }
+    });
+    
+    // Enable option inputs
+    document.querySelectorAll('.option-input').forEach(input => {
+        input.disabled = false;
+        input.style.cursor = 'pointer';
+    });
+    
+    // Enable form inputs
+    document.querySelectorAll('.form-input').forEach(input => {
+        input.disabled = false;
+        const originalPlaceholder = input.getAttribute('data-original-placeholder') || '';
+        input.placeholder = originalPlaceholder;
+    });
+    
+    // Enable navigation items
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.style.pointerEvents = 'auto';
+        item.style.opacity = '1';
+    });
+}
+
+// ========== STATE MANAGEMENT ==========
+function checkSubmissionStatus() {
+    try {
+        const submitted = localStorage.getItem('quizSubmitted');
+        const now = new Date();
+        
+        console.log('📋 checkSubmissionStatus:', {
+            submitted: submitted,
+            isQuizAccessible: isQuizAccessible(),
+            now: now.toLocaleString('id-ID')
+        });
+        
+        // If already submitted, show submitted state
+        if (submitted === 'true') {
+            console.log('📄 User sudah submit sebelumnya');
+            return true;
+        }
+        
+        // For non-submitted users, check schedule
+        if (!isQuizAccessible()) {
+            console.log('⏰ Quiz tidak dapat diakses (diluar jadwal)');
+            return false;
+        }
+        
+        console.log('✅ Quiz dapat diakses, user belum submit');
+        return false;
+    } catch (e) {
+        console.error('Error checking submission status:', e);
+        return false;
+    }
+}
+
+function markAsSubmitted() {
+    try {
+        localStorage.setItem('quizSubmitted', 'true');
+        localStorage.setItem('submissionTime', new Date().toISOString());
+        console.log('✅ Quiz marked as submitted');
+    } catch (e) {
+        console.error('Error marking as submitted:', e);
+    }
+}
+
+function showAlreadySubmittedState() {
+    console.log('📊 Showing already submitted state');
+    
+    // Hide quiz state
+    document.getElementById('quizActiveState').classList.add('hidden');
+    document.getElementById('alreadySubmittedState').classList.remove('hidden');
+    
+    // Start countdown
+    startSubmittedCountdown();
+}
+
+function showQuizActiveState() {
+    console.log('📝 Showing quiz active state');
+    
+    // Show quiz state
+    document.getElementById('quizActiveState').classList.remove('hidden');
+    document.getElementById('alreadySubmittedState').classList.add('hidden');
+    
+    // Stop any running countdown
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+    }
+}
+
+// ========== COUNTDOWN FUNCTIONS ==========
+function startSubmittedCountdown() {
+    const targetDate = new Date('2026-01-28T16:30:00+07:00'); // 28 Jan 2026 16:30 WIB
+    
+    function updateCountdown() {
+        const now = new Date();
+        const diff = targetDate - now;
+        
+        if (diff <= 0) {
+            // Countdown finished
+            document.getElementById('submittedCdDays').innerHTML = `0<span class="countdown-label">Hari</span>`;
+            document.getElementById('submittedCdHours').innerHTML = `0<span class="countdown-label">Jam</span>`;
+            document.getElementById('submittedCdMins').innerHTML = `0<span class="countdown-label">Menit</span>`;
+            document.getElementById('submittedCdSecs').innerHTML = `0<span class="countdown-label">Detik</span>`;
+            
+            // Show results button
+            const viewResultsBtn = document.getElementById('viewResultsBtn');
+            if (viewResultsBtn) {
+                viewResultsBtn.innerHTML = '<i class="fas fa-trophy"></i> Lihat Hasil Sekarang';
+                viewResultsBtn.onclick = () => {
+                    window.location.href = 'new-design.html';
+                };
+            }
+            
+            clearInterval(countdownInterval);
+            return;
+        }
+        
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+        
+        document.getElementById('submittedCdDays').innerHTML = `${days}<span class="countdown-label">Hari</span>`;
+        document.getElementById('submittedCdHours').innerHTML = `${hours}<span class="countdown-label">Jam</span>`;
+        document.getElementById('submittedCdMins').innerHTML = `${minutes}<span class="countdown-label">Menit</span>`;
+        document.getElementById('submittedCdSecs').innerHTML = `${seconds}<span class="countdown-label">Detik</span>`;
+    }
+    
+    updateCountdown();
+    countdownInterval = setInterval(updateCountdown, 1000);
+}
+
+// ========== QUIZ FUNCTIONS ==========
+function renderNav() {
+    const nav = document.getElementById('questionNav');
+    if (!nav) return;
+    
+    nav.innerHTML = '';
+    quizQuestions.forEach((q, idx) => {
+        const item = document.createElement('div');
+        item.className = 'nav-item';
+        if (userAnswers[q.id]) item.classList.add('answered');
+        if (idx === currentQuestionIndex) item.classList.add('current');
+        item.textContent = q.id;
+        item.title = `Soal ${q.id}`;
+        item.onclick = () => {
+            // Only allow navigation if quiz is accessible OR already submitted
+            const submitted = localStorage.getItem('quizSubmitted') === 'true';
+            if (!isQuizAccessible() && !submitted) {
+                console.log('⚠️ Navigation diblokir: quiz terkunci');
+                return;
+            }
+            
+            currentQuestionIndex = idx;
+            renderQuestion();
+            renderNav();
+        };
+        nav.appendChild(item);
+    });
+}
+
+function renderQuestion() {
+    const container = document.getElementById('questionsContainer');
+    if (!container) return;
+    
+    const question = quizQuestions[currentQuestionIndex];
+    const userAnswer = userAnswers[question.id] || '';
+    const submitted = localStorage.getItem('quizSubmitted') === 'true';
+    
+    const questionHTML = `
+        <div class="question-card" id="question-${question.id}">
+            <div class="question-header">
+                <div class="question-number">${currentQuestionIndex + 1}</div>
+                <div class="question-topic">${question.topic}</div>
+            </div>
+            <div class="question-text">${question.question}</div>
+            <div class="options-container">
+                ${question.options.map((option, optIndex) => {
+                    const optionLetter = String.fromCharCode(65 + optIndex);
+                    const isChecked = userAnswer === optionLetter;
+                    const isDisabled = !isQuizAccessible() && !submitted;
+                    
+                    return `
+                        <div class="option-item">
+                            <input type="radio" 
+                                   id="q${question.id}-${optionLetter}" 
+                                   name="question-${question.id}" 
+                                   value="${optionLetter}"
+                                   class="option-input"
+                                   ${isChecked ? 'checked' : ''}
+                                   ${isDisabled ? 'disabled' : ''}>
+                            <label for="q${question.id}-${optionLetter}" class="option-label">
+                                <div class="option-letter">${optionLetter}</div>
+                                <div class="option-text">${option}</div>
+                            </label>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        </div>
+    `;
+    
+    container.innerHTML = questionHTML;
+
+    // Attach event listeners to options
+    document.querySelectorAll('.option-input').forEach(input => {
+        input.addEventListener('change', function() {
+            const submitted = localStorage.getItem('quizSubmitted') === 'true';
+            
+            if (!isQuizAccessible() && !submitted) {
+                showAlert('⏰ Waktu Habis', 'Waktu pengerjaan quiz telah berakhir (12 Januari 2026, 23:59 WIB).');
+                this.checked = false;
+                return;
+            }
+            
+            if (submitted) {
+                showAlert('📄 Sudah Dikumpulkan', 'Anda sudah mengumpulkan jawaban. Tidak dapat mengubah jawaban.');
+                this.checked = false;
+                return;
+            }
+            
+            const questionId = this.name.split('-')[1];
+            const answer = this.value;
+            userAnswers[questionId] = answer;
+            saveToLocalStorage();
+            updateProgress();
+            checkCompletion();
+            renderNav();
+        });
+    });
+
+    // Update prev/next button states
+    const prevBtn = document.getElementById('prevQuestionBtn');
+    const nextBtn = document.getElementById('nextQuestionBtn');
+    if (prevBtn) prevBtn.disabled = currentQuestionIndex === 0;
+    if (nextBtn) nextBtn.disabled = currentQuestionIndex === quizQuestions.length - 1;
+}
+
+function updateProgress() {
+    const answeredCount = Object.keys(userAnswers).length;
+    const totalQuestions = quizQuestions.length;
+    const progressPercent = Math.round((answeredCount / totalQuestions) * 100);
+    
+    const progressPercentEl = document.getElementById('progressPercent');
+    const progressFillEl = document.getElementById('progressFill');
+    
+    if (progressPercentEl) progressPercentEl.textContent = `${progressPercent}%`;
+    if (progressFillEl) progressFillEl.style.width = `${progressPercent}%`;
+}
+
+function checkCompletion() {
+    const answeredCount = Object.keys(userAnswers).length;
+    const totalQuestions = quizQuestions.length;
+    const completionMessage = document.getElementById('completionMessage');
+    
+    if (answeredCount === totalQuestions) {
+        if (completionMessage) completionMessage.classList.remove('hidden');
+    } else {
+        if (completionMessage) completionMessage.classList.add('hidden');
+    }
+}
+
+function calculateScore() {
+    let score = 0;
+    let correctAnswers = [];
+    let incorrectAnswers = [];
+    
+    for (const [questionId, userAnswer] of Object.entries(userAnswers)) {
+        if (userAnswer === answerKey[questionId]) {
+            score++;
+            correctAnswers.push(parseInt(questionId));
+        } else {
+            incorrectAnswers.push({
+                questionId: parseInt(questionId),
+                userAnswer: userAnswer,
+                correctAnswer: answerKey[questionId]
+            });
+        }
+    }
+    
+    return {
+        rawScore: score,
+        totalQuestions: quizQuestions.length,
+        percentage: Math.round((score / quizQuestions.length) * 100),
+        correctAnswers: correctAnswers,
+        incorrectAnswers: incorrectAnswers,
+        unanswered: quizQuestions.length - Object.keys(userAnswers).length
+    };
+}
+
+async function submitToGoogleForm() {
+    if (isSubmitting) return false;
+    
+    // Check if still within schedule
+    if (!isQuizAccessible()) {
+        showAlert('⏰ Waktu Habis', 
+            'Maaf, waktu pengumpulan quiz telah berakhir (12 Januari 2026, 23:59 WIB).\nAnda tidak dapat mengirim jawaban.');
+        return false;
+    }
+    
+    isSubmitting = true;
+    
+    try {
+        const formData = new FormData();
+        formData.append(FORM_ENTRY_IDS.name, participantData.name || 'Anonymous');
+        formData.append(FORM_ENTRY_IDS.username, participantData.email || 'no-email@example.com');
+        
+        for (let i = 1; i <= 15; i++) {
+            const answer = userAnswers[i] || 'Tidak dijawab';
+            const entryId = FORM_ENTRY_IDS[`q${i}`];
+            if (entryId) {
+                formData.append(entryId, answer);
+            }
+        }
+        
+        // Use fetch with no-cors mode for Google Forms
+        await fetch(GOOGLE_FORM_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: formData
+        });
+        
+        return true;
+    } catch (error) {
+        console.error('❌ Submission error:', error);
+        return false;
+    } finally {
+        isSubmitting = false;
+    }
+}
+
+function showAlert(title, message, type = 'info', onConfirm = null) {
+    const modal = document.getElementById('alertModal');
+    const titleEl = document.getElementById('alertModalTitle');
+    const messageEl = document.getElementById('alertModalMessage');
+    const confirmBtn = document.getElementById('alertConfirmBtn');
+    const cancelBtn = document.getElementById('alertCancelBtn');
+    
+    if (!modal || !titleEl || !messageEl || !confirmBtn) return;
+    
+    titleEl.textContent = title;
+    messageEl.textContent = message;
+    
+    if (type === 'confirm') {
+        cancelBtn.style.display = 'flex';
+        confirmBtn.textContent = 'Ya';
+        confirmBtn.className = 'action-btn primary';
+    } else {
+        cancelBtn.style.display = 'none';
+        confirmBtn.textContent = 'OK';
+        confirmBtn.className = 'action-btn primary';
+    }
+    
+    modal.style.display = 'flex';
+    
+    // Set up event listeners
+    const closeModal = () => {
+        modal.style.display = 'none';
+        if (onConfirm) onConfirm();
+    };
+    
+    confirmBtn.onclick = closeModal;
+    if (cancelBtn) {
+        cancelBtn.onclick = () => { modal.style.display = 'none'; };
+    }
+    document.getElementById('alertModalClose').onclick = () => { modal.style.display = 'none'; };
+    
+    // Close on background click
+    modal.onclick = (e) => {
+        if (e.target === modal) modal.style.display = 'none';
+    };
+}
+
+function saveToLocalStorage() {
+    try {
+        const data = {
+            answers: userAnswers,
+            participant: participantData,
+            currentIndex: currentQuestionIndex,
+            timestamp: new Date().toISOString(),
+            version: '2.0'
+        };
+        localStorage.setItem('historyQuizData', JSON.stringify(data));
+        console.log('✅ Progress saved to localStorage');
+    } catch (e) {
+        console.error('❌ Failed to save:', e);
+        showAlert('⚠️ Gagal Menyimpan', 'Browser tidak mengizinkan penyimpanan data. Progress tidak tersimpan.', 'warning');
+    }
+}
+
+function loadSavedAnswers() {
+    try {
+        const saved = localStorage.getItem('historyQuizData');
+        if (saved) {
+            const data = JSON.parse(saved);
+            userAnswers = data.answers || {};
+            participantData = data.participant || { name: '', email: '' };
+            currentQuestionIndex = data.currentIndex || 0;
+            console.log('✅ Loaded saved data:', { 
+                answersCount: Object.keys(userAnswers).length,
+                currentIndex: currentQuestionIndex 
+            });
+        }
+    } catch (e) {
+        console.error('❌ Failed to load:', e);
+    }
+}
+
+function clearLocalStorage() {
+    localStorage.removeItem('historyQuizData');
+    localStorage.removeItem('quizResults');
+    localStorage.removeItem('quizSubmitted');
+    localStorage.removeItem('submissionTime');
+}
+
+// ========== EVENT LISTENERS ==========
+function setupEventListeners() {
+    // Submit Quiz
+    const submitQuizBtn = document.getElementById('submitQuizBtn');
+    if (submitQuizBtn) {
+        submitQuizBtn.onclick = () => {
+            // Check if quiz is accessible
+            if (!isQuizAccessible()) {
+                showAlert('⏰ Waktu Habis', 'Waktu pengumpulan quiz telah berakhir (12 Januari 2026, 23:59 WIB).');
+                return;
+            }
+            
+            const answeredCount = Object.keys(userAnswers).length;
+            const totalQuestions = quizQuestions.length;
+            
+            if (answeredCount === 0) {
+                showAlert('ℹ️ Info', 'Anda belum menjawab satupun soal. Silakan jawab beberapa soal terlebih dahulu.');
+                return;
+            }
+            
+            if (answeredCount < totalQuestions) {
+                showAlert(
+                    '⚠️ Konfirmasi Pengumpulan',
+                    `Anda baru menjawab ${answeredCount} dari ${totalQuestions} soal.\n${totalQuestions - answeredCount} soal belum dijawab.\n\nApakah Anda yakin ingin mengumpulkan sekarang?`,
+                    'confirm',
+                    () => {
+                        if (participantData.name) {
+                            document.getElementById('participantName').value = participantData.name;
+                        }
+                        if (participantData.email) {
+                            document.getElementById('participantEmail').value = participantData.email;
+                        }
+                        document.getElementById('dataModal').style.display = 'flex';
+                    }
+                );
+            } else {
+                if (participantData.name) {
+                    document.getElementById('participantName').value = participantData.name;
+                }
+                if (participantData.email) {
+                    document.getElementById('participantEmail').value = participantData.email;
+                }
+                document.getElementById('dataModal').style.display = 'flex';
+            }
+        };
+    }
+    
+    // Save Progress
+    const saveProgressBtn = document.getElementById('saveProgressBtn');
+    if (saveProgressBtn) {
+        saveProgressBtn.onclick = () => {
+            // Check if quiz is accessible
+            if (!isQuizAccessible()) {
+                showAlert('⏰ Waktu Habis', 'Waktu pengerjaan quiz telah berakhir (12 Januari 2026, 23:59 WIB).');
+                return;
+            }
+            
+            saveToLocalStorage();
+            const answeredCount = Object.keys(userAnswers).length;
+            showAlert('✅ Progress Tersimpan', 
+                `Progress berhasil disimpan!\nJawaban tersimpan: ${answeredCount}/${quizQuestions.length}\nAnda dapat melanjutkan kapan saja.`);
+        };
+    }
+    
+    // Reset Quiz
+    const resetQuizBtn = document.getElementById('resetQuizBtn');
+    if (resetQuizBtn) {
+        resetQuizBtn.onclick = () => {
+            // Check if quiz is accessible
+            if (!isQuizAccessible()) {
+                showAlert('⏰ Waktu Habis', 'Waktu pengerjaan quiz telah berakhir (12 Januari 2026, 23:59 WIB).');
+                return;
+            }
+            
+            const answeredCount = Object.keys(userAnswers).length;
+            if (answeredCount === 0) {
+                showAlert('ℹ️ Info', 'Tidak ada jawaban yang perlu dihapus.');
+                return;
+            }
+            
+            document.getElementById('modalMessage').textContent = 
+                `Apakah Anda yakin ingin mengulangi pengerjaan?\n${answeredCount} jawaban akan dihapus.\nSemua progress akan hilang.`;
+            document.getElementById('confirmationModal').style.display = 'flex';
+        };
+    }
+    
+    // Previous/Next navigation
+    const prevBtn = document.getElementById('prevQuestionBtn');
+    const nextBtn = document.getElementById('nextQuestionBtn');
+    
+    if (prevBtn) {
+        prevBtn.onclick = () => {
+            const submitted = localStorage.getItem('quizSubmitted') === 'true';
+            if (!isQuizAccessible() && !submitted) {
+                showAlert('⏰ Waktu Habis', 'Waktu pengerjaan quiz telah berakhir (12 Januari 2026, 23:59 WIB).');
+                return;
+            }
+            
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+                renderNav();
+                saveToLocalStorage();
+            }
+        };
+    }
+    
+    if (nextBtn) {
+        nextBtn.onclick = () => {
+            const submitted = localStorage.getItem('quizSubmitted') === 'true';
+            if (!isQuizAccessible() && !submitted) {
+                showAlert('⏰ Waktu Habis', 'Waktu pengerjaan quiz telah berakhir (12 Januari 2026, 23:59 WIB).');
+                return;
+            }
+            
+            if (currentQuestionIndex < quizQuestions.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+                renderNav();
+                saveToLocalStorage();
+            }
+        };
+    }
+    
+    // Start Quiz Button (in lock overlay)
+    const startQuizBtn = document.getElementById('startQuizBtn');
+    if (startQuizBtn) {
+        startQuizBtn.onclick = () => {
+            startQuiz();
+        };
+    }
+    
+    // Refresh Lock Button (only when quiz is not active)
+    const refreshLockBtn = document.getElementById('refreshLockBtn');
+    if (refreshLockBtn) {
+        refreshLockBtn.onclick = () => {
+            const now = new Date();
+            if (now >= QUIZ_SCHEDULE.startDate && now <= QUIZ_SCHEDULE.endDate) {
+                // If quiz is active, start quiz instead
+                startQuiz();
+            } else {
+                location.reload();
+            }
+        };
+    }
+}
+
+function setupSubmittedStateListeners() {
+    // View Results Button
+    const viewResultsBtn = document.getElementById('viewResultsBtn');
+    if (viewResultsBtn) {
+        viewResultsBtn.onclick = () => {
+            // Check if countdown is finished
+            const targetDate = new Date('2026-01-28T16:30:00+07:00');
+            const now = new Date();
+            
+            if (now >= targetDate) {
+                window.location.href = 'new-design.html';
+            } else {
+                showAlert('⏳ Belum Waktunya', 'Hasil akan tersedia pada 28 Januari 2026, 16:30 WIB. Silakan tunggu sampai waktu yang ditentukan.');
+            }
+        };
+    }
+    
+    // New Quiz Button
+    const newQuizBtn = document.getElementById('newQuizBtn');
+    if (newQuizBtn) {
+        newQuizBtn.onclick = () => {
+            // Check if quiz is currently accessible
+            if (!isQuizAccessible()) {
+                showAlert('⏰ Waktu Habis', 
+                    'Waktu pengerjaan quiz telah berakhir (12 Januari 2026, 23:59 WIB).\nAnda tidak dapat memulai quiz baru.');
+                return;
+            }
+            
+            showAlert('⚠️ Reset Data', 
+                'Apakah Anda yakin ingin memulai quiz baru? Data pengiriman sebelumnya akan dihapus dan Anda dapat mengirim jawaban baru.',
+                'confirm',
+                () => {
+                    clearLocalStorage();
+                    location.reload();
+                }
+            );
+        };
+    }
+}
+
+function setupModalListeners() {
+    // Data Modal
+    const closeDataModal = document.getElementById('closeDataModal');
+    if (closeDataModal) {
+        closeDataModal.onclick = () => {
+            document.getElementById('dataModal').style.display = 'none';
+        };
+    }
+    
+    const participantForm = document.getElementById('participantForm');
+    if (participantForm) {
+        participantForm.onsubmit = async (e) => {
+            e.preventDefault();
+            
+            // Check if quiz is still accessible
+            if (!isQuizAccessible()) {
+                showAlert('⏰ Waktu Habis', 'Maaf, waktu pengumpulan quiz telah berakhir (12 Januari 2026, 23:59 WIB).');
+                document.getElementById('dataModal').style.display = 'none';
+                return;
+            }
+            
+            participantData.name = document.getElementById('participantName').value.trim();
+            participantData.email = document.getElementById('participantEmail').value.trim();
+            
+            if (!participantData.name) {
+                showAlert('⚠️ Validasi Gagal', 'Harap isi nama lengkap', 'warning');
+                return;
+            }
+            
+            if (!participantData.email) {
+                showAlert('⚠️ Validasi Gagal', 'Harap isi username atau email', 'warning');
+                return;
+            }
+            
+            document.getElementById('dataModal').style.display = 'none';
+            
+            // Disable submit button and show loading
+            const submitBtn = document.getElementById('submitQuizBtn');
+            const originalHTML = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
+            submitBtn.disabled = true;
+            
+            // Calculate score
+            const score = calculateScore();
+            saveToLocalStorage();
+            
+            // Submit to Google Form
+            let submittedToGoogle = false;
+            let errorMessage = '';
+            
+            try {
+                submittedToGoogle = await submitToGoogleForm();
+            } catch (err) {
+                errorMessage = err.message;
+            }
+            
+            // Save results and mark as submitted
+            const resultsData = {
+                name: participantData.name,
+                email: participantData.email,
+                score: score.rawScore,
+                total: score.totalQuestions,
+                percentage: score.percentage,
+                answers: userAnswers,
+                correctAnswers: score.correctAnswers,
+                incorrectAnswers: score.incorrectAnswers,
+                unanswered: score.unanswered,
+                submittedToGoogle,
+                submissionTime: new Date().toISOString(),
+                error: errorMessage
+            };
+            
+            localStorage.setItem('quizResults', JSON.stringify(resultsData));
+            markAsSubmitted(); // MARK AS SUBMITTED - KEY FUNCTION!
+            
+            // Show result message
+            if (submittedToGoogle) {
+                showAlert('✅ Sukses!',
+                    `QUIZ BERHASIL DIKUMPULKAN!\nNama: ${participantData.name}\nSkor: ${score.rawScore}/${score.totalQuestions} (${score.percentage}%)\nData telah terkirim ke Google Form.`,
+                    'info',
+                    () => {
+                        // Switch to submitted state
+                        showAlreadySubmittedState();
+                    }
+                );
+            } else {
+                showAlert('⚠️ Data Tersimpan Lokal',
+                    `QUIZ DISIMPAN LOKAL\nNama: ${participantData.name}\nSkor: ${score.rawScore}/${score.totalQuestions} (${score.percentage}%)\nData TIDAK terkirim ke Google Sheets. Coba lagi nanti.`,
+                    'info',
+                    () => {
+                        // Switch to submitted state even if Google failed
+                        showAlreadySubmittedState();
+                    }
+                );
+            }
+            
+            // Restore submit button
+            setTimeout(() => {
+                submitBtn.innerHTML = originalHTML;
+                submitBtn.disabled = false;
+            }, 1000);
+        };
+    }
+    
+    // Confirmation Modal
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    if (closeModalBtn) {
+        closeModalBtn.onclick = () => {
+            document.getElementById('confirmationModal').style.display = 'none';
+        };
+    }
+    
+    const confirmationCancelBtn = document.getElementById('confirmationCancelBtn');
+    if (confirmationCancelBtn) {
+        confirmationCancelBtn.onclick = () => {
+            document.getElementById('confirmationModal').style.display = 'none';
+        };
+    }
+    
+    const confirmationConfirmBtn = document.getElementById('confirmationConfirmBtn');
+    if (confirmationConfirmBtn) {
+        confirmationConfirmBtn.onclick = () => {
+            // Check if quiz is still accessible before resetting
+            if (!isQuizAccessible()) {
+                showAlert('⏰ Waktu Habis', 'Waktu pengerjaan quiz telah berakhir (12 Januari 2026, 23:59 WIB).');
+                document.getElementById('confirmationModal').style.display = 'none';
+                return;
+            }
+            
+            clearLocalStorage();
+            userAnswers = {};
+            participantData = { name: '', email: '' };
+            currentQuestionIndex = 0;
+            renderNav();
+            renderQuestion();
+            updateProgress();
+            document.getElementById('confirmationModal').style.display = 'none';
+            showAlert('✅ Reset Berhasil', 'Semua jawaban telah dihapus. Silakan mulai mengerjakan kembali.');
+        };
+    }
+    
+    // Close modals when clicking outside (except quizLockedOverlay)
+    window.onclick = (e) => {
+        const modals = ['confirmationModal', 'dataModal', 'alertModal'];
+        modals.forEach(id => {
+            const modal = document.getElementById(id);
+            if (e.target === modal) modal.style.display = 'none';
+        });
+    };
+}
+
+// ========== INITIALIZE ==========
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('✅ Quiz initialized with schedule restriction (10-12 Jan 2026)');
+    console.log('📅 Schedule:', {
+        start: QUIZ_SCHEDULE.startDate.toLocaleString('id-ID'),
+        end: QUIZ_SCHEDULE.endDate.toLocaleString('id-ID'),
+        now: new Date().toLocaleString('id-ID'),
+        isAccessible: isQuizAccessible()
+    });
+    
+    // Cek apakah user sudah submit quiz sebelumnya
+    const isSubmitted = checkSubmissionStatus();
+    
+    if (isSubmitted) {
+        // TAMPILKAN STATE "ALREADY SUBMITTED"
+        console.log('📄 User sudah submit sebelumnya, tampilkan state submitted');
+        showAlreadySubmittedState();
+        setupSubmittedStateListeners();
+    } else {
+        // JIKA BELUM SUBMIT:
+        console.log('🚫 User belum submit, cek jadwal quiz');
+        
+        // 1. Load data yang disimpan
+        loadSavedAnswers();
+        
+        // 2. Cek apakah quiz sedang berlangsung
+        if (isQuizAccessible()) {
+            console.log('✅ Quiz sedang berlangsung (10-12 Jan 2026)');
+            
+            // Jika user sudah mulai mengerjakan sebelumnya, langsung tampilkan quiz
+            if (Object.keys(userAnswers).length > 0) {
+                console.log('📝 User ada progress sebelumnya, tampilkan quiz aktif');
+                // Enable quiz interactions
+                enableQuizInteractions();
+                // Render UI
+                renderNav();
+                renderQuestion();
+                updateProgress();
+            } else {
+                // Jika user belum mulai mengerjakan, tampilkan modal lock dengan tombol mulai
+                console.log('🆕 User baru pertama kali, tampilkan modal lock');
+                showQuizLockedOverlay(); // Ini akan tampilkan modal dengan tombol "Mulai Mengerjakan"
+                // Setup UI dasar (untuk tombol mulai)
+                renderNav();
+                renderQuestion();
+                updateProgress();
+            }
+        } else {
+            // Quiz belum/sudah berakhir
+            console.log('⏰ Quiz belum dimulai atau sudah berakhir');
+            showQuizLockedOverlay();
+            disableQuizInteractions();
+            // Setup UI minimal
+            renderNav();
+            renderQuestion();
+            updateProgress();
+        }
+        
+        // 3. Setup event listeners
+        setupEventListeners();
+        setupModalListeners();
+    }
+    
+    // Store original placeholders for form inputs
+    document.querySelectorAll('.form-input').forEach(input => {
+        input.setAttribute('data-original-placeholder', input.placeholder);
+    });
+});
+
+// Tambahkan di JavaScript
+// Mencegah context menu (klik kanan)
+document.addEventListener('contextmenu', function(e) {
+    if (e.target.closest('.question-text, .option-text')) {
+        e.preventDefault();
+        showAlert('⚠️ Tidak Diizinkan', 'Menyalin teks soal tidak diizinkan.');
+    }
+});
+
+// Mencegah keyboard shortcuts (Ctrl+C, Ctrl+A)
+document.addEventListener('keydown', function(e) {
+    // Ctrl+C atau Cmd+C
+    if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
+        const activeElement = document.activeElement;
+        if (activeElement.closest('.question-text, .option-text')) {
+            e.preventDefault();
+            showAlert('⚠️ Tidak Diizinkan', 'Menyalin teks soal tidak diizinkan.');
+        }
+    }
+    
+    // Ctrl+A (select all)
+    if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
+        e.preventDefault();
+    }
+});
+
+// Mencegah drag untuk menyalin
+document.addEventListener('dragstart', function(e) {
+    if (e.target.closest('.question-text, .option-text')) {
+        e.preventDefault();
+    }
+});
+
+console.log('✅ Quiz system with schedule restriction activated');
+
+    </script>
+</body>
+
+</html>
