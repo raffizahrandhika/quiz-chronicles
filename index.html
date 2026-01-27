@@ -2605,130 +2605,6 @@
             border-radius: 3px;
         }
 
-        /* ===== INSTAGRAM BROWSER WARNING ===== */
-.instagram-warning {
-    background: linear-gradient(135deg, #FF6B6B 0%, #C92A2A 100%);
-    color: white;
-    padding: 14px 18px;
-    border-radius: var(--radius-md);
-    margin: 14px 14px 20px;
-    box-shadow: var(--shadow-lg);
-    border: 2px solid #FFA8A8;
-    position: relative;
-    overflow: hidden;
-    animation: slideDown 0.5s ease;
-    display: none; /* Awalnya tersembunyi */
-}
-
-.instagram-warning::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #FFA8A8 0%, #FF6B6B 50%, #FFA8A8 100%);
-}
-
-.instagram-warning-content {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-}
-
-.instagram-warning-icon {
-    font-size: 1.8rem;
-    color: white;
-    background: rgba(255, 255, 255, 0.2);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.instagram-warning-text {
-    flex: 1;
-}
-
-.instagram-warning-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.instagram-warning-desc {
-    font-size: 0.9rem;
-    line-height: 1.5;
-    opacity: 0.95;
-    margin-bottom: 12px;
-}
-
-.instagram-warning-steps {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: var(--radius-md);
-    padding: 12px;
-    margin-top: 10px;
-}
-
-.instagram-warning-steps-title {
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.instagram-warning-steps ol {
-    margin-left: 20px;
-    padding-left: 0;
-}
-
-.instagram-warning-steps li {
-    font-size: 0.85rem;
-    margin-bottom: 6px;
-    line-height: 1.4;
-}
-
-.instagram-warning-close {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: white;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: var(--transition-normal);
-}
-
-.instagram-warning-close:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.1);
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
         /* Print styles */
         @media print {
 
@@ -2810,40 +2686,6 @@
             </button>
         </div>
     </section>
-
-    <!-- Instagram Browser Warning -->
-<div class="instagram-warning" id="instagramWarning">
-    <button class="instagram-warning-close" id="closeInstagramWarning">&times;</button>
-    <div class="instagram-warning-content">
-        <div class="instagram-warning-icon">
-            <i class="fab fa-instagram"></i>
-        </div>
-        <div class="instagram-warning-text">
-            <h3 class="instagram-warning-title">
-                <i class="fas fa-exclamation-triangle"></i>
-                Browser Instagram Terdeteksi
-            </h3>
-            <p class="instagram-warning-desc">
-                Anda membuka halaman ini melalui browser Instagram (In-App Browser). 
-                <strong>Unduh sertifikat dan hasil PDF tidak akan berfungsi</strong> di browser ini.
-                Fitur download memerlukan browser standar seperti Chrome, Safari, Firefox, dll.
-            </p>
-            
-            <div class="instagram-warning-steps">
-                <h4 class="instagram-warning-steps-title">
-                    <i class="fas fa-mobile-alt"></i>
-                    Cara Mengatasi:
-                </h4>
-                <ol>
-                    <li><strong>Klik 3 titik (⋮) di kanan atas</strong> pada browser Instagram</li>
-                    <li>Pilih <strong>"Buka di Browser"</strong> atau <strong>"Open in Browser"</strong></li>
-                    <li>Halaman akan terbuka di browser default Anda</li>
-                    <li>Masukkan kembali username Anda untuk melihat hasil</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
 
     <!-- Results Container -->
     <main class="container">
@@ -3590,6 +3432,181 @@ const certificateConfig = {
 let globalScores = {};
 let globalRanks = {};
 let cachedRankData = null;
+let isInstagramBrowser = false;
+
+// Fungsi untuk deteksi Instagram browser
+function detectInstagramBrowser() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    return userAgent.includes('instagram') || userAgent.includes('fbav');
+}
+
+// Fungsi untuk menghitung jumlah jawaban yang dijawab
+function countAnsweredQuestions(answers) {
+    return answers.filter(a => a && a !== "0").length;
+}
+
+// Fungsi untuk redirect ke browser native
+function redirectToNativeBrowser() {
+    const currentUrl = window.location.href;
+    const message = `Maaf, fitur ini tidak didukung di Instagram In-App Browser.\n\nURL: ${currentUrl}\n\nSilakan buka tautan ini di browser native handphone Anda (Chrome, Safari, Firefox, dll).`;
+    alert(message);
+    
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(currentUrl).then(() => {
+            alert('URL sudah disalin ke clipboard. Silakan buka di browser lain.');
+        });
+    }
+}
+
+// Fungsi untuk tampilkan warning minimum 2 jawaban
+function showMinimumAnswersWarning() {
+    const warningModal = document.createElement('div');
+    warningModal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 5000;
+    `;
+    
+    const warningContent = document.createElement('div');
+    warningContent.style.cssText = `
+        background: white;
+        border-radius: var(--radius-lg);
+        padding: 30px;
+        max-width: 420px;
+        text-align: center;
+        box-shadow: var(--shadow-xl);
+        animation: slideUp 0.3s ease;
+    `;
+    
+    warningContent.innerHTML = `
+        <div style="font-size: 48px; margin-bottom: 16px;">⚠️</div>
+        <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--darker); margin-bottom: 12px;">Jawaban Tidak Cukup</h3>
+        <p style="color: var(--gray); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px;">
+            Sertifikat hanya dapat di-generate jika Anda telah menjawab minimal <strong>2 pertanyaan</strong>. Saat ini Anda baru menjawab <strong>1 pertanyaan</strong>.
+        </p>
+        <p style="color: #B22222; font-size: 0.85rem; font-weight: 600; margin-bottom: 24px;">
+            Mohon lanjutkan mengerjakan kuis terlebih dahulu.
+        </p>
+        <button id="warningCloseBtn" style="
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: var(--transition-normal);
+            font-size: 0.9rem;
+        ">Mengerti</button>
+    `;
+    
+    warningModal.appendChild(warningContent);
+    document.body.appendChild(warningModal);
+    
+    const closeBtn = warningContent.querySelector('#warningCloseBtn');
+    closeBtn.addEventListener('click', () => {
+        warningModal.remove();
+    });
+    
+    closeBtn.addEventListener('mouseover', () => {
+        closeBtn.style.transform = 'translateY(-1px)';
+        closeBtn.style.boxShadow = 'var(--shadow-lg)';
+    });
+    
+    closeBtn.addEventListener('mouseout', () => {
+        closeBtn.style.transform = 'translateY(0)';
+        closeBtn.style.boxShadow = '';
+    });
+}
+
+// Fungsi untuk tampilkan warning Instagram browser
+function showInstagramBrowserWarning() {
+    const warningModal = document.createElement('div');
+    warningModal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 5000;
+    `;
+    
+    const warningContent = document.createElement('div');
+    warningContent.style.cssText = `
+        background: white;
+        border-radius: var(--radius-lg);
+        padding: 30px;
+        max-width: 420px;
+        text-align: center;
+        box-shadow: var(--shadow-xl);
+        animation: slideUp 0.3s ease;
+    `;
+    
+    warningContent.innerHTML = `
+        <div style="font-size: 48px; margin-bottom: 16px;">📱</div>
+        <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--darker); margin-bottom: 12px;">Browser Tidak Didukung</h3>
+        <p style="color: var(--gray); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px;">
+            Fitur download sertifikat dan PDF tidak didukung di <strong>Instagram In-App Browser</strong>.
+        </p>
+        <p style="color: #B22222; font-size: 0.85rem; margin-bottom: 24px;">
+            Silakan buka di browser native handphone Anda untuk mengakses fitur ini.
+        </p>
+        <div style="display: flex; gap: 10px; flex-direction: column;">
+            <button id="openNativeBrowserBtn" style="
+                background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+                color: white;
+                border: none;
+                padding: 12px 16px;
+                border-radius: var(--radius-full);
+                font-weight: 600;
+                cursor: pointer;
+                transition: var(--transition-normal);
+                font-size: 0.9rem;
+            ">
+                <i class="fas fa-arrow-up-right-from-square"></i> Buka di Browser Lain
+            </button>
+            <button id="instagramWarningCloseBtn" style="
+                background: transparent;
+                color: var(--primary);
+                border: 2px solid var(--primary);
+                padding: 12px 16px;
+                border-radius: var(--radius-full);
+                font-weight: 600;
+                cursor: pointer;
+                transition: var(--transition-normal);
+                font-size: 0.9rem;
+            ">
+                Tutup
+            </button>
+        </div>
+    `;
+    
+    warningModal.appendChild(warningContent);
+    document.body.appendChild(warningModal);
+    
+    const closeBtn = warningContent.querySelector('#instagramWarningCloseBtn');
+    const openBtn = warningContent.querySelector('#openNativeBrowserBtn');
+    
+    closeBtn.addEventListener('click', () => {
+        warningModal.remove();
+    });
+    
+    openBtn.addEventListener('click', () => {
+        redirectToNativeBrowser();
+    });
+}
 
 async function fetchParticipantsFromCSV() {
     try {
@@ -3852,6 +3869,22 @@ async function renderCertificateCanvas(name) {
     const canvas = document.getElementById('certificatePreview');
     if (!canvas) return;
     
+    // Check apakah ada data peserta
+    const username = document.getElementById('usernameInput').value.trim().toLowerCase();
+    const participant = quizData.participants[username];
+    if (!participant) return;
+    
+    // Check jumlah jawaban minimal 2
+    const answeredCount = countAnsweredQuestions(participant.answers);
+    if (answeredCount < 2) {
+        showMinimumAnswersWarning();
+        canvas.style.display = 'none';
+        return;
+    }
+    
+    // Clear warning jika ada dan tampilkan canvas
+    canvas.style.display = 'block';
+    
     const ctx = canvas.getContext('2d');
     const width = 2000;
     const height = 1414;
@@ -3946,6 +3979,9 @@ async function renderCertificateCanvas(name) {
 }
 
 document.addEventListener('DOMContentLoaded', async function () {
+    // Deteksi Instagram browser
+    isInstagramBrowser = detectInstagramBrowser();
+    
     const csvLoaded = await fetchParticipantsFromCSV();
     if (!csvLoaded) {
         showErrorState();
@@ -4242,9 +4278,22 @@ document.addEventListener('DOMContentLoaded', async function () {
     const confirmDownloadBtn = document.getElementById('confirmDownloadBtn');
 
     downloadCertificateBtn.addEventListener('click', async () => {
+        // Check Instagram browser
+        if (isInstagramBrowser) {
+            showInstagramBrowserWarning();
+            return;
+        }
+        
         const username = usernameInput.value.trim().toLowerCase();
         const participant = quizData.participants[username];
         if (!participant) return;
+        
+        // Check minimal 2 jawaban
+        const answeredCount = countAnsweredQuestions(participant.answers);
+        if (answeredCount < 2) {
+            showMinimumAnswersWarning();
+            return;
+        }
 
         const originalHTML = downloadCertificateBtn.innerHTML;
         downloadCertificateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
@@ -4271,20 +4320,44 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     if (certificateNameInput) {
         certificateNameInput.addEventListener('input', async () => {
+            const username = usernameInput.value.trim().toLowerCase();
+            const participant = quizData.participants[username];
+            if (!participant) return;
+            
+            // Check minimal 2 jawaban sebelum render
+            const answeredCount = countAnsweredQuestions(participant.answers);
+            if (answeredCount < 2) {
+                const canvas = document.getElementById('certificatePreview');
+                if (canvas) canvas.style.display = 'none';
+                return;
+            }
+            
             const nameVal = certificateNameInput.value.trim();
-            const fallback = window.currentCertParticipantUsername ? 
-                quizData.participants[window.currentCertParticipantUsername]?.name : '';
+            const fallback = participant.name || 'Peserta Kuis';
             await renderCertificateCanvas(nameVal || fallback);
         });
     }
 
     confirmDownloadBtn.addEventListener('click', () => {
+        // Check Instagram browser
+        if (isInstagramBrowser) {
+            showInstagramBrowserWarning();
+            return;
+        }
+        
         const canvas = document.getElementById('certificatePreview');
         if (!canvas || !canvas.toBlob) return;
 
         const username = usernameInput.value.trim().toLowerCase();
         const participant = quizData.participants[username];
         if (!participant) return;
+        
+        // Check minimal 2 jawaban
+        const answeredCount = countAnsweredQuestions(participant.answers);
+        if (answeredCount < 2) {
+            showMinimumAnswersWarning();
+            return;
+        }
 
         const customName = certificateNameInput?.value.trim();
         const name = customName || participant.name;
@@ -4382,108 +4455,6 @@ document.getElementById('feedbackForm').addEventListener('submit', function (e) 
     });
 });
 
-// Deteksi browser Instagram
-function detectInstagramBrowser() {
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    
-    // Deteksi Instagram in-app browser
-    const isInstagramBrowser = /Instagram/i.test(userAgent);
-    
-    // Deteksi browser mobile umum yang memiliki download restrictions
-    const isMobileBrowser = /iPhone|iPad|iPod|Android/i.test(userAgent);
-    
-    // Deteksi browser yang tidak mendukung download canvas (IG Browser, Facebook Browser, dll)
-    const isRestrictedBrowser = isInstagramBrowser || 
-                               /FBAN|FBAV|FBSN|FB_IAB|FB4A|FBAN/i.test(userAgent);
-    
-    return {
-        isInstagramBrowser,
-        isMobileBrowser,
-        isRestrictedBrowser,
-        userAgent
-    };
-}
-
-// Tampilkan warning jika dibuka di Instagram Browser
-function showInstagramWarning() {
-    const detection = detectInstagramBrowser();
-    const warningElement = document.getElementById('instagramWarning');
-    const closeButton = document.getElementById('closeInstagramWarning');
-    
-    if (detection.isRestrictedBrowser && warningElement) {
-        // Tampilkan warning
-        warningElement.style.display = 'block';
-        
-        // Nonaktifkan tombol download jika Instagram browser terdeteksi
-        if (detection.isInstagramBrowser) {
-            const downloadBtn = document.getElementById('downloadCertificateBtn');
-            const pdfBtn = document.getElementById('downloadResultsBtn');
-            
-            if (downloadBtn) {
-                downloadBtn.disabled = true;
-                downloadBtn.innerHTML = '<i class="fas fa-ban"></i> Tidak Tersedia di IG Browser';
-                downloadBtn.style.background = 'linear-gradient(135deg, var(--gray) 0%, var(--gray-light) 100%)';
-                downloadBtn.style.cursor = 'not-allowed';
-                downloadBtn.style.opacity = '0.7';
-            }
-            
-            if (pdfBtn) {
-                pdfBtn.disabled = true;
-                pdfBtn.innerHTML = '<i class="fas fa-ban"></i> Tidak Tersedia di IG Browser';
-                pdfBtn.style.background = 'linear-gradient(135deg, var(--gray) 0%, var(--gray-light) 100%)';
-                pdfBtn.style.cursor = 'not-allowed';
-                pdfBtn.style.opacity = '0.7';
-            }
-            
-            // Update pesan warning untuk Instagram spesifik
-            const warningTitle = warningElement.querySelector('.instagram-warning-title');
-            const warningDesc = warningElement.querySelector('.instagram-warning-desc');
-            
-            if (warningTitle) {
-                warningTitle.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Instagram Browser Terdeteksi';
-            }
-            
-            if (warningDesc) {
-                warningDesc.innerHTML = `
-                    Anda membuka halaman ini melalui <strong>browser Instagram</strong>. 
-                    <strong>Fitur download sertifikat dan hasil PDF tidak akan bekerja</strong> di browser ini.
-                    Instagram membatasi akses ke sistem file perangkat.
-                    <br><br>
-                    <strong>Solusi:</strong> Buka halaman ini di browser standar (Chrome, Safari, dll).
-                `;
-            }
-        }
-        
-        // Tambahkan event listener untuk close button
-        if (closeButton) {
-            closeButton.addEventListener('click', () => {
-                warningElement.style.display = 'none';
-            });
-        }
-        
-        // Auto-hide setelah 30 detik
-        setTimeout(() => {
-            if (warningElement.style.display === 'block') {
-                warningElement.style.opacity = '0.7';
-            }
-        }, 30000);
-    }
-}
-
-// Panggil fungsi deteksi saat DOM siap
-document.addEventListener('DOMContentLoaded', function() {
-    showInstagramWarning();
-    
-    // Tambahkan juga ke dalam fungsi initializeLockedState jika diperlukan
-    const originalInitializeLockedState = window.initializeLockedState;
-    window.initializeLockedState = function() {
-        if (originalInitializeLockedState) {
-            originalInitializeLockedState();
-        }
-        showInstagramWarning();
-    };
-});
-
 // Fungsi untuk menampilkan notifikasi sukses
 function showFeedbackSuccess() {
     // Buat elemen notifikasi
@@ -4572,6 +4543,11 @@ anonymousCheckbox.addEventListener('change', function () {
 
     // Download PDF button
     document.getElementById('downloadResultsBtn').addEventListener('click', () => {
+        // Check Instagram browser
+        if (isInstagramBrowser) {
+            showInstagramBrowserWarning();
+            return;
+        }
         window.print();
     });
 
