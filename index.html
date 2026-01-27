@@ -3471,7 +3471,7 @@ function showMinimumAnswersWarning() {
     
     const warningContent = document.createElement('div');
     warningContent.className = 'modal-content';
-    warningContent.style.maxWidth = '420px'; // Sama dengan modal lain
+    warningContent.style.maxWidth = '420px';
     
     warningContent.innerHTML = `
         <div class="modal-header">
@@ -3505,8 +3505,8 @@ function showMinimumAnswersWarning() {
             
             <div style="background: #FEF3E2; border-left: 4px solid var(--warning); padding: 14px 16px; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin-bottom: 20px;">
                 <p style="margin: 0; color: #5D4037; font-size: 0.85rem; line-height: 1.4;">
-                    <i class="fas fa-lightbulb" style="color: var(--warning); margin-right: 6px;"></i>
-                    <strong>Saran:</strong> Lanjutkan mengerjakan kuis dan coba lagi nanti!
+                    <i class="fas fa-calendar-alt" style="color: var(--warning); margin-right: 6px;"></i>
+                    <strong>Saran:</strong> Ikuti acara kuis selanjutnya dan coba lagi!
                 </p>
             </div>
             
@@ -3514,8 +3514,8 @@ function showMinimumAnswersWarning() {
                 <button id="warningOkBtn" class="action-btn primary" style="font-family: var(--font-primary);">
                     <i class="fas fa-check-circle"></i> Mengerti
                 </button>
-                <button id="warningRetryBtn" class="action-btn secondary" style="font-family: var(--font-primary);">
-                    <i class="fas fa-redo"></i> Cek Jawaban Saya
+                <button id="warningRcentralBtn" class="action-btn secondary" style="font-family: var(--font-primary);">
+                    <i class="fas fa-external-link-alt"></i> Lihat Agenda Kuis Lainnya
                 </button>
             </div>
         </div>
@@ -3527,7 +3527,7 @@ function showMinimumAnswersWarning() {
     // Event listeners
     const closeBtn = warningContent.querySelector('#warningCloseBtn');
     const okBtn = warningContent.querySelector('#warningOkBtn');
-    const retryBtn = warningContent.querySelector('#warningRetryBtn');
+    const rcentralBtn = warningContent.querySelector('#warningRcentralBtn');
     
     // Close button
     closeBtn.addEventListener('click', () => {
@@ -3541,22 +3541,13 @@ function showMinimumAnswersWarning() {
         setTimeout(() => warningModal.remove(), 300);
     });
     
-    // Retry button - scroll ke tab answers
-    retryBtn.addEventListener('click', () => {
+    // R-CENTRAL button - buka agenda kuis
+    rcentralBtn.addEventListener('click', () => {
         warningModal.style.display = 'none';
         setTimeout(() => warningModal.remove(), 300);
         
-        // Scroll ke tab answers
-        setTimeout(() => {
-            const answersTab = document.querySelector('[data-tab="answers"]');
-            if (answersTab) {
-                answersTab.click();
-                const answersSection = document.getElementById('answers-tab');
-                if (answersSection) {
-                    answersSection.scrollIntoView({ behavior: 'smooth' });
-                }
-            }
-        }, 100);
+        // Buka R-CENTRAL Quiz Agenda
+        window.open('https://raffizahrandhika.github.io/r-central/#quiz-agenda', '_blank');
     });
     
     // Close on backdrop click
