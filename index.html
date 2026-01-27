@@ -3461,69 +3461,115 @@ function redirectToNativeBrowser() {
 // Fungsi untuk tampilkan warning minimum 2 jawaban
 function showMinimumAnswersWarning() {
     const warningModal = document.createElement('div');
+    warningModal.className = 'modal';
     warningModal.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.6);
         display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 5000;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        animation: fadeIn 0.3s ease;
     `;
     
     const warningContent = document.createElement('div');
-    warningContent.style.cssText = `
-        background: white;
-        border-radius: var(--radius-lg);
-        padding: 30px;
-        max-width: 420px;
-        text-align: center;
-        box-shadow: var(--shadow-xl);
-        animation: slideUp 0.3s ease;
-    `;
+    warningContent.className = 'modal-content';
+    warningContent.style.maxWidth = '420px'; // Sama dengan modal lain
     
     warningContent.innerHTML = `
-        <div style="font-size: 48px; margin-bottom: 16px;">⚠️</div>
-        <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--darker); margin-bottom: 12px;">Jawaban Tidak Cukup</h3>
-        <p style="color: var(--gray); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px;">
-            Sertifikat hanya dapat di-generate jika Anda telah menjawab minimal <strong>2 pertanyaan</strong>. Saat ini Anda baru menjawab <strong>1 pertanyaan</strong>.
-        </p>
-        <p style="color: #B22222; font-size: 0.85rem; font-weight: 600; margin-bottom: 24px;">
-            Mohon lanjutkan mengerjakan kuis terlebih dahulu.
-        </p>
-        <button id="warningCloseBtn" style="
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: var(--radius-full);
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: var(--transition-normal);
-            font-size: 0.9rem;
-        ">Mengerti</button>
+        <div class="modal-header">
+            <h3 class="modal-title">Jawaban Tidak Cukup</h3>
+            <button class="close-btn" id="warningCloseBtn">&times;</button>
+        </div>
+        <div style="padding: 20px 0;">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <div style="
+                    width: 70px;
+                    height: 70px;
+                    background: linear-gradient(135deg, var(--warning) 0%, #DAA520 100%);
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 0 auto 16px;
+                    color: white;
+                    font-size: 28px;
+                    box-shadow: var(--shadow-md);
+                ">
+                    <i class="fas fa-exclamation-circle"></i>
+                </div>
+                <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 10px; font-family: var(--font-primary);">
+                    Sertifikat Belum Dapat Dihasilkan
+                </h4>
+                <p style="color: var(--gray); font-size: 0.9rem; line-height: 1.4; margin-bottom: 10px;">
+                    Anda perlu menjawab minimal <strong>2 pertanyaan</strong> untuk mendapatkan sertifikat.
+                </p>
+            </div>
+            
+            <div style="background: #FEF3E2; border-left: 4px solid var(--warning); padding: 14px 16px; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin-bottom: 20px;">
+                <p style="margin: 0; color: #5D4037; font-size: 0.85rem; line-height: 1.4;">
+                    <i class="fas fa-lightbulb" style="color: var(--warning); margin-right: 6px;"></i>
+                    <strong>Saran:</strong> Lanjutkan mengerjakan kuis dan coba lagi nanti!
+                </p>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <button id="warningOkBtn" class="action-btn primary" style="font-family: var(--font-primary);">
+                    <i class="fas fa-check-circle"></i> Mengerti
+                </button>
+                <button id="warningRetryBtn" class="action-btn secondary" style="font-family: var(--font-primary);">
+                    <i class="fas fa-redo"></i> Cek Jawaban Saya
+                </button>
+            </div>
+        </div>
     `;
     
-    warningModal.appendChild(warningContent);
     document.body.appendChild(warningModal);
+    warningModal.appendChild(warningContent);
     
+    // Event listeners
     const closeBtn = warningContent.querySelector('#warningCloseBtn');
+    const okBtn = warningContent.querySelector('#warningOkBtn');
+    const retryBtn = warningContent.querySelector('#warningRetryBtn');
+    
+    // Close button
     closeBtn.addEventListener('click', () => {
-        warningModal.remove();
+        warningModal.style.display = 'none';
+        setTimeout(() => warningModal.remove(), 300);
     });
     
-    closeBtn.addEventListener('mouseover', () => {
-        closeBtn.style.transform = 'translateY(-1px)';
-        closeBtn.style.boxShadow = 'var(--shadow-lg)';
+    // OK button
+    okBtn.addEventListener('click', () => {
+        warningModal.style.display = 'none';
+        setTimeout(() => warningModal.remove(), 300);
     });
     
-    closeBtn.addEventListener('mouseout', () => {
-        closeBtn.style.transform = 'translateY(0)';
-        closeBtn.style.boxShadow = '';
+    // Retry button - scroll ke tab answers
+    retryBtn.addEventListener('click', () => {
+        warningModal.style.display = 'none';
+        setTimeout(() => warningModal.remove(), 300);
+        
+        // Scroll ke tab answers
+        setTimeout(() => {
+            const answersTab = document.querySelector('[data-tab="answers"]');
+            if (answersTab) {
+                answersTab.click();
+                const answersSection = document.getElementById('answers-tab');
+                if (answersSection) {
+                    answersSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        }, 100);
+    });
+    
+    // Close on backdrop click
+    warningModal.addEventListener('click', (e) => {
+        if (e.target === warningModal) {
+            warningModal.style.display = 'none';
+            setTimeout(() => warningModal.remove(), 300);
+        }
+    });
+    
+    // Prevent bubbling
+    warningContent.addEventListener('click', (e) => {
+        e.stopPropagation();
     });
 }
 
